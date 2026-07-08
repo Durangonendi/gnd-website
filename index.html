@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GND İş Makineleri</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#home" class="logo"><img src="assets/logo-original.png" alt="GND İş Makineleri" /></a>
+    <nav class="main-nav">
+      <a href="#home" data-i18n="nav_home">Ana Sayfa</a>
+      <a href="#categories" data-i18n="nav_categories">Makineler</a>
+      <a href="#spareparts" data-i18n="nav_spareparts">Yedek Parça</a>
+      <a href="#about" data-i18n="nav_about">Hakkımızda</a>
+      <a href="#contact" data-i18n="nav_contact">İletişim</a>
+    </nav>
+    <div class="header-actions">
+      <select id="lang-select" class="lang-select" aria-label="Language">
+        <option value="tr">TR</option>
+        <option value="en">EN</option>
+      </select>
+      <a class="btn btn-primary header-cta" id="header-whatsapp-btn" target="_blank" rel="noopener">
+        <span data-i18n="get_quote">Teklif Al</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-inner">
+    <h1 data-i18n="hero_title">Ağır İş Makinesi Dünyasında Güvenilir Ortağınız</h1>
+    <p data-i18n="hero_subtitle">Hafriyat, madencilik ve inşaat sektörü için geniş makine kategorileri. İhtiyacınızı söyleyin, size özel teklifi WhatsApp üzerinden anında iletelim.</p>
+    <a href="#categories" class="btn btn-primary btn-lg" data-i18n="hero_cta">Makineleri İncele</a>
+  </div>
+</section>
+
+<section id="categories" class="categories-section">
+  <div class="section-inner">
+    <h2 data-i18n="categories_title">Makine Kategorilerimiz</h2>
+    <p class="section-sub" data-i18n="categories_subtitle">Her kategori için detaylı teklif almak üzere doğrudan WhatsApp üzerinden bize ulaşın.</p>
+    <div class="condition-toggle">
+      <button type="button" data-condition="new" class="active"><span data-i18n="condition_new">Sıfır</span></button>
+      <button type="button" data-condition="used"><span data-i18n="condition_used">2. El</span></button>
+    </div>
+    <div id="category-grid" class="category-grid"></div>
+  </div>
+</section>
+
+<section id="spareparts" class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2 data-i18n="spareparts_title">Yedek Parça</h2>
+    <p class="section-sub" data-i18n="spareparts_subtitle">Filtre, mekanik, hidrolik grupları ve ataşmanlar için bize ulaşın.</p>
+    <div id="spareparts-grid" class="category-grid"></div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="section-inner about-inner">
+    <div class="about-text">
+      <h2 data-i18n="about_title">Hakkımızda</h2>
+      <p data-i18n="about_p1">GND İş Makineleri olarak, hafriyat ve madencilik sektörüne global ölçekte ağır iş makinesi tedariki, kiralama ve satış sonrası destek sunuyoruz.</p>
+      <p data-i18n="about_p2">Geniş üretici ağımız sayesinde ihtiyacınıza en uygun makineyi bulup, rekabetçi bir teklifle sizinle buluşturuyoruz.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><span class="stat-num" id="stat-category-count">–</span><span data-i18n="stat_categories">Makine Kategorisi</span></div>
+      <div class="stat"><span class="stat-num">Global</span><span data-i18n="stat_reach">Tedarik Ağı</span></div>
+      <div class="stat"><span class="stat-num">7/24</span><span data-i18n="stat_support">WhatsApp Destek</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <h2 data-i18n="contact_title">Bize Ulaşın</h2>
+    <p data-i18n="contact_subtitle">İhtiyacınızı iletin, size en kısa sürede dönüş yapalım.</p>
+    <a href="#" id="contact-whatsapp-btn" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+      <span data-i18n="contact_cta">WhatsApp'tan Teklif Al</span>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner footer-inner">
+    <div>© <span id="footer-year"></span> GND İş Makineleri</div>
+    <div class="footer-note" data-i18n="footer_note">Bu site içeriği yer tutucu görsellerle hazırlanmıştır.</div>
+  </div>
+</footer>
+
+<a href="#" id="floating-whatsapp-btn" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.15 8.15 0 0 1-4.2-1.15l-.3-.18-3.1.95.95-3-.2-.32A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.13-1.45-.72-1.68-.8-.22-.08-.39-.13-.55.13-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.28.37-.42.13-.14.17-.25.25-.4.08-.16.04-.3-.02-.42-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.25-.85.83-.85 2.03s.87 2.36 1 2.52c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28z"/></svg>
+  <span data-i18n="live_support">Canlı Destek</span>
+</a>
+
+<script src="js/i18n.js?v=5"></script>
+<script src="js/main.js?v=5"></script>
+</body>
+</html>
