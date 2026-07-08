@@ -1,5 +1,6 @@
 const STORAGE_KEY = "gnd-site-lang";
 let currentCondition = "new"; // "new" | "used"
+let searchTerm = "";
 
 function buildWhatsAppLink(message) {
   const encoded = encodeURIComponent(message);
@@ -15,6 +16,10 @@ function applyTranslations(lang) {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     if (dict[key]) el.textContent = dict[key];
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (dict[key]) el.placeholder = dict[key];
   });
   document.documentElement.lang = lang;
 
@@ -47,8 +52,21 @@ function renderCategoryGrid(gridId, list, lang, includeCondition) {
   });
 }
 
+function filteredCategories(lang) {
+  const term = searchTerm.trim().toLocaleLowerCase("tr");
+  if (!term) return CATEGORIES;
+  return CATEGORIES.filter((cat) => cat.name[lang].toLocaleLowerCase("tr").includes(term));
+}
+
+function renderMachines(lang) {
+  const list = filteredCategories(lang);
+  renderCategoryGrid("category-grid", list, lang, true);
+  document.getElementById("category-grid").style.display = list.length ? "grid" : "none";
+  document.getElementById("category-no-results").style.display = list.length ? "none" : "block";
+}
+
 function renderAll(lang) {
-  renderCategoryGrid("category-grid", CATEGORIES, lang, true);
+  renderMachines(lang);
   renderCategoryGrid("spareparts-grid", SPARE_PARTS_CATEGORIES, lang, false);
 }
 
@@ -64,7 +82,7 @@ function setCondition(condition) {
   document.querySelectorAll(".condition-toggle button").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.condition === condition);
   });
-  renderCategoryGrid("category-grid", CATEGORIES, getLang(), true);
+  renderMachines(getLang());
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -79,5 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".condition-toggle button").forEach((btn) => {
     btn.addEventListener("click", () => setCondition(btn.dataset.condition));
+  });
+
+  document.getElementById("category-search-input").addEventListener("input", (e) => {
+    searchTerm = e.target.value;
+    renderMachines(getLang());
   });
 });
