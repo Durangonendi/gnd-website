@@ -168,6 +168,49 @@ a { color: inherit; text-decoration: none; }
 }
 .vm-card p { margin: 0; color: var(--text-dim); font-size: 15px; }
 
+/* Values */
+.values-section { padding: 50px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+.values-section h2 { font-size: 26px; margin: 0 0 24px; font-weight: 800; }
+.values-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.value-pill {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-hover);
+}
+
+/* Why GND */
+.why-section { padding: 60px 0; }
+.why-section h2 { font-size: 28px; margin: 0 0 26px; font-weight: 800; text-align: center; }
+.why-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 640px;
+  display: grid;
+  gap: 14px;
+}
+.why-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.why-list svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--whatsapp);
+}
+
 /* History / Timeline */
 .history-section { padding: 60px 0; background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .history-section h2 { font-size: 28px; margin: 0 0 10px; font-weight: 800; }
