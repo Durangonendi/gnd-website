@@ -24,43 +24,43 @@ ICONS = {
     "attachment": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l5-5 3 3-5 5-3-3zM11 10l4-4 6 6-4 4M9 17l-4 4"/></svg>',
 }
 
-# (slug, ad, kısa açıklama (kart), uzun açıklama (SEO sayfası), icon key)
+# (slug, ad, kısa açıklama (kart), uzun açıklama (SEO sayfası), icon key, görsel dosya adı ya da None)
 MACHINES = [
     ("mini-ekskavator", "Mini Ekskavatör", "Dar alan ve hafif hafriyat işleri için kompakt ekskavatörler.",
-     "Mini ekskavatörler, dar sokak aralarında, bahçe düzenlemesinde, bina içi yıkım ve küçük çaplı hafriyat işlerinde manevra kabiliyeti sağlar. GND İş Makineleri olarak sıfır ve 2. el mini ekskavatör tedarikinde geniş üretici ağımızla size en uygun teklifi sunuyoruz.", "excavator"),
+     "Mini ekskavatörler, dar sokak aralarında, bahçe düzenlemesinde, bina içi yıkım ve küçük çaplı hafriyat işlerinde manevra kabiliyeti sağlar. GND İş Makineleri olarak sıfır ve 2. el mini ekskavatör tedarikinde geniş üretici ağımızla size en uygun teklifi sunuyoruz.", "excavator", "mini-ekskavator.jpg"),
     ("orta-ekskavator", "Orta Seviye Ekskavatör", "Genel hafriyat ve inşaat işleri için orta sınıf ekskavatörler.",
-     "Orta seviye ekskavatörler, konut ve ticari inşaat projelerinde, altyapı çalışmalarında ve genel hafriyat işlerinde en çok tercih edilen makine sınıfıdır. Sıfır ve 2. el seçeneklerle, ihtiyacınıza uygun tonaj ve modeli sizin için buluyoruz.", "excavator"),
+     "Orta seviye ekskavatörler, konut ve ticari inşaat projelerinde, altyapı çalışmalarında ve genel hafriyat işlerinde en çok tercih edilen makine sınıfıdır. Sıfır ve 2. el seçeneklerle, ihtiyacınıza uygun tonaj ve modeli sizin için buluyoruz.", "excavator", "orta-ekskavator.jpg"),
     ("agir-tonaj-ekskavator", "Ağır Tonaj Ekskavatör", "Maden ve büyük ölçekli hafriyat için ağır tonajlı ekskavatörler.",
-     "Ağır tonajlı ekskavatörler; maden ocakları, büyük ölçekli hafriyat sahaları ve taş ocağı operasyonları için yüksek kazı kapasitesi sunar. Global tedarik ağımız sayesinde ağır tonaj sınıfında sıfır ve 2. el makineler için rekabetçi teklifler hazırlıyoruz.", "excavator"),
+     "Ağır tonajlı ekskavatörler; maden ocakları, büyük ölçekli hafriyat sahaları ve taş ocağı operasyonları için yüksek kazı kapasitesi sunar. Global tedarik ağımız sayesinde ağır tonaj sınıfında sıfır ve 2. el makineler için rekabetçi teklifler hazırlıyoruz.", "excavator", "agir-tonaj-ekskavator.jpg"),
     ("loader", "Loaderlar", "Lastikli yükleyiciler, her ölçekte yükleme işi için.",
-     "Lastikli yükleyiciler (loader), malzeme yükleme, taşıma ve istifleme operasyonlarında saha verimliliğini artırır. GND İş Makineleri, farklı kapasite ve marka seçenekleriyle sıfır ve 2. el loader tedariki sağlar.", "loader"),
+     "Lastikli yükleyiciler (loader), malzeme yükleme, taşıma ve istifleme operasyonlarında saha verimliliğini artırır. GND İş Makineleri, farklı kapasite ve marka seçenekleriyle sıfır ve 2. el loader tedariki sağlar.", "loader", "loader.jpg"),
     ("bekoloader", "Bekoloaderler", "Kazı ve yükleme işini tek makinede birleştiren bekoloaderler.",
-     "Bekoloaderler, kazı ve yükleme fonksiyonlarını tek bir makinede birleştirerek küçük ve orta ölçekli şantiyelerde çok yönlü kullanım sağlar. İhtiyacınıza uygun bekoloader modelini üretici ağımızdan bulup teklif hazırlıyoruz.", "backhoe-loader"),
+     "Bekoloaderler, kazı ve yükleme fonksiyonlarını tek bir makinede birleştirerek küçük ve orta ölçekli şantiyelerde çok yönlü kullanım sağlar. İhtiyacınıza uygun bekoloader modelini üretici ağımızdan bulup teklif hazırlıyoruz.", "backhoe-loader", "bekoloader.jpg"),
     ("manlift", "Manliftler", "Yüksekte çalışma platformları, bakım ve montaj işleri için.",
-     "Manliftler (yüksekte çalışma platformları), bakım, montaj, elektrik ve boya işlerinde güvenli ve verimli erişim sağlar. GND İş Makineleri olarak makaslı ve eklemli manlift seçenekleri için teklif sunuyoruz.", "manlift"),
+     "Manliftler (yüksekte çalışma platformları), bakım, montaj, elektrik ve boya işlerinde güvenli ve verimli erişim sağlar. GND İş Makineleri olarak makaslı ve eklemli manlift seçenekleri için teklif sunuyoruz.", "manlift", "manlift.jpg"),
     ("telehandler", "Telehandlerlar", "Teleskopik kollu yükleyiciler, yüksek ve uzak noktalara taşıma için.",
-     "Telehandlerlar, teleskopik kolları sayesinde yüksek ve uzak noktalara malzeme taşımada esneklik sağlar; inşaat, tarım ve depo operasyonlarında tercih edilir. Sıfır ve 2. el telehandler tedariki için bize ulaşın.", "telehandler"),
+     "Telehandlerlar, teleskopik kolları sayesinde yüksek ve uzak noktalara malzeme taşımada esneklik sağlar; inşaat, tarım ve depo operasyonlarında tercih edilir. Sıfır ve 2. el telehandler tedariki için bize ulaşın.", "telehandler", "telehandler.jpg"),
     ("silindir", "Silindirler", "Zemin ve asfalt sıkıştırma işleri için silindirler.",
-     "Silindirler, yol yapımı, zemin ve asfalt sıkıştırma işlerinde vazgeçilmez makinelerdir. GND İş Makineleri, tek ve çift tamburlu silindir seçenekleriyle projelerinize uygun tedarik sağlar.", "roller"),
+     "Silindirler, yol yapımı, zemin ve asfalt sıkıştırma işlerinde vazgeçilmez makinelerdir. GND İş Makineleri, tek ve çift tamburlu silindir seçenekleriyle projelerinize uygun tedarik sağlar.", "roller", "silindir.jpg"),
     ("finiser", "Finişerler", "Asfalt serimi için finişer makineleri.",
-     "Finişerler, asfalt serim kalitesini ve hızını doğrudan etkileyen kritik yol yapım makineleridir. Üretici ağımız üzerinden sıfır ve 2. el finişer tedariki konusunda size destek oluyoruz.", "finisher"),
+     "Finişerler, asfalt serim kalitesini ve hızını doğrudan etkileyen kritik yol yapım makineleridir. Üretici ağımız üzerinden sıfır ve 2. el finişer tedariki konusunda size destek oluyoruz.", "finisher", "finiser.jpg"),
     ("greyder", "Greyderler", "Zemin tesviyesi ve yol yapımı için greyderler.",
-     "Greyderler, zemin tesviyesi, yol yapımı ve bakımında hassas düzeltme sağlayan makinelerdir. GND İş Makineleri, greyder tedarikinde global üretici ağımızla rekabetçi teklifler sunar.", "grader"),
+     "Greyderler, zemin tesviyesi, yol yapımı ve bakımında hassas düzeltme sağlayan makinelerdir. GND İş Makineleri, greyder tedarikinde global üretici ağımızla rekabetçi teklifler sunar.", "grader", "greyder.jpg"),
     ("dozer", "Dozerler", "Ağır zemin çalışmaları için güçlü dozer seçenekleri.",
-     "Dozerler, ağır zemin itme, tesviye ve hafriyat hazırlığı işlerinde yüksek güç ve verim sağlar. Sıfır ve 2. el dozer seçenekleri için GND İş Makineleri'nden teklif alabilirsiniz.", "dozer"),
+     "Dozerler, ağır zemin itme, tesviye ve hafriyat hazırlığı işlerinde yüksek güç ve verim sağlar. Sıfır ve 2. el dozer seçenekleri için GND İş Makineleri'nden teklif alabilirsiniz.", "dozer", "dozer.jpg"),
     ("skid-steer-loader", "Skid Steer Loaderlar", "Dar alanlarda manevra kabiliyeti yüksek kompakt yükleyiciler.",
-     "Skid steer loaderlar, dar ve engebeli alanlarda yüksek manevra kabiliyeti sunan kompakt yükleyicilerdir; peyzaj, iç mekan ve küçük şantiye işlerinde tercih edilir. Uygun modeli sizin için buluyoruz.", "skid-steer"),
+     "Skid steer loaderlar, dar ve engebeli alanlarda yüksek manevra kabiliyeti sunan kompakt yükleyicilerdir; peyzaj, iç mekan ve küçük şantiye işlerinde tercih edilir. Uygun modeli sizin için buluyoruz.", "skid-steer", "skid-steer-loader.jpg"),
 ]
 
 SPARE_PARTS = [
     ("filtre-gruplari", "Filtre Grupları", "Yağ, yakıt, hava ve hidrolik filtreleri.",
-     "İş makinelerinizin performansını korumak için yağ, yakıt, hava ve hidrolik filtre gruplarını orijinal ve muadil seçeneklerle tedarik ediyoruz.", "filter"),
+     "İş makinelerinizin performansını korumak için yağ, yakıt, hava ve hidrolik filtre gruplarını orijinal ve muadil seçeneklerle tedarik ediyoruz.", "filter", None),
     ("mekanik-gruplar", "Mekanik Gruplar", "Motor ve şanzıman gibi mekanik parça grupları.",
-     "Motor, şanzıman ve diğer mekanik parça gruplarında güvenilir tedarik ve teknik destek sağlıyoruz.", "mechanical"),
+     "Motor, şanzıman ve diğer mekanik parça gruplarında güvenilir tedarik ve teknik destek sağlıyoruz.", "mechanical", None),
     ("hidrolik-gruplar", "Hidrolik Gruplar", "Hidrolik pompa, silindir ve valf grupları.",
-     "Hidrolik pompa, silindir ve valf grupları başta olmak üzere iş makinesi hidrolik sistem parçalarını tedarik ediyoruz.", "hydraulic"),
+     "Hidrolik pompa, silindir ve valf grupları başta olmak üzere iş makinesi hidrolik sistem parçalarını tedarik ediyoruz.", "hydraulic", None),
     ("atasmanlar", "Ataşmanlar", "Kova, kırıcı ve diğer ekipman ataşmanları.",
-     "Kova, kırıcı ve makinenize özel diğer ekipman ataşmanlarını ihtiyacınıza göre tedarik ediyoruz.", "attachment"),
+     "Kova, kırıcı ve makinenize özel diğer ekipman ataşmanlarını ihtiyacınıza göre tedarik ediyoruz.", "attachment", None),
 ]
 
 HEADER = """<header class="site-header">
@@ -109,7 +109,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <div class="category-detail-icon">{icon}</div>
+    {media}
     <h1>{name}</h1>
     <p>{long_desc}</p>
     <a href="https://wa.me/{wa}?text={wa_quote}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Teklif Al →</a>
@@ -132,7 +132,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-SIBLING_CARD = """<div class="category-card">
+SIBLING_CARD_PHOTO = """<div class="category-card">
+        <div class="category-photo-wrap"><img class="category-photo" src="{root}assets/categories/{image}" alt="{name}" loading="lazy"></div>
+        <h3><a href="{href}">{name}</a></h3>
+        <p>{desc}</p>
+      </div>"""
+
+SIBLING_CARD_ICON = """<div class="category-card">
         <div class="category-icon">{icon}</div>
         <h3><a href="{href}">{name}</a></h3>
         <p>{desc}</p>
@@ -144,23 +150,32 @@ def wa_link_text(text):
     return quote(text)
 
 
-def build_pages(items, out_dir, group_title, url_prefix):
+def build_pages(items, out_dir, group_title, url_prefix, root):
     os.makedirs(out_dir, exist_ok=True)
-    root = "../"
     wa_generic = wa_link_text("Merhaba, GND İş Makineleri hakkında bilgi almak istiyorum.")
     header = HEADER.format(root=root, wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
     footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
 
-    for slug, name, short_desc, long_desc, icon_key in items:
-        siblings_html = "\n      ".join(
-            SIBLING_CARD.format(icon=ICONS[k], href=f"{s}.html", name=n, desc=d)
-            for s, n, d, _, k in items if s != slug
-        )
+    for slug, name, short_desc, long_desc, icon_key, image in items:
+        sibling_parts = []
+        for s, n, d, _, k, img in items:
+            if s == slug:
+                continue
+            if img:
+                sibling_parts.append(SIBLING_CARD_PHOTO.format(root=root, image=img, href=f"{s}.html", name=n, desc=d))
+            else:
+                sibling_parts.append(SIBLING_CARD_ICON.format(icon=ICONS[k], href=f"{s}.html", name=n, desc=d))
+        siblings_html = "\n      ".join(sibling_parts)
+
         wa_quote = wa_link_text(f"Merhaba, {name} için teklif almak istiyorum.")
+        if image:
+            media = f'<div class="category-detail-photo"><img src="{root}assets/categories/{image}" alt="{name}" loading="lazy"></div>'
+        else:
+            media = f'<div class="category-detail-icon">{ICONS[icon_key]}</div>'
         page = PAGE_TEMPLATE.format(
             name=name, site_name=SITE_NAME, long_desc=long_desc,
             canonical=f"{BASE_URL}/{url_prefix}/{slug}.html",
-            root=root, header=header, icon=ICONS[icon_key],
+            root=root, header=header, media=media,
             wa=WHATSAPP_NUMBER, wa_quote=wa_quote,
             group_title=group_title, siblings=siblings_html, footer=footer
         )
@@ -172,7 +187,7 @@ def build_pages(items, out_dir, group_title, url_prefix):
 if __name__ == "__main__":
     root_dir = os.path.dirname(os.path.abspath(__file__))
     print("Makine sayfaları:")
-    build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Makineler", "makineler")
+    build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Makineler", "makineler", "../")
     print("Yedek parça sayfaları:")
-    build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Yedek Parça Kategorileri", "yedek-parca")
+    build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Yedek Parça Kategorileri", "yedek-parca", "../")
     print("Tamamlandı.")
