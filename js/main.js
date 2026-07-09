@@ -40,9 +40,10 @@ function renderCategoryGrid(gridId, list, lang, includeCondition) {
     card.className = "category-card";
     const label = includeCondition ? `${conditionLabel(lang)} ${cat.name[lang]}` : cat.name[lang];
     const message = TRANSLATIONS[lang].quote_intro + label + TRANSLATIONS[lang].quote_middle;
+    const titleHtml = cat.page ? `<a href="${cat.page}">${cat.name[lang]}</a>` : cat.name[lang];
     card.innerHTML = `
       <div class="category-icon">${cat.icon}</div>
-      <h3>${cat.name[lang]}</h3>
+      <h3>${titleHtml}</h3>
       <p>${cat.desc[lang]}</p>
       <a class="category-quote-btn" href="${buildWhatsAppLink(message)}" target="_blank" rel="noopener">
         ${TRANSLATIONS[lang].get_quote} →

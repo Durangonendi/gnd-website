@@ -117,73 +117,85 @@ const CATEGORIES = [
     id: "mini-excavator",
     name: { tr: "Mini Ekskavatör", en: "Mini Excavator" },
     desc: { tr: "Dar alan ve hafif hafriyat işleri için kompakt ekskavatörler.", en: "Compact excavators for tight spaces and light earthmoving." },
-    icon: ICONS.excavator
+    icon: ICONS.excavator,
+    page: "makineler/mini-ekskavator.html"
   },
   {
     id: "mid-excavator",
     name: { tr: "Orta Seviye Ekskavatör", en: "Mid-Range Excavator" },
     desc: { tr: "Genel hafriyat ve inşaat işleri için orta sınıf ekskavatörler.", en: "Mid-class excavators for general earthmoving and construction." },
-    icon: ICONS.excavator
+    icon: ICONS.excavator,
+    page: "makineler/orta-ekskavator.html"
   },
   {
     id: "heavy-excavator",
     name: { tr: "Ağır Tonaj Ekskavatör", en: "Heavy-Duty Excavator" },
     desc: { tr: "Maden ve büyük ölçekli hafriyat için ağır tonajlı ekskavatörler.", en: "Heavy-tonnage excavators for mining and large-scale earthmoving." },
-    icon: ICONS.excavator
+    icon: ICONS.excavator,
+    page: "makineler/agir-tonaj-ekskavator.html"
   },
   {
     id: "loader",
     name: { tr: "Loaderlar", en: "Loaders" },
     desc: { tr: "Lastikli yükleyiciler, her ölçekte yükleme işi için.", en: "Wheel loaders for loading jobs of any scale." },
-    icon: ICONS.loader
+    icon: ICONS.loader,
+    page: "makineler/loader.html"
   },
   {
     id: "backhoe-loader",
     name: { tr: "Bekoloaderler", en: "Backhoe Loaders" },
     desc: { tr: "Kazı ve yükleme işini tek makinede birleştiren bekoloaderler.", en: "Backhoe loaders combining digging and loading in one machine." },
-    icon: ICONS["backhoe-loader"]
+    icon: ICONS["backhoe-loader"],
+    page: "makineler/bekoloader.html"
   },
   {
     id: "manlift",
     name: { tr: "Manliftler", en: "Man Lifts" },
     desc: { tr: "Yüksekte çalışma platformları, bakım ve montaj işleri için.", en: "Aerial work platforms for maintenance and installation work." },
-    icon: ICONS.manlift
+    icon: ICONS.manlift,
+    page: "makineler/manlift.html"
   },
   {
     id: "telehandler",
     name: { tr: "Telehandlerlar", en: "Telehandlers" },
     desc: { tr: "Teleskopik kollu yükleyiciler, yüksek ve uzak noktalara taşıma için.", en: "Telescopic handlers for reaching high and far load points." },
-    icon: ICONS.telehandler
+    icon: ICONS.telehandler,
+    page: "makineler/telehandler.html"
   },
   {
     id: "roller",
     name: { tr: "Silindirler", en: "Rollers" },
     desc: { tr: "Zemin ve asfalt sıkıştırma işleri için silindirler.", en: "Rollers for ground and asphalt compaction." },
-    icon: ICONS.roller
+    icon: ICONS.roller,
+    page: "makineler/silindir.html"
   },
   {
     id: "finisher",
     name: { tr: "Finişerler", en: "Asphalt Finishers" },
     desc: { tr: "Asfalt serimi için finişer makineleri.", en: "Paver finishers for asphalt laying." },
-    icon: ICONS.finisher
+    icon: ICONS.finisher,
+    page: "makineler/finiser.html"
   },
   {
     id: "grader",
     name: { tr: "Greyderler", en: "Graders" },
     desc: { tr: "Zemin tesviyesi ve yol yapımı için greyderler.", en: "Graders for ground leveling and road construction." },
-    icon: ICONS.grader
+    icon: ICONS.grader,
+    page: "makineler/greyder.html"
   },
   {
     id: "dozer",
     name: { tr: "Dozerler", en: "Bulldozers" },
     desc: { tr: "Ağır zemin çalışmaları için güçlü dozer seçenekleri.", en: "Powerful dozers for heavy grading work." },
-    icon: ICONS.dozer
+    icon: ICONS.dozer,
+    page: "makineler/dozer.html"
   },
   {
     id: "skid-steer",
     name: { tr: "Skid Steer Loaderlar", en: "Skid Steer Loaders" },
     desc: { tr: "Dar alanlarda manevra kabiliyeti yüksek kompakt yükleyiciler.", en: "Compact loaders with high maneuverability in tight spaces." },
-    icon: ICONS["skid-steer"]
+    icon: ICONS["skid-steer"],
+    page: "makineler/skid-steer-loader.html"
   }
 ];
 
@@ -193,24 +205,28 @@ const SPARE_PARTS_CATEGORIES = [
     id: "filter-groups",
     name: { tr: "Filtre Grupları", en: "Filter Groups" },
     desc: { tr: "Yağ, yakıt, hava ve hidrolik filtreleri.", en: "Oil, fuel, air and hydraulic filters." },
-    icon: ICONS.filter
+    icon: ICONS.filter,
+    page: "yedek-parca/filtre-gruplari.html"
   },
   {
     id: "mechanical-groups",
     name: { tr: "Mekanik Gruplar", en: "Mechanical Groups" },
     desc: { tr: "Motor ve şanzıman gibi mekanik parça grupları.", en: "Mechanical part groups such as engine and transmission." },
-    icon: ICONS.mechanical
+    icon: ICONS.mechanical,
+    page: "yedek-parca/mekanik-gruplar.html"
   },
   {
     id: "hydraulic-groups",
     name: { tr: "Hidrolik Gruplar", en: "Hydraulic Groups" },
     desc: { tr: "Hidrolik pompa, silindir ve valf grupları.", en: "Hydraulic pump, cylinder and valve groups." },
-    icon: ICONS.hydraulic
+    icon: ICONS.hydraulic,
+    page: "yedek-parca/hidrolik-gruplar.html"
   },
   {
     id: "attachments",
     name: { tr: "Ataşmanlar", en: "Attachments" },
     desc: { tr: "Kova, kırıcı ve diğer ekipman ataşmanları.", en: "Buckets, breakers and other equipment attachments." },
-    icon: ICONS.attachment
+    icon: ICONS.attachment,
+    page: "yedek-parca/atasmanlar.html"
   }
 ];
