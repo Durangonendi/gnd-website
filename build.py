@@ -54,13 +54,13 @@ MACHINES = [
 
 SPARE_PARTS = [
     ("filtre-gruplari", "Filtre Grupları", "Yağ, yakıt, hava ve hidrolik filtreleri.",
-     "İş makinelerinizin performansını korumak için yağ, yakıt, hava ve hidrolik filtre gruplarını orijinal ve muadil seçeneklerle tedarik ediyoruz.", "filter", None),
+     "İş makinelerinizin performansını korumak için yağ, yakıt, hava ve hidrolik filtre gruplarını orijinal ve muadil seçeneklerle tedarik ediyoruz.", "filter", "filtre-gruplari.jpg"),
     ("mekanik-gruplar", "Mekanik Gruplar", "Motor ve şanzıman gibi mekanik parça grupları.",
-     "Motor, şanzıman ve diğer mekanik parça gruplarında güvenilir tedarik ve teknik destek sağlıyoruz.", "mechanical", None),
+     "Motor, şanzıman ve diğer mekanik parça gruplarında güvenilir tedarik ve teknik destek sağlıyoruz.", "mechanical", "mekanik-gruplar.jpg"),
     ("hidrolik-gruplar", "Hidrolik Gruplar", "Hidrolik pompa, silindir ve valf grupları.",
-     "Hidrolik pompa, silindir ve valf grupları başta olmak üzere iş makinesi hidrolik sistem parçalarını tedarik ediyoruz.", "hydraulic", None),
+     "Hidrolik pompa, silindir ve valf grupları başta olmak üzere iş makinesi hidrolik sistem parçalarını tedarik ediyoruz.", "hydraulic", "hidrolik-gruplar.jpg"),
     ("atasmanlar", "Ataşmanlar", "Kova, kırıcı ve diğer ekipman ataşmanları.",
-     "Kova, kırıcı ve makinenize özel diğer ekipman ataşmanlarını ihtiyacınıza göre tedarik ediyoruz.", "attachment", None),
+     "Kova, kırıcı ve makinenize özel diğer ekipman ataşmanlarını ihtiyacınıza göre tedarik ediyoruz.", "attachment", "atasmanlar.jpg"),
 ]
 
 HEADER = """<header class="site-header">

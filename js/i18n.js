@@ -282,27 +282,31 @@ const SPARE_PARTS_CATEGORIES = [
     name: { tr: "Filtre Grupları", en: "Filter Groups" },
     desc: { tr: "Yağ, yakıt, hava ve hidrolik filtreleri.", en: "Oil, fuel, air and hydraulic filters." },
     icon: ICONS.filter,
-    page: "yedek-parca/filtre-gruplari.html"
+    page: "yedek-parca/filtre-gruplari.html",
+    image: "assets/categories/filtre-gruplari.jpg"
   },
   {
     id: "mechanical-groups",
     name: { tr: "Mekanik Gruplar", en: "Mechanical Groups" },
     desc: { tr: "Motor ve şanzıman gibi mekanik parça grupları.", en: "Mechanical part groups such as engine and transmission." },
     icon: ICONS.mechanical,
-    page: "yedek-parca/mekanik-gruplar.html"
+    page: "yedek-parca/mekanik-gruplar.html",
+    image: "assets/categories/mekanik-gruplar.jpg"
   },
   {
     id: "hydraulic-groups",
     name: { tr: "Hidrolik Gruplar", en: "Hydraulic Groups" },
     desc: { tr: "Hidrolik pompa, silindir ve valf grupları.", en: "Hydraulic pump, cylinder and valve groups." },
     icon: ICONS.hydraulic,
-    page: "yedek-parca/hidrolik-gruplar.html"
+    page: "yedek-parca/hidrolik-gruplar.html",
+    image: "assets/categories/hidrolik-gruplar.jpg"
   },
   {
     id: "attachments",
     name: { tr: "Ataşmanlar", en: "Attachments" },
     desc: { tr: "Kova, kırıcı ve diğer ekipman ataşmanları.", en: "Buckets, breakers and other equipment attachments." },
     icon: ICONS.attachment,
-    page: "yedek-parca/atasmanlar.html"
+    page: "yedek-parca/atasmanlar.html",
+    image: "assets/categories/atasmanlar.jpg"
   }
 ];
