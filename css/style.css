@@ -56,7 +56,7 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 .logo img {
-  height: 44px;
+  height: 64px;
   width: auto;
   display: block;
 }
@@ -140,8 +140,8 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   padding: 40px 24px;
   background-image:
-    linear-gradient(180deg, rgba(10, 10, 12, 0.55), rgba(10, 10, 12, 0.72)),
-    url("assets/hero-cover.jpg");
+    linear-gradient(180deg, rgba(10, 10, 12, 0.2), rgba(10, 10, 12, 0.4)),
+    url("../assets/hero-cover.jpg");
   background-size: cover;
   background-position: center;
   border-bottom: none;
