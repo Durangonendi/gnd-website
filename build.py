@@ -144,7 +144,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <div class="category-grid">
       {siblings}
     </div>
-    <p style="margin-top:28px"><a href="{root}index.html">← Ana sayfaya dön</a></p>
+    <p class="back-link"><a href="{root}index.html">← Ana sayfaya dön</a></p>
   </div>
 </section>
 
