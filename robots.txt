@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gnd-website-five.vercel.app/sitemap.xml

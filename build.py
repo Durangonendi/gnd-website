@@ -102,6 +102,28 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{long_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{root}css/style.css">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{base_url}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "{group_title}", "item": "{base_url}/#categories"}},
+    {{"@type": "ListItem", "position": 3, "name": "{name}", "item": "{canonical}"}}
+  ]
+}}
+</script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "{name}",
+  "description": "{long_desc}",
+  "provider": {{"@type": "Organization", "name": "GND İş Makineleri Sanayi ve Ticaret A.Ş.", "url": "{base_url}/"}},
+  "areaServed": "TR",
+  "url": "{canonical}"
+}}
+</script>
 </head>
 <body>
 
@@ -174,7 +196,7 @@ def build_pages(items, out_dir, group_title, url_prefix, root):
             media = f'<div class="category-detail-icon">{ICONS[icon_key]}</div>'
         page = PAGE_TEMPLATE.format(
             name=name, site_name=SITE_NAME, long_desc=long_desc,
-            canonical=f"{BASE_URL}/{url_prefix}/{slug}.html",
+            canonical=f"{BASE_URL}/{url_prefix}/{slug}.html", base_url=BASE_URL,
             root=root, header=header, media=media,
             wa=WHATSAPP_NUMBER, wa_quote=wa_quote,
             group_title=group_title, siblings=siblings_html, footer=footer
@@ -190,4 +212,18 @@ if __name__ == "__main__":
     build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Makineler", "makineler", "../")
     print("Yedek parça sayfaları:")
     build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Yedek Parça Kategorileri", "yedek-parca", "../")
+
+    urls = [(f"{BASE_URL}/", "weekly", "1.0")]
+    for slug, *_ in MACHINES:
+        urls.append((f"{BASE_URL}/makineler/{slug}.html", "monthly", "0.8"))
+    for slug, *_ in SPARE_PARTS:
+        urls.append((f"{BASE_URL}/yedek-parca/{slug}.html", "monthly", "0.7"))
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, freq, pri in urls:
+        sitemap.append(f"<url><loc>{loc}</loc><changefreq>{freq}</changefreq><priority>{pri}</priority></url>")
+    sitemap.append("</urlset>")
+    with open(os.path.join(root_dir, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write("\n".join(sitemap) + "\n")
+    print(f"sitemap.xml güncellendi ({len(urls)} URL).")
+
     print("Tamamlandı.")
