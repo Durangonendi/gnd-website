@@ -65,7 +65,7 @@ SPARE_PARTS = [
 
 HEADER = """<header class="site-header">
   <div class="header-inner">
-    <a href="{root}index.html" class="logo"><img src="{root}assets/logo-original.png" alt="GND İş Makineleri" /></a>
+    <a href="{root}index.html" class="logo"><img src="{root}assets/logo-header.png" width="160" height="160" alt="GND İş Makineleri" /></a>
     <nav class="main-nav">
       <a href="{root}index.html#home">Ana Sayfa</a>
       <a href="{root}index.html#categories">Makineler</a>
