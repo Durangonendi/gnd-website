@@ -22,6 +22,7 @@ ICONS = {
     "mechanical": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L15 12l-3-3 2.7-2.7z"/></svg>',
     "hydraulic": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="12" height="6" rx="1"/><path d="M16 11h4v2h-4M6 9V6h4v3"/></svg>',
     "attachment": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l5-5 3 3-5 5-3-3zM11 10l4-4 6 6-4 4M9 17l-4 4"/></svg>',
+    "trade": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9z"/></svg>',
 }
 
 BENEFITS = [
@@ -33,76 +34,128 @@ BENEFITS = [
 
 MACHINE_LINKS = [("filters", "Filters"), ("hydraulic-parts", "Hydraulic Parts"), ("attachments", "Attachments")]
 PARTS_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("bulldozer", "Bulldozers")]
+SERVICE_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("attachments", "Attachments")]
 
-# (slug, name, meta description, intro, icon key, image filename)
+# (slug, name, meta description, intro, icon key, image filename, specs)
+# specs = (typical_spec_range, common_applications)
 MACHINES = [
     ("mini-excavator", "Mini Excavators",
      "New and used mini excavators for sale from GND Machinery. Global supplier of compact excavators for construction, landscaping and utility work.",
      "Mini excavators combine compact size with genuine digging power, making them the preferred choice for landscaping, utility work, demolition in tight spaces and urban construction sites. GND Machinery sources new and used mini excavators from a wide international manufacturer network, matching each buyer with the right size, reach and operating weight for their project.",
-     "excavator", "mini-ekskavator.jpg"),
+     "excavator", "mini-ekskavator.jpg",
+     ("Operating weight 0.8–6 t &middot; Engine power 10–50 HP",
+      "Landscaping, utility trenching, small demolition, indoor and basement work, tight urban sites")),
     ("excavator", "Excavators",
      "Buy new or used excavators from GND Machinery, a global heavy equipment supplier. Crawler excavators for construction, earthmoving and infrastructure projects.",
      "Excavators are the backbone of any earthmoving operation, and GND Machinery supplies mid-size crawler excavators for construction, road building and general earthmoving work. Through our global manufacturer network, we source both new and used excavators matched to your tonnage, reach and site requirements.",
-     "excavator", "orta-ekskavator.jpg"),
+     "excavator", "orta-ekskavator.jpg",
+     ("Operating weight 13–25 t &middot; Engine power 90–150 HP",
+      "General earthmoving, foundation work, road construction, utility installation")),
     ("mining-excavator", "Mining & Heavy-Duty Excavators",
      "Heavy-duty and mining excavators for sale. GND Machinery supplies large-tonnage excavators for quarries, mines and large-scale earthmoving projects worldwide.",
      "Mining and heavy-duty excavators deliver the digging capacity required for quarries, open-pit mines and large-scale earthmoving projects. GND Machinery's global supply network sources new and used heavy-tonnage excavators, offering competitive quotations for buyers in the mining and quarrying sector.",
-     "excavator", "agir-tonaj-ekskavator.jpg"),
+     "excavator", "agir-tonaj-ekskavator.jpg",
+     ("Operating weight 30–120+ t &middot; Engine power 200–700+ HP",
+      "Open-pit mining, quarrying, overburden removal, large-scale earthmoving")),
     ("wheel-loader", "Wheel Loaders",
      "New and used wheel loaders for sale from GND Machinery. Global supplier of loading equipment for construction, quarrying and material handling.",
      "Wheel loaders are essential for loading, carrying and stockpiling material on any construction or quarry site. GND Machinery supplies new and used wheel loaders in a range of capacities, sourced through our international manufacturer network to match your operation's throughput needs.",
-     "loader", "loader.jpg"),
+     "loader", "loader.jpg",
+     ("Operating weight 5–25 t &middot; Engine power 100–300 HP",
+      "Material loading, stockpiling, quarry face loading, snow removal")),
     ("backhoe-loader", "Backhoe Loaders",
      "Backhoe loaders for sale, new and used. GND Machinery supplies versatile backhoe loaders combining excavation and loading in a single machine.",
      "Backhoe loaders combine excavation and loading in a single versatile machine, ideal for small to mid-size construction sites. GND Machinery sources new and used backhoe loaders from trusted manufacturers worldwide, offering flexible supply options for contractors and rental fleets.",
-     "backhoe-loader", "bekoloader.jpg"),
+     "backhoe-loader", "bekoloader.jpg",
+     ("Operating weight 7–9 t &middot; Engine power 80–110 HP",
+      "Small-to-mid excavation, utility work, municipal projects, material handling")),
     ("boom-lift", "Boom Lifts & Man Lifts",
      "Boom lifts and man lifts for sale. GND Machinery supplies aerial work platforms for maintenance, installation and construction access work.",
      "Boom lifts and man lifts provide safe, efficient access for maintenance, installation and construction work at height. GND Machinery supplies articulating and telescopic boom lifts through its global equipment network, sourced new or used to fit your project's reach and budget.",
-     "manlift", "manlift.jpg"),
+     "manlift", "manlift.jpg",
+     ("Working height 12–45 m",
+      "Maintenance, installation, facade work, warehouse and steel-structure access")),
     ("telehandler", "Telehandlers",
      "Telehandlers for sale, new and used telescopic handlers from GND Machinery, a global heavy equipment supplier for construction and agriculture.",
      "Telehandlers extend the reach of a standard forklift, moving materials to high and hard-to-reach points on construction sites, warehouses and farms. GND Machinery supplies new and used telehandlers sourced through its international manufacturer network.",
-     "telehandler", "telehandler.jpg"),
+     "telehandler", "telehandler.jpg",
+     ("Lift height 6–17 m &middot; Lift capacity 2.5–5 t",
+      "Construction material handling, agriculture, warehouse logistics")),
     ("road-roller", "Road Rollers & Compactors",
      "Road rollers and compactors for sale. GND Machinery supplies single and double-drum rollers for road construction and ground compaction projects.",
      "Road rollers and compactors are essential for road construction, ground preparation and asphalt compaction. GND Machinery supplies single and double-drum rollers, sourced new or used to match the compaction requirements of your project.",
-     "roller", "silindir.jpg"),
+     "roller", "silindir.jpg",
+     ("Operating weight 1–20 t",
+      "Subgrade compaction, asphalt finishing, trench and ground compaction")),
     ("asphalt-paver", "Asphalt Pavers (Finishers)",
      "Asphalt pavers and finishers for sale from GND Machinery, a global supplier of road construction equipment for paving contractors.",
      "Asphalt pavers, also known as finishers, determine the speed and quality of any road paving project. GND Machinery supplies new and used asphalt pavers through its global manufacturer network, matched to your paving width and output requirements.",
-     "finisher", "finiser.jpg"),
+     "finisher", "finiser.jpg",
+     ("Paving width 2–10 m &middot; Engine power 60–130 HP",
+      "Road paving, parking lots, airport runways")),
     ("motor-grader", "Motor Graders",
      "Motor graders for sale, new and used grading equipment from GND Machinery, a global supplier for road construction and site leveling.",
      "Motor graders deliver the precision grading needed for road construction, site leveling and maintenance work. GND Machinery sources new and used motor graders from a global manufacturer network, supporting contractors and infrastructure projects worldwide.",
-     "grader", "greyder.jpg"),
+     "grader", "greyder.jpg",
+     ("Engine power 100–280 HP &middot; Blade width 3–4.3 m",
+      "Road grading, site leveling, slope and maintenance work")),
     ("bulldozer", "Bulldozers",
      "Bulldozers for sale, new and used dozers from GND Machinery, a global heavy equipment supplier for earthmoving and site preparation.",
      "Bulldozers provide the pushing power needed for site preparation, grading and heavy earthmoving work. GND Machinery supplies new and used bulldozers sourced through its international manufacturer network, matched to your project's horsepower and blade requirements.",
-     "dozer", "dozer.jpg"),
+     "dozer", "dozer.jpg",
+     ("Engine power 70–450+ HP",
+      "Site clearing, grading, material pushing, rough terrain leveling")),
     ("skid-steer-loader", "Skid Steer Loaders",
      "Skid steer loaders for sale, compact and versatile loaders from GND Machinery, a global supplier for landscaping, demolition and tight-access sites.",
      "Skid steer loaders bring compact power and tight-radius maneuverability to landscaping, demolition and confined job sites. GND Machinery supplies new and used skid steer loaders through its global equipment network, matched to your attachment and lift capacity needs.",
-     "skid-steer", "skid-steer-loader.jpg"),
+     "skid-steer", "skid-steer-loader.jpg",
+     ("Operating weight 1.4–3.5 t &middot; Engine power 45–100 HP",
+      "Landscaping, demolition, tight-access material handling")),
 ]
 
+# (slug, name, meta description, intro, icon key, image filename, sourcing)
+# sourcing = (domestic_text, imported_text, oem_text)
 SPARE_PARTS = [
     ("filters", "Heavy Equipment Filters",
      "OEM and aftermarket filters for heavy equipment. GND Machinery supplies oil, fuel, air and hydraulic filters for construction and mining machinery.",
      "Genuine and aftermarket filtration keeps heavy equipment running at peak performance. GND Machinery supplies oil, fuel, air, hydraulic and cabin filters for excavators, loaders and other construction and mining machinery.",
-     "filter", "filtre-gruplari.jpg"),
+     "filter", "filtre-gruplari.jpg",
+     ("Locally manufactured filters offering fast delivery and lower cost for routine maintenance.",
+      "Internationally sourced filters from established brands for buyers with a preferred standard.",
+      "Original equipment manufacturer filters matched exactly to your machine's model, for warranty-sensitive use.")),
     ("mechanical-parts", "Mechanical Parts & Components",
      "Mechanical parts for heavy equipment: engines, transmissions, undercarriage and drive components supplied globally by GND Machinery.",
      "From engine and transmission components to undercarriage and drive axle groups, GND Machinery supplies mechanical parts for heavy equipment, backed by a global sourcing network and technical support.",
-     "mechanical", "mekanik-gruplar.jpg"),
+     "mechanical", "mekanik-gruplar.jpg",
+     ("Locally produced components for common wear items such as seals, gaskets and basic mechanical parts.",
+      "Internationally sourced mechanical components for models without a ready local equivalent.",
+      "Manufacturer-original parts for engine, transmission and drivetrain components requiring exact specification.")),
     ("hydraulic-parts", "Hydraulic Parts & Components",
      "Hydraulic parts for heavy equipment: pumps, valves, cylinders and motors supplied globally by GND Machinery for construction and mining machinery.",
      "Hydraulic pumps, control valves, cylinders and motors are critical to the performance of any heavy equipment fleet. GND Machinery supplies hydraulic components for excavators, loaders and other construction machinery through its global parts network.",
-     "hydraulic", "hidrolik-gruplar.jpg"),
+     "hydraulic", "hidrolik-gruplar.jpg",
+     ("Locally manufactured hydraulic components for standard repair and maintenance needs.",
+      "Internationally sourced hydraulic pumps, valves and cylinders across a wider brand and model range.",
+      "Manufacturer-original hydraulic components for precision-critical applications.")),
     ("attachments", "Attachments & Implements",
      "Heavy equipment attachments for sale: buckets, breakers, grapples and implements supplied globally by GND Machinery.",
      "The right attachment turns a single machine into a multi-purpose tool. GND Machinery supplies buckets, hydraulic breakers, grapples and other attachments for excavators, loaders and skid steers worldwide.",
-     "attachment", "atasmanlar.jpg"),
+     "attachment", "atasmanlar.jpg",
+     ("Locally manufactured buckets and general attachments, a cost-effective choice for standard jobs.",
+      "Internationally sourced specialty attachments such as grapples and breakers for specific working conditions.",
+      "Manufacturer-original attachments engineered for exact compatibility with your machine.")),
+]
+
+# (slug, name, meta description, intro, icon key, image filename, help_areas)
+# help_areas = (sourcing_text, customs_text, logistics_text)
+SERVICES = [
+    ("import-export-consultancy", "Import & Export Consultancy",
+     "Heavy equipment import and export consultancy from GND Machinery — reference-backed sourcing, customs guidance and logistics support for international buyers and sellers.",
+     "Buying or selling heavy equipment across borders involves sourcing verification, customs documentation, logistics and market knowledge that most buyers don't have in-house. GND Machinery draws on its own international trade network and track record to guide clients through the import and export process, from finding a reliable counterpart to coordinating shipment.",
+     "trade", None,
+     ("Connecting buyers and sellers with vetted counterparts through our reference network, built on real transaction history rather than cold listings.",
+      "General guidance on the customs documentation and process involved in cross-border equipment transactions — not a substitute for formal customs/legal advice.",
+      "Coordinating freight and logistics for cross-border heavy equipment shipments, from origin to destination.")),
 ]
 
 HEADER = """<header class="site-header">
@@ -140,7 +193,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{name} | New &amp; Used Supplier — {site_name}</title>
+<title>{name} | {title_suffix} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{root}css/style.css">
@@ -181,7 +234,36 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   </div>
 </section>
 
+{supply_section}
+
+{info_section}
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2>Why Source Through GND Machinery</h2>
+    <div class="category-grid">
+      {benefits}
+    </div>
+  </div>
+</section>
+
 <section class="categories-section">
+  <div class="section-inner">
+    <h2>{related_heading}</h2>
+    <div class="category-grid">
+      {siblings}
+    </div>
+    <p class="back-link">{cross_links} &nbsp;|&nbsp; <a href="{root}index.html">← Back to home</a></p>
+  </div>
+</section>
+
+{footer}
+
+</body>
+</html>
+"""
+
+SUPPLY_SECTION = """<section class="categories-section">
   <div class="section-inner">
     <h2>New &amp; Used {name} Supply</h2>
     <div class="vm-grid">
@@ -195,32 +277,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
   </div>
-</section>
-
-<section class="categories-section spareparts-section">
-  <div class="section-inner">
-    <h2>Why Source Through GND Machinery</h2>
-    <div class="category-grid">
-      {benefits}
-    </div>
-  </div>
-</section>
-
-<section class="categories-section">
-  <div class="section-inner">
-    <h2>Related Equipment Categories</h2>
-    <div class="category-grid">
-      {siblings}
-    </div>
-    <p class="back-link">{cross_links} &nbsp;|&nbsp; <a href="{root}index.html">← Back to home</a></p>
-  </div>
-</section>
-
-{footer}
-
-</body>
-</html>
-"""
+</section>"""
 
 SIBLING_CARD_PHOTO = """<div class="category-card">
         <div class="category-photo-wrap"><img class="category-photo" src="{root}assets/categories/{image}" alt="{name} supplied by GND Machinery" loading="lazy"></div>
@@ -245,7 +302,52 @@ def wa_link_text(text):
     return quote(text)
 
 
-def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target_prefix, cross_links_list):
+MACHINE_INFO_SECTION = """<section class="categories-section">
+  <div class="section-inner">
+    <h2>Performance &amp; Application Overview</h2>
+    <div class="vm-grid">
+      <div class="vm-card">
+        <h3>Typical Specifications</h3>
+        <p>{spec_range}</p>
+      </div>
+      <div class="vm-card">
+        <h3>Common Applications</h3>
+        <p>{applications}</p>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:16px">Exact pricing depends on brand, model year, working hours and configuration. For a price-performance comparison matched to your budget, message us on WhatsApp — no full spec sheet needed to get started.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Pricing on WhatsApp →</a>
+  </div>
+</section>"""
+
+PARTS_INFO_SECTION = """<section class="categories-section">
+  <div class="section-inner">
+    <h2>Sourcing Options</h2>
+    <div class="category-grid">
+      <div class="category-card"><h3>Domestic Production</h3><p>{domestic}</p></div>
+      <div class="category-card"><h3>Imported Products</h3><p>{imported}</p></div>
+      <div class="category-card"><h3>OEM Imported</h3><p>{oem}</p></div>
+    </div>
+    <p class="section-sub" style="margin-top:16px">The right option depends on your machine's brand, model and how critical the part is to your operation. Message us on WhatsApp with your machine details for a tailored recommendation.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Sourcing on WhatsApp →</a>
+  </div>
+</section>"""
+
+SERVICE_INFO_SECTION = """<section class="categories-section">
+  <div class="section-inner">
+    <h2>What We Help With</h2>
+    <div class="category-grid">
+      <div class="category-card"><h3>Sourcing &amp; Verification</h3><p>{sourcing}</p></div>
+      <div class="category-card"><h3>Customs &amp; Documentation Guidance</h3><p>{customs}</p></div>
+      <div class="category-card"><h3>Logistics Coordination</h3><p>{logistics}</p></div>
+    </div>
+    <p class="section-sub" style="margin-top:16px">Every country and transaction has its own requirements. For guidance specific to your import or export case, message us directly on WhatsApp.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Your Case on WhatsApp →</a>
+  </div>
+</section>"""
+
+
+def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target_prefix, cross_links_list, kind):
     os.makedirs(out_dir, exist_ok=True)
     wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
     header = HEADER.format(root=root, wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
@@ -253,9 +355,9 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
     benefits_html = "\n      ".join(BENEFIT_CARD.format(title=t, text=x) for t, x in BENEFITS)
     cross_links_html = " &middot; ".join(f'<a href="{root}{cross_link_target_prefix}/{s}.html">{n}</a>' for s, n in cross_links_list)
 
-    for slug, name, meta_desc, intro, icon_key, image in items:
+    for slug, name, meta_desc, intro, icon_key, image, extra in items:
         sibling_parts = []
-        for s, n, m, d, k, img in items:
+        for s, n, m, d, k, img, ex in items:
             if s == slug:
                 continue
             if img:
@@ -265,16 +367,37 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
         siblings_html = "\n      ".join(sibling_parts)
 
         wa_quote = wa_link_text(f"Hi, I'd like a quote for {name}.")
+        wa_info = wa_link_text(f"Hi, I have a question about {name}.")
         if image:
             media = f'<div class="category-detail-photo"><img src="{root}assets/categories/{image}" alt="{name} for sale — GND Machinery" loading="lazy"></div>'
         else:
             media = f'<div class="category-detail-icon">{ICONS[icon_key]}</div>'
+
+        related_heading = "Related Equipment Categories"
+        if kind == "machine":
+            spec_range, applications = extra
+            info_section = MACHINE_INFO_SECTION.format(spec_range=spec_range, applications=applications, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            title_suffix = "New & Used Supplier"
+            supply_section = SUPPLY_SECTION.format(name=name)
+        elif kind == "service":
+            sourcing, customs, logistics = extra
+            info_section = SERVICE_INFO_SECTION.format(sourcing=sourcing, customs=customs, logistics=logistics, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            title_suffix = "Consultancy Services"
+            supply_section = ""
+        else:
+            domestic, imported, oem = extra
+            info_section = PARTS_INFO_SECTION.format(domestic=domestic, imported=imported, oem=oem, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            title_suffix = "New & Used Supplier"
+            supply_section = SUPPLY_SECTION.format(name=name)
+
         page = PAGE_TEMPLATE.format(
             name=name, site_name=SITE_NAME, meta_desc=meta_desc, intro=intro,
             canonical=f"{BASE_URL}/{url_prefix}/{slug}.html", base_url=BASE_URL,
             root=root, header=header, media=media, benefits=benefits_html,
             wa=WHATSAPP_NUMBER, wa_quote=wa_quote, cross_links=cross_links_html,
-            group_title=group_title, siblings=siblings_html, footer=footer
+            group_title=group_title, siblings=siblings_html, footer=footer,
+            info_section=info_section, title_suffix=title_suffix, supply_section=supply_section,
+            related_heading=related_heading,
         )
         with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
             f.write(page)
@@ -284,15 +407,19 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
 if __name__ == "__main__":
     root_dir = os.path.dirname(os.path.abspath(__file__))
     print("Machine pages:")
-    build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Machines", "makineler", "../", "yedek-parca", MACHINE_LINKS)
+    build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Machines", "makineler", "../", "yedek-parca", MACHINE_LINKS, kind="machine")
     print("Spare parts pages:")
-    build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Spare Parts", "yedek-parca", "../", "makineler", PARTS_LINKS)
+    build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Spare Parts", "yedek-parca", "../", "makineler", PARTS_LINKS, kind="parts")
+    print("Service pages:")
+    build_pages(SERVICES, os.path.join(root_dir, "hizmetler"), "Services", "hizmetler", "../", "makineler", SERVICE_LINKS, kind="service")
 
     urls = [(f"{BASE_URL}/", "weekly", "1.0")]
     for slug, *_ in MACHINES:
         urls.append((f"{BASE_URL}/makineler/{slug}.html", "monthly", "0.8"))
     for slug, *_ in SPARE_PARTS:
         urls.append((f"{BASE_URL}/yedek-parca/{slug}.html", "monthly", "0.7"))
+    for slug, *_ in SERVICES:
+        urls.append((f"{BASE_URL}/hizmetler/{slug}.html", "monthly", "0.7"))
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, freq, pri in urls:
         sitemap.append(f"<url><loc>{loc}</loc><changefreq>{freq}</changefreq><priority>{pri}</priority></url>")
