@@ -1,6 +1,13 @@
 # Generates English-first SEO landing pages per machine/spare-part category.
 # To add/change a category: update MACHINES / SPARE_PARTS below AND the matching
 # entry in js/i18n.js (CATEGORIES / SPARE_PARTS_CATEGORIES) — both keep the same data.
+#
+# Language handling on these pages: the server-rendered default is always English
+# (SEO-safe — matches what a crawler with no localStorage sees). Visible text carries
+# a `data-tr="..."` twin; js/detail-lang.js swaps to Turkish at runtime ONLY if the
+# visitor already has "tr" explicitly stored in localStorage (gnd-site-lang), i.e. they
+# picked it via the lang-select on this site before. First-time visitors with no stored
+# preference keep seeing English, same as today.
 import os
 
 SITE_NAME = "GND Machinery"
@@ -25,96 +32,168 @@ ICONS = {
     "trade": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-6-3.5-9s1-6.5 3.5-9z"/></svg>',
 }
 
+# (title, text, title_tr, text_tr)
 BENEFITS = [
-    ("Global manufacturer network", "Access to new and used equipment sourced from trusted producers worldwide."),
-    ("New and used options", "Flexible sourcing matched to your budget, timeline, and specification."),
-    ("Fast quotation", "Get pricing and availability directly on WhatsApp, without a sign-up form."),
-    ("Genuine parts support", "Backed by our own spare parts and after-sales network."),
+    ("Global manufacturer network", "Access to new and used equipment sourced from trusted producers worldwide.",
+     "Küresel üretici ağı", "Dünya çapında güvenilir üreticilerden sıfır ve ikinci el ekipmana erişim."),
+    ("New and used options", "Flexible sourcing matched to your budget, timeline, and specification.",
+     "Sıfır ve ikinci el seçenekler", "Bütçenize, zaman çizelgenize ve spesifikasyonunuza uygun esnek tedarik."),
+    ("Fast quotation", "Get pricing and availability directly on WhatsApp, without a sign-up form.",
+     "Hızlı teklif", "Kayıt formu olmadan doğrudan WhatsApp üzerinden fiyat ve stok bilgisi alın."),
+    ("Genuine parts support", "Backed by our own spare parts and after-sales network.",
+     "Orijinal parça desteği", "Kendi yedek parça ve satış sonrası ağımızla desteklenir."),
 ]
 
 MACHINE_LINKS = [("filters", "Filters"), ("hydraulic-parts", "Hydraulic Parts"), ("attachments", "Attachments")]
 PARTS_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("bulldozer", "Bulldozers")]
 SERVICE_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("attachments", "Attachments")]
 
-# (slug, name, meta description, intro, icon key, image filename, specs)
+
+def esc(s):
+    return s.replace("&", "&amp;").replace('"', "&quot;")
+
+
+# (slug, name, meta description, intro, icon key, image filename, specs, tr)
 # specs = (typical_spec_range, common_applications)
+# tr = (name_tr, intro_tr, (spec_range_tr, applications_tr), desc_tr)
 MACHINES = [
     ("mini-excavator", "Mini Excavators",
      "New and used mini excavators for sale from GND Machinery. Global supplier of compact excavators for construction, landscaping and utility work.",
      "Mini excavators combine compact size with genuine digging power, making them the preferred choice for landscaping, utility work, demolition in tight spaces and urban construction sites. GND Machinery sources new and used mini excavators from a wide international manufacturer network, matching each buyer with the right size, reach and operating weight for their project.",
      "excavator", "mini-ekskavator.jpg",
      ("Operating weight 0.8–6 t &middot; Engine power 10–50 HP",
-      "Landscaping, utility trenching, small demolition, indoor and basement work, tight urban sites")),
+      "Landscaping, utility trenching, small demolition, indoor and basement work, tight urban sites"),
+     ("Mini Ekskavatörler",
+      "Mini ekskavatörler, kompakt boyutları ile gerçek kazı gücünü bir araya getirir; peyzaj işleri, altyapı çalışmaları, dar alanlarda yıkım ve şehir içi inşaat sahaları için tercih edilir. GND Machinery, geniş uluslararası üretici ağı üzerinden sıfır ve ikinci el mini ekskavatör tedarik ederek her alıcıyı projesine uygun boyut, erişim mesafesi ve çalışma ağırlığıyla eşleştirir.",
+      ("Çalışma ağırlığı 0,8–6 ton · Motor gücü 10–50 HP",
+       "Peyzaj işleri, altyapı hendek kazısı, küçük ölçekli yıkım, bodrum ve iç mekan çalışmaları, dar şehir içi sahalar"),
+      "Dar alan ve hafif hafriyat işleri için kompakt ekskavatörler.")),
     ("excavator", "Excavators",
      "Buy new or used excavators from GND Machinery, a global heavy equipment supplier. Crawler excavators for construction, earthmoving and infrastructure projects.",
      "Excavators are the backbone of any earthmoving operation, and GND Machinery supplies mid-size crawler excavators for construction, road building and general earthmoving work. Through our global manufacturer network, we source both new and used excavators matched to your tonnage, reach and site requirements.",
      "excavator", "orta-ekskavator.jpg",
      ("Operating weight 13–25 t &middot; Engine power 90–150 HP",
-      "General earthmoving, foundation work, road construction, utility installation")),
+      "General earthmoving, foundation work, road construction, utility installation"),
+     ("Ekskavatörler",
+      "Ekskavatörler her hafriyat operasyonunun temelini oluşturur; GND Machinery inşaat, yol yapımı ve genel hafriyat işleri için orta sınıf paletli ekskavatörler tedarik eder. Küresel üretici ağımız sayesinde tonaj, erişim mesafesi ve saha gereksinimlerinize uygun sıfır ve ikinci el ekskavatörler buluyoruz.",
+      ("Çalışma ağırlığı 13–25 ton · Motor gücü 90–150 HP",
+       "Genel hafriyat, temel çalışmaları, yol yapımı, altyapı tesisatı"),
+      "Genel hafriyat ve inşaat işleri için orta sınıf ekskavatörler.")),
     ("mining-excavator", "Mining & Heavy-Duty Excavators",
      "Heavy-duty and mining excavators for sale. GND Machinery supplies large-tonnage excavators for quarries, mines and large-scale earthmoving projects worldwide.",
      "Mining and heavy-duty excavators deliver the digging capacity required for quarries, open-pit mines and large-scale earthmoving projects. GND Machinery's global supply network sources new and used heavy-tonnage excavators, offering competitive quotations for buyers in the mining and quarrying sector.",
      "excavator", "agir-tonaj-ekskavator.jpg",
      ("Operating weight 30–120+ t &middot; Engine power 200–700+ HP",
-      "Open-pit mining, quarrying, overburden removal, large-scale earthmoving")),
+      "Open-pit mining, quarrying, overburden removal, large-scale earthmoving"),
+     ("Madencilik ve Ağır Tonaj Ekskavatörler",
+      "Madencilik ve ağır tonaj ekskavatörler; taş ocakları, açık maden sahaları ve büyük ölçekli hafriyat projeleri için gereken kazı kapasitesini sağlar. GND Machinery'nin küresel tedarik ağı, madencilik ve taş ocağı sektöründeki alıcılar için sıfır ve ikinci el ağır tonajlı ekskavatörler bularak rekabetçi teklifler sunar.",
+      ("Çalışma ağırlığı 30–120+ ton · Motor gücü 200–700+ HP",
+       "Açık maden işletmeciliği, taş ocakçılığı, örtü tabakası kaldırma, büyük ölçekli hafriyat"),
+      "Maden ve büyük ölçekli hafriyat için ağır tonajlı ekskavatörler.")),
     ("wheel-loader", "Wheel Loaders",
      "New and used wheel loaders for sale from GND Machinery. Global supplier of loading equipment for construction, quarrying and material handling.",
      "Wheel loaders are essential for loading, carrying and stockpiling material on any construction or quarry site. GND Machinery supplies new and used wheel loaders in a range of capacities, sourced through our international manufacturer network to match your operation's throughput needs.",
      "loader", "loader.jpg",
      ("Operating weight 5–25 t &middot; Engine power 100–300 HP",
-      "Material loading, stockpiling, quarry face loading, snow removal")),
+      "Material loading, stockpiling, quarry face loading, snow removal"),
+     ("Lastikli Yükleyiciler",
+      "Lastikli yükleyiciler, her inşaat veya taş ocağı sahasında yükleme, taşıma ve stoklama için vazgeçilmezdir. GND Machinery, uluslararası üretici ağı üzerinden farklı kapasitelerde sıfır ve ikinci el lastikli yükleyiciler tedarik ederek operasyonunuzun verim ihtiyacına uygun çözümler sunar.",
+      ("Çalışma ağırlığı 5–25 ton · Motor gücü 100–300 HP",
+       "Malzeme yükleme, stoklama, taş ocağı yüzü yükleme, kar temizleme"),
+      "Lastikli yükleyiciler, her ölçekte yükleme işi için.")),
     ("backhoe-loader", "Backhoe Loaders",
      "Backhoe loaders for sale, new and used. GND Machinery supplies versatile backhoe loaders combining excavation and loading in a single machine.",
      "Backhoe loaders combine excavation and loading in a single versatile machine, ideal for small to mid-size construction sites. GND Machinery sources new and used backhoe loaders from trusted manufacturers worldwide, offering flexible supply options for contractors and rental fleets.",
      "backhoe-loader", "bekoloader.jpg",
      ("Operating weight 7–9 t &middot; Engine power 80–110 HP",
-      "Small-to-mid excavation, utility work, municipal projects, material handling")),
+      "Small-to-mid excavation, utility work, municipal projects, material handling"),
+     ("Bekoloaderler",
+      "Bekoloaderler, kazı ve yükleme işlevlerini tek bir çok yönlü makinede birleştirir; küçük ve orta ölçekli inşaat sahaları için idealdir. GND Machinery, dünya çapında güvenilir üreticilerden sıfır ve ikinci el bekoloaderler tedarik ederek yükleniciler ve kiralama filoları için esnek tedarik seçenekleri sunar.",
+      ("Çalışma ağırlığı 7–9 ton · Motor gücü 80–110 HP",
+       "Küçük ve orta ölçekli kazı, altyapı işleri, belediye projeleri, malzeme taşıma"),
+      "Kazı ve yükleme işini tek makinede birleştiren bekoloaderler.")),
     ("boom-lift", "Boom Lifts & Man Lifts",
      "Boom lifts and man lifts for sale. GND Machinery supplies aerial work platforms for maintenance, installation and construction access work.",
      "Boom lifts and man lifts provide safe, efficient access for maintenance, installation and construction work at height. GND Machinery supplies articulating and telescopic boom lifts through its global equipment network, sourced new or used to fit your project's reach and budget.",
      "manlift", "manlift.jpg",
      ("Working height 12–45 m",
-      "Maintenance, installation, facade work, warehouse and steel-structure access")),
+      "Maintenance, installation, facade work, warehouse and steel-structure access"),
+     ("Platform ve Manliftler",
+      "Platform ve manliftler, yükseklikte yapılan bakım, montaj ve inşaat çalışmaları için güvenli ve verimli erişim sağlar. GND Machinery, küresel ekipman ağı üzerinden eklemli ve teleskopik platformları sıfır veya ikinci el olarak, projenizin erişim mesafesine ve bütçesine uygun şekilde tedarik eder.",
+      ("Çalışma yüksekliği 12–45 m",
+       "Bakım, montaj, cephe çalışmaları, depo ve çelik yapı erişimi"),
+      "Yüksekte çalışma platformları, bakım ve montaj işleri için.")),
     ("telehandler", "Telehandlers",
      "Telehandlers for sale, new and used telescopic handlers from GND Machinery, a global heavy equipment supplier for construction and agriculture.",
      "Telehandlers extend the reach of a standard forklift, moving materials to high and hard-to-reach points on construction sites, warehouses and farms. GND Machinery supplies new and used telehandlers sourced through its international manufacturer network.",
      "telehandler", "telehandler.jpg",
      ("Lift height 6–17 m &middot; Lift capacity 2.5–5 t",
-      "Construction material handling, agriculture, warehouse logistics")),
+      "Construction material handling, agriculture, warehouse logistics"),
+     ("Telehandlerlar",
+      "Telehandlerlar, standart bir forkliftin erişim mesafesini uzatarak inşaat sahalarında, depolarda ve tarım alanlarında malzemeyi yüksek ve zor ulaşılan noktalara taşır. GND Machinery, uluslararası üretici ağı üzerinden sıfır ve ikinci el telehandlerlar tedarik eder.",
+      ("Kaldırma yüksekliği 6–17 m · Kaldırma kapasitesi 2,5–5 ton",
+       "İnşaat malzeme taşıma, tarım, depo lojistiği"),
+      "Teleskopik kollu yükleyiciler, yüksek ve uzak noktalara taşıma için.")),
     ("road-roller", "Road Rollers & Compactors",
      "Road rollers and compactors for sale. GND Machinery supplies single and double-drum rollers for road construction and ground compaction projects.",
      "Road rollers and compactors are essential for road construction, ground preparation and asphalt compaction. GND Machinery supplies single and double-drum rollers, sourced new or used to match the compaction requirements of your project.",
      "roller", "silindir.jpg",
      ("Operating weight 1–20 t",
-      "Subgrade compaction, asphalt finishing, trench and ground compaction")),
+      "Subgrade compaction, asphalt finishing, trench and ground compaction"),
+     ("Silindirler ve Kompaktörler",
+      "Silindirler ve kompaktörler; yol yapımı, zemin hazırlığı ve asfalt sıkıştırma çalışmaları için vazgeçilmezdir. GND Machinery, projenizin sıkıştırma gereksinimlerine uygun tek ve çift tamburlu silindirleri sıfır veya ikinci el olarak tedarik eder.",
+      ("Çalışma ağırlığı 1–20 ton",
+       "Zemin sıkıştırma, asfalt serme sonrası sıkıştırma, hendek ve zemin sıkıştırma"),
+      "Zemin ve asfalt sıkıştırma işleri için silindirler.")),
     ("asphalt-paver", "Asphalt Pavers (Finishers)",
      "Asphalt pavers and finishers for sale from GND Machinery, a global supplier of road construction equipment for paving contractors.",
      "Asphalt pavers, also known as finishers, determine the speed and quality of any road paving project. GND Machinery supplies new and used asphalt pavers through its global manufacturer network, matched to your paving width and output requirements.",
      "finisher", "finiser.jpg",
      ("Paving width 2–10 m &middot; Engine power 60–130 HP",
-      "Road paving, parking lots, airport runways")),
+      "Road paving, parking lots, airport runways"),
+     ("Asfalt Finişerleri",
+      "Finişer olarak da bilinen asfalt serici makineler, herhangi bir yol yapım projesinin hızını ve kalitesini belirler. GND Machinery, küresel üretici ağı üzerinden serim genişliği ve kapasite gereksinimlerinize uygun sıfır ve ikinci el asfalt finişerleri tedarik eder.",
+      ("Serim genişliği 2–10 m · Motor gücü 60–130 HP",
+       "Yol serimi, otopark yapımı, havalimanı pisti çalışmaları"),
+      "Asfalt serimi için finişer makineleri.")),
     ("motor-grader", "Motor Graders",
      "Motor graders for sale, new and used grading equipment from GND Machinery, a global supplier for road construction and site leveling.",
      "Motor graders deliver the precision grading needed for road construction, site leveling and maintenance work. GND Machinery sources new and used motor graders from a global manufacturer network, supporting contractors and infrastructure projects worldwide.",
      "grader", "greyder.jpg",
      ("Engine power 100–280 HP &middot; Blade width 3–4.3 m",
-      "Road grading, site leveling, slope and maintenance work")),
+      "Road grading, site leveling, slope and maintenance work"),
+     ("Greyderler",
+      "Greyderler, yol yapımı, saha tesviyesi ve bakım çalışmaları için gereken hassas tesviyeyi sağlar. GND Machinery, dünya çapındaki yükleniciler ve altyapı projeleri için küresel üretici ağından sıfır ve ikinci el greyderler tedarik eder.",
+      ("Motor gücü 100–280 HP · Bıçak genişliği 3–4,3 m",
+       "Yol tesviyesi, saha düzleştirme, eğim ve bakım çalışmaları"),
+      "Zemin tesviyesi ve yol yapımı için greyderler.")),
     ("bulldozer", "Bulldozers",
      "Bulldozers for sale, new and used dozers from GND Machinery, a global heavy equipment supplier for earthmoving and site preparation.",
      "Bulldozers provide the pushing power needed for site preparation, grading and heavy earthmoving work. GND Machinery supplies new and used bulldozers sourced through its international manufacturer network, matched to your project's horsepower and blade requirements.",
      "dozer", "dozer.jpg",
      ("Engine power 70–450+ HP",
-      "Site clearing, grading, material pushing, rough terrain leveling")),
+      "Site clearing, grading, material pushing, rough terrain leveling"),
+     ("Dozerler",
+      "Dozerler, saha hazırlığı, tesviye ve ağır hafriyat çalışmaları için gereken itme gücünü sağlar. GND Machinery, projenizin beygir gücü ve bıçak gereksinimlerine uygun sıfır ve ikinci el dozerleri uluslararası üretici ağı üzerinden tedarik eder.",
+      ("Motor gücü 70–450+ HP",
+       "Saha temizleme, tesviye, malzeme itme, arazi düzleştirme"),
+      "Ağır zemin çalışmaları için güçlü dozer seçenekleri.")),
     ("skid-steer-loader", "Skid Steer Loaders",
      "Skid steer loaders for sale, compact and versatile loaders from GND Machinery, a global supplier for landscaping, demolition and tight-access sites.",
      "Skid steer loaders bring compact power and tight-radius maneuverability to landscaping, demolition and confined job sites. GND Machinery supplies new and used skid steer loaders through its global equipment network, matched to your attachment and lift capacity needs.",
      "skid-steer", "skid-steer-loader.jpg",
      ("Operating weight 1.4–3.5 t &middot; Engine power 45–100 HP",
-      "Landscaping, demolition, tight-access material handling")),
+      "Landscaping, demolition, tight-access material handling"),
+     ("Skid Steer Loaderlar",
+      "Skid steer loaderlar, peyzaj işleri, yıkım ve dar alanlı iş sahalarına kompakt güç ve dar dönüş yarıçapıyla manevra kabiliyeti kazandırır. GND Machinery, ataşman ve kaldırma kapasitesi ihtiyacınıza uygun sıfır ve ikinci el skid steer loaderları küresel ekipman ağı üzerinden tedarik eder.",
+      ("Çalışma ağırlığı 1,4–3,5 ton · Motor gücü 45–100 HP",
+       "Peyzaj işleri, yıkım, dar alanda malzeme taşıma"),
+      "Dar alanlarda manevra kabiliyeti yüksek kompakt yükleyiciler.")),
 ]
 
-# (slug, name, meta description, intro, icon key, image filename, sourcing)
+# (slug, name, meta description, intro, icon key, image filename, sourcing, tr)
 # sourcing = (domestic_text, imported_text, oem_text)
+# tr = (name_tr, intro_tr, (domestic_tr, imported_tr, oem_tr), desc_tr)
 SPARE_PARTS = [
     ("filters", "Heavy Equipment Filters",
      "OEM and aftermarket filters for heavy equipment. GND Machinery supplies oil, fuel, air and hydraulic filters for construction and mining machinery.",
@@ -122,32 +201,57 @@ SPARE_PARTS = [
      "filter", "filtre-gruplari.jpg",
      ("Locally manufactured filters offering fast delivery and lower cost for routine maintenance.",
       "Internationally sourced filters from established brands for buyers with a preferred standard.",
-      "Original equipment manufacturer filters matched exactly to your machine's model, for warranty-sensitive use.")),
+      "Original equipment manufacturer filters matched exactly to your machine's model, for warranty-sensitive use."),
+     ("Filtre Grupları",
+      "Orijinal ve muadil filtrasyon çözümleri, ağır iş makinelerinin en yüksek performansta çalışmasını sağlar. GND Machinery, ekskavatör, yükleyici ve diğer inşaat/madencilik makineleri için yağ, yakıt, hava, hidrolik ve kabin filtreleri tedarik eder.",
+      ("Rutin bakım için hızlı teslimat ve düşük maliyet sunan yerli üretim filtreler.",
+       "Belirli bir standardı tercih eden alıcılar için köklü markalardan ithal edilen filtreler.",
+       "Garanti kapsamındaki kullanım için makinenizin modeliyle birebir uyumlu orijinal ekipman üreticisi (OEM) filtreleri."),
+      "Yağ, yakıt, hava ve hidrolik filtreleri.")),
     ("mechanical-parts", "Mechanical Parts & Components",
      "Mechanical parts for heavy equipment: engines, transmissions, undercarriage and drive components supplied globally by GND Machinery.",
      "From engine and transmission components to undercarriage and drive axle groups, GND Machinery supplies mechanical parts for heavy equipment, backed by a global sourcing network and technical support.",
      "mechanical", "mekanik-gruplar.jpg",
      ("Locally produced components for common wear items such as seals, gaskets and basic mechanical parts.",
       "Internationally sourced mechanical components for models without a ready local equivalent.",
-      "Manufacturer-original parts for engine, transmission and drivetrain components requiring exact specification.")),
+      "Manufacturer-original parts for engine, transmission and drivetrain components requiring exact specification."),
+     ("Mekanik Parçalar ve Bileşenler",
+      "Motor ve şanzıman bileşenlerinden şasi altı ve tahrik grubu parçalarına kadar, GND Machinery ağır iş makineleri için mekanik parçaları küresel bir tedarik ağı ve teknik destekle sunar.",
+      ("Conta, keçe ve temel mekanik parçalar gibi yaygın aşınan bileşenler için yerli üretim seçenekler.",
+       "Yerli muadili bulunmayan modeller için uluslararası kaynaklardan tedarik edilen mekanik bileşenler.",
+       "Tam spesifikasyon gerektiren motor, şanzıman ve tahrik grubu bileşenleri için üretici orijinali parçalar."),
+      "Motor ve şanzıman gibi mekanik parça grupları.")),
     ("hydraulic-parts", "Hydraulic Parts & Components",
      "Hydraulic parts for heavy equipment: pumps, valves, cylinders and motors supplied globally by GND Machinery for construction and mining machinery.",
      "Hydraulic pumps, control valves, cylinders and motors are critical to the performance of any heavy equipment fleet. GND Machinery supplies hydraulic components for excavators, loaders and other construction machinery through its global parts network.",
      "hydraulic", "hidrolik-gruplar.jpg",
      ("Locally manufactured hydraulic components for standard repair and maintenance needs.",
       "Internationally sourced hydraulic pumps, valves and cylinders across a wider brand and model range.",
-      "Manufacturer-original hydraulic components for precision-critical applications.")),
+      "Manufacturer-original hydraulic components for precision-critical applications."),
+     ("Hidrolik Parçalar ve Bileşenler",
+      "Hidrolik pompalar, kontrol valfleri, silindirler ve motorlar, herhangi bir ağır iş makinesi filosunun performansı için kritik öneme sahiptir. GND Machinery, ekskavatör, yükleyici ve diğer inşaat makineleri için hidrolik bileşenleri küresel parça ağı üzerinden tedarik eder.",
+      ("Standart onarım ve bakım ihtiyaçları için yerli üretim hidrolik bileşenler.",
+       "Daha geniş marka ve model yelpazesi için uluslararası kaynaklardan tedarik edilen hidrolik pompa, valf ve silindirler.",
+       "Hassasiyet gerektiren uygulamalar için üretici orijinali hidrolik bileşenler."),
+      "Hidrolik pompa, silindir ve valf grupları.")),
     ("attachments", "Attachments & Implements",
      "Heavy equipment attachments for sale: buckets, breakers, grapples and implements supplied globally by GND Machinery.",
      "The right attachment turns a single machine into a multi-purpose tool. GND Machinery supplies buckets, hydraulic breakers, grapples and other attachments for excavators, loaders and skid steers worldwide.",
      "attachment", "atasmanlar.jpg",
      ("Locally manufactured buckets and general attachments, a cost-effective choice for standard jobs.",
       "Internationally sourced specialty attachments such as grapples and breakers for specific working conditions.",
-      "Manufacturer-original attachments engineered for exact compatibility with your machine.")),
+      "Manufacturer-original attachments engineered for exact compatibility with your machine."),
+     ("Ataşmanlar ve Ekipmanlar",
+      "Doğru ataşman, tek bir makineyi çok amaçlı bir araca dönüştürür. GND Machinery, dünya çapında ekskavatör, yükleyici ve skid steer loaderlar için kova, hidrolik kırıcı, grapple ve diğer ataşmanları tedarik eder.",
+      ("Standart işler için maliyet avantajlı, yerli üretim kova ve genel ataşmanlar.",
+       "Özel çalışma koşulları için grapple ve kırıcı gibi uluslararası kaynaklı özel ataşmanlar.",
+       "Makinenizle tam uyumluluk için mühendislik detayına uygun üretici orijinali ataşmanlar."),
+      "Kova, kırıcı ve diğer ekipman ataşmanları.")),
 ]
 
-# (slug, name, meta description, intro, icon key, image filename, help_areas)
+# (slug, name, meta description, intro, icon key, image filename, help_areas, tr)
 # help_areas = (sourcing_text, customs_text, logistics_text)
+# tr = (name_tr, intro_tr, (sourcing_tr, customs_tr, logistics_tr), desc_tr)
 SERVICES = [
     ("import-export-consultancy", "Import & Export Consultancy",
      "Heavy equipment import and export consultancy from GND Machinery — reference-backed sourcing, customs guidance and logistics support for international buyers and sellers.",
@@ -155,22 +259,32 @@ SERVICES = [
      "trade", None,
      ("Connecting buyers and sellers with vetted counterparts through our reference network, built on real transaction history rather than cold listings.",
       "General guidance on the customs documentation and process involved in cross-border equipment transactions — not a substitute for formal customs/legal advice.",
-      "Coordinating freight and logistics for cross-border heavy equipment shipments, from origin to destination.")),
+      "Coordinating freight and logistics for cross-border heavy equipment shipments, from origin to destination."),
+     ("İthalat & İhracat Danışmanlığı",
+      "Ağır iş makinesi alım satımında sınır ötesi işlemler; tedarik doğrulaması, gümrük evrakları, lojistik ve çoğu alıcının kurum içinde sahip olmadığı bir pazar bilgisi gerektirir. GND Machinery, kendi uluslararası ticaret ağını ve geçmiş iş tecrübesini kullanarak müşterilerine güvenilir bir muhatap bulmaktan sevkiyatın koordinasyonuna kadar ithalat ve ihracat sürecinde rehberlik eder.",
+      ("Soğuk ilanlar yerine gerçek işlem geçmişine dayanan referans ağımız üzerinden alıcı ve satıcıları doğrulanmış muhataplarla buluşturuyoruz.",
+       "Sınır ötesi makine işlemlerinde gerekli gümrük evrakları ve süreci hakkında genel yönlendirme — resmi gümrük/hukuk danışmanlığının yerini tutmaz.",
+       "Sınır ötesi ağır iş makinesi sevkiyatları için çıkış noktasından varış noktasına kadar navlun ve lojistik koordinasyonu."),
+      "Referans temelli tedarik, gümrük rehberliği ve lojistik desteği.")),
 ]
 
 HEADER = """<header class="site-header">
   <div class="header-inner">
     <a href="{root}index.html" class="logo"><img src="{root}assets/logo-header.png" width="160" height="160" alt="GND Machinery" /></a>
     <nav class="main-nav">
-      <a href="{root}index.html#home">Home</a>
-      <a href="{root}index.html#categories">Machines</a>
-      <a href="{root}index.html#spareparts">Spare Parts</a>
-      <a href="{root}index.html#about">About</a>
-      <a href="{root}index.html#contact">Contact</a>
+      <a href="{root}index.html#home" data-tr="Ana Sayfa">Home</a>
+      <a href="{root}index.html#categories" data-tr="Makineler">Machines</a>
+      <a href="{root}index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
+      <a href="{root}index.html#about" data-tr="Hakkımızda">About</a>
+      <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
     <div class="header-actions">
+      <select id="lang-select" class="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="tr">TR</option>
+      </select>
       <a class="btn btn-primary header-cta" href="https://wa.me/{wa}?text={wa_generic}" target="_blank" rel="noopener">
-        <span>Get a Quote</span>
+        <span data-tr="Teklif Al">Get a Quote</span>
       </a>
     </div>
   </div>
@@ -179,13 +293,13 @@ HEADER = """<header class="site-header">
 FOOTER = """<footer class="site-footer">
   <div class="section-inner footer-inner">
     <div>© 2026 GND Machinery — GND İş Makineleri Sanayi ve Ticaret A.Ş.</div>
-    <div class="footer-note">Global supplier of heavy equipment and spare parts.</div>
+    <div class="footer-note" data-tr="Ağır iş makinesi ve yedek parça küresel tedarikçisi.">Global supplier of heavy equipment and spare parts.</div>
   </div>
 </footer>
 
 <a href="https://wa.me/{wa}?text={wa_generic}" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.15 8.15 0 0 1-4.2-1.15l-.3-.18-3.1.95.95-3-.2-.32A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.13-1.45-.72-1.68-.8-.22-.08-.39-.13-.55.13-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.28.37-.42.13-.14.17-.25.25-.4.08-.16.04-.3-.02-.42-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.25-.85.83-.85 2.03s.87 2.36 1 2.52c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28z"/></svg>
-  <span>Live Support</span>
+  <span data-tr="Canlı Destek">Live Support</span>
 </a>"""
 
 PAGE_TEMPLATE = """<!DOCTYPE html>
@@ -228,9 +342,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <section class="hero category-hero">
   <div class="hero-inner">
     {media}
-    <h1>{name}</h1>
-    <p>{intro}</p>
-    <a href="https://wa.me/{wa}?text={wa_quote}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Get a Quote →</a>
+    <h1 data-tr="{name_tr}">{name}</h1>
+    <p data-tr="{intro_tr}">{intro}</p>
+    <a href="https://wa.me/{wa}?text={wa_quote}" class="btn btn-primary btn-lg" target="_blank" rel="noopener" data-tr="Teklif Al →">Get a Quote →</a>
   </div>
 </section>
 
@@ -240,7 +354,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <section class="categories-section spareparts-section">
   <div class="section-inner">
-    <h2>Why Source Through GND Machinery</h2>
+    <h2 data-tr="Neden GND Machinery Üzerinden Tedarik?">Why Source Through GND Machinery</h2>
     <div class="category-grid">
       {benefits}
     </div>
@@ -249,31 +363,32 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <section class="categories-section">
   <div class="section-inner">
-    <h2>{related_heading}</h2>
+    <h2 data-tr="İlgili Ekipman Kategorileri">Related Equipment Categories</h2>
     <div class="category-grid">
       {siblings}
     </div>
-    <p class="back-link">{cross_links} &nbsp;|&nbsp; <a href="{root}index.html">← Back to home</a></p>
+    <p class="back-link">{cross_links} &nbsp;|&nbsp; <a href="{root}index.html" data-tr="← Anasayfaya dön">← Back to home</a></p>
   </div>
 </section>
 
 {footer}
 
+<script src="{root}js/detail-lang.js"></script>
 </body>
 </html>
 """
 
 SUPPLY_SECTION = """<section class="categories-section">
   <div class="section-inner">
-    <h2>New &amp; Used {name} Supply</h2>
+    <h2 data-tr="Sıfır ve İkinci El {name_tr} Tedariği">New &amp; Used {name} Supply</h2>
     <div class="vm-grid">
       <div class="vm-card">
-        <h3>New {name}</h3>
-        <p>Factory-new units sourced directly from our manufacturer partners, with full specification and delivery lead time provided on request.</p>
+        <h3 data-tr="Sıfır {name_tr}">New {name}</h3>
+        <p data-tr="Üretici ortaklarımızdan doğrudan temin edilen, talep üzerine tam spesifikasyon ve teslimat süresi bilgisi sağlanan fabrika çıkışı sıfır üniteler.">Factory-new units sourced directly from our manufacturer partners, with full specification and delivery lead time provided on request.</p>
       </div>
       <div class="vm-card">
-        <h3>Used {name}</h3>
-        <p>Inspected used units offering lower upfront cost, sourced from our global network and matched to your working hours and budget.</p>
+        <h3 data-tr="İkinci El {name_tr}">Used {name}</h3>
+        <p data-tr="Global ağımızdan temin edilen, çalışma saatlerinize ve bütçenize uygun, incelemesi yapılmış ikinci el üniteler.">Inspected used units offering lower upfront cost, sourced from our global network and matched to your working hours and budget.</p>
       </div>
     </div>
   </div>
@@ -281,19 +396,19 @@ SUPPLY_SECTION = """<section class="categories-section">
 
 SIBLING_CARD_PHOTO = """<div class="category-card">
         <div class="category-photo-wrap"><img class="category-photo" src="{root}assets/categories/{image}" alt="{name} supplied by GND Machinery" loading="lazy"></div>
-        <h3><a href="{href}">{name}</a></h3>
-        <p>{desc}</p>
+        <h3><a href="{href}" data-tr="{name_tr}">{name}</a></h3>
+        <p data-tr="{desc_tr}">{desc}</p>
       </div>"""
 
 SIBLING_CARD_ICON = """<div class="category-card">
         <div class="category-icon">{icon}</div>
-        <h3><a href="{href}">{name}</a></h3>
-        <p>{desc}</p>
+        <h3><a href="{href}" data-tr="{name_tr}">{name}</a></h3>
+        <p data-tr="{desc_tr}">{desc}</p>
       </div>"""
 
 BENEFIT_CARD = """<div class="category-card">
-        <h3>{title}</h3>
-        <p>{text}</p>
+        <h3 data-tr="{title_tr}">{title}</h3>
+        <p data-tr="{text_tr}">{text}</p>
       </div>"""
 
 
@@ -304,45 +419,45 @@ def wa_link_text(text):
 
 MACHINE_INFO_SECTION = """<section class="categories-section">
   <div class="section-inner">
-    <h2>Performance &amp; Application Overview</h2>
+    <h2 data-tr="Performans ve Kullanım Alanı Genel Bakışı">Performance &amp; Application Overview</h2>
     <div class="vm-grid">
       <div class="vm-card">
-        <h3>Typical Specifications</h3>
-        <p>{spec_range}</p>
+        <h3 data-tr="Tipik Teknik Özellikler">Typical Specifications</h3>
+        <p data-tr="{spec_range_tr}">{spec_range}</p>
       </div>
       <div class="vm-card">
-        <h3>Common Applications</h3>
-        <p>{applications}</p>
+        <h3 data-tr="Yaygın Kullanım Alanları">Common Applications</h3>
+        <p data-tr="{applications_tr}">{applications}</p>
       </div>
     </div>
-    <p class="section-sub" style="margin-top:16px">Exact pricing depends on brand, model year, working hours and configuration. For a price-performance comparison matched to your budget, message us on WhatsApp — no full spec sheet needed to get started.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Pricing on WhatsApp →</a>
+    <p class="section-sub" style="margin-top:16px" data-tr="Kesin fiyat; marka, model yılı, çalışma saati ve konfigürasyona göre değişir. Bütçenize uygun fiyat-performans karşılaştırması için WhatsApp'tan bize ulaşın — başlamak için tam teknik döküman gerekmiyor.">Exact pricing depends on brand, model year, working hours and configuration. For a price-performance comparison matched to your budget, message us on WhatsApp — no full spec sheet needed to get started.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Fiyat Sorun →">Ask About Pricing on WhatsApp →</a>
   </div>
 </section>"""
 
 PARTS_INFO_SECTION = """<section class="categories-section">
   <div class="section-inner">
-    <h2>Sourcing Options</h2>
+    <h2 data-tr="Tedarik Seçenekleri">Sourcing Options</h2>
     <div class="category-grid">
-      <div class="category-card"><h3>Domestic Production</h3><p>{domestic}</p></div>
-      <div class="category-card"><h3>Imported Products</h3><p>{imported}</p></div>
-      <div class="category-card"><h3>OEM Imported</h3><p>{oem}</p></div>
+      <div class="category-card"><h3 data-tr="Yerli Üretim">Domestic Production</h3><p data-tr="{domestic_tr}">{domestic}</p></div>
+      <div class="category-card"><h3 data-tr="İthal Ürünler">Imported Products</h3><p data-tr="{imported_tr}">{imported}</p></div>
+      <div class="category-card"><h3 data-tr="OEM İthal">OEM Imported</h3><p data-tr="{oem_tr}">{oem}</p></div>
     </div>
-    <p class="section-sub" style="margin-top:16px">The right option depends on your machine's brand, model and how critical the part is to your operation. Message us on WhatsApp with your machine details for a tailored recommendation.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Sourcing on WhatsApp →</a>
+    <p class="section-sub" style="margin-top:16px" data-tr="Doğru seçenek; makinenizin markasına, modeline ve parçanın operasyonunuz için ne kadar kritik olduğuna bağlıdır. Size özel bir öneri için makine bilgilerinizle WhatsApp'tan bize ulaşın.">The right option depends on your machine's brand, model and how critical the part is to your operation. Message us on WhatsApp with your machine details for a tailored recommendation.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Tedarik Sorun →">Ask About Sourcing on WhatsApp →</a>
   </div>
 </section>"""
 
 SERVICE_INFO_SECTION = """<section class="categories-section">
   <div class="section-inner">
-    <h2>What We Help With</h2>
+    <h2 data-tr="Nasıl Yardımcı Oluyoruz">What We Help With</h2>
     <div class="category-grid">
-      <div class="category-card"><h3>Sourcing &amp; Verification</h3><p>{sourcing}</p></div>
-      <div class="category-card"><h3>Customs &amp; Documentation Guidance</h3><p>{customs}</p></div>
-      <div class="category-card"><h3>Logistics Coordination</h3><p>{logistics}</p></div>
+      <div class="category-card"><h3 data-tr="Tedarik ve Doğrulama">Sourcing &amp; Verification</h3><p data-tr="{sourcing_tr}">{sourcing}</p></div>
+      <div class="category-card"><h3 data-tr="Gümrük ve Evrak Rehberliği">Customs &amp; Documentation Guidance</h3><p data-tr="{customs_tr}">{customs}</p></div>
+      <div class="category-card"><h3 data-tr="Lojistik Koordinasyonu">Logistics Coordination</h3><p data-tr="{logistics_tr}">{logistics}</p></div>
     </div>
-    <p class="section-sub" style="margin-top:16px">Every country and transaction has its own requirements. For guidance specific to your import or export case, message us directly on WhatsApp.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener">Ask About Your Case on WhatsApp →</a>
+    <p class="section-sub" style="margin-top:16px" data-tr="Her ülke ve işlemin kendine has gereksinimleri vardır. Sizin ithalat veya ihracat durumunuza özel rehberlik için doğrudan WhatsApp'tan bize ulaşın.">Every country and transaction has its own requirements. For guidance specific to your import or export case, message us directly on WhatsApp.</p>
+    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Durumunuzu Sorun →">Ask About Your Case on WhatsApp →</a>
   </div>
 </section>"""
 
@@ -352,18 +467,24 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
     wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
     header = HEADER.format(root=root, wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
     footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
-    benefits_html = "\n      ".join(BENEFIT_CARD.format(title=t, text=x) for t, x in BENEFITS)
+    benefits_html = "\n      ".join(
+        BENEFIT_CARD.format(title=t, text=x, title_tr=esc(tt), text_tr=esc(tx))
+        for t, x, tt, tx in BENEFITS
+    )
     cross_links_html = " &middot; ".join(f'<a href="{root}{cross_link_target_prefix}/{s}.html">{n}</a>' for s, n in cross_links_list)
 
-    for slug, name, meta_desc, intro, icon_key, image, extra in items:
+    for slug, name, meta_desc, intro, icon_key, image, extra, tr in items:
+        name_tr, intro_tr, extra_tr, desc_tr = tr
+
         sibling_parts = []
-        for s, n, m, d, k, img, ex in items:
+        for s, n, m, d, k, img, ex, tri in items:
             if s == slug:
                 continue
+            n_tr, _, _, d_tr = tri
             if img:
-                sibling_parts.append(SIBLING_CARD_PHOTO.format(root=root, image=img, href=f"{s}.html", name=n, desc=m))
+                sibling_parts.append(SIBLING_CARD_PHOTO.format(root=root, image=img, href=f"{s}.html", name=n, desc=m, name_tr=esc(n_tr), desc_tr=esc(d_tr)))
             else:
-                sibling_parts.append(SIBLING_CARD_ICON.format(icon=ICONS[k], href=f"{s}.html", name=n, desc=m))
+                sibling_parts.append(SIBLING_CARD_ICON.format(icon=ICONS[k], href=f"{s}.html", name=n, desc=m, name_tr=esc(n_tr), desc_tr=esc(d_tr)))
         siblings_html = "\n      ".join(sibling_parts)
 
         wa_quote = wa_link_text(f"Hi, I'd like a quote for {name}.")
@@ -373,22 +494,24 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
         else:
             media = f'<div class="category-detail-icon">{ICONS[icon_key]}</div>'
 
-        related_heading = "Related Equipment Categories"
         if kind == "machine":
             spec_range, applications = extra
-            info_section = MACHINE_INFO_SECTION.format(spec_range=spec_range, applications=applications, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            spec_range_tr, applications_tr = extra_tr
+            info_section = MACHINE_INFO_SECTION.format(spec_range=spec_range, applications=applications, spec_range_tr=esc(spec_range_tr), applications_tr=esc(applications_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
             title_suffix = "New & Used Supplier"
-            supply_section = SUPPLY_SECTION.format(name=name)
+            supply_section = SUPPLY_SECTION.format(name=name, name_tr=esc(name_tr))
         elif kind == "service":
             sourcing, customs, logistics = extra
-            info_section = SERVICE_INFO_SECTION.format(sourcing=sourcing, customs=customs, logistics=logistics, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            sourcing_tr, customs_tr, logistics_tr = extra_tr
+            info_section = SERVICE_INFO_SECTION.format(sourcing=sourcing, customs=customs, logistics=logistics, sourcing_tr=esc(sourcing_tr), customs_tr=esc(customs_tr), logistics_tr=esc(logistics_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
             title_suffix = "Consultancy Services"
             supply_section = ""
         else:
             domestic, imported, oem = extra
-            info_section = PARTS_INFO_SECTION.format(domestic=domestic, imported=imported, oem=oem, wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            domestic_tr, imported_tr, oem_tr = extra_tr
+            info_section = PARTS_INFO_SECTION.format(domestic=domestic, imported=imported, oem=oem, domestic_tr=esc(domestic_tr), imported_tr=esc(imported_tr), oem_tr=esc(oem_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
             title_suffix = "New & Used Supplier"
-            supply_section = SUPPLY_SECTION.format(name=name)
+            supply_section = SUPPLY_SECTION.format(name=name, name_tr=esc(name_tr))
 
         page = PAGE_TEMPLATE.format(
             name=name, site_name=SITE_NAME, meta_desc=meta_desc, intro=intro,
@@ -397,15 +520,47 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
             wa=WHATSAPP_NUMBER, wa_quote=wa_quote, cross_links=cross_links_html,
             group_title=group_title, siblings=siblings_html, footer=footer,
             info_section=info_section, title_suffix=title_suffix, supply_section=supply_section,
-            related_heading=related_heading,
+            name_tr=esc(name_tr), intro_tr=esc(intro_tr),
         )
         with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
             f.write(page)
         print(f"  wrote {out_dir}/{slug}.html")
 
 
+DETAIL_LANG_JS = """(function () {
+  var stored = localStorage.getItem('gnd-site-lang');
+  var lang = stored === 'tr' ? 'tr' : 'en';
+
+  function apply(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-tr]').forEach(function (el) {
+      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+      el.innerHTML = l === 'tr' ? el.dataset.tr : el.dataset.en;
+    });
+    var sel = document.getElementById('lang-select');
+    if (sel) sel.value = l;
+  }
+
+  apply(lang);
+
+  var sel = document.getElementById('lang-select');
+  if (sel) {
+    sel.addEventListener('change', function (e) {
+      localStorage.setItem('gnd-site-lang', e.target.value);
+      apply(e.target.value);
+    });
+  }
+})();
+"""
+
+
 if __name__ == "__main__":
     root_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(root_dir, "js", "detail-lang.js"), "w", encoding="utf-8") as f:
+        f.write(DETAIL_LANG_JS)
+    print("Wrote js/detail-lang.js")
+
     print("Machine pages:")
     build_pages(MACHINES, os.path.join(root_dir, "makineler"), "Machines", "makineler", "../", "yedek-parca", MACHINE_LINKS, kind="machine")
     print("Spare parts pages:")
