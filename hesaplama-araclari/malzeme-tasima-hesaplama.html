@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Hauling Calculator — GND Machinery</title>
+<meta name="description" content="Free material hauling calculator. Enter total material volume and vehicle capacity to find out how many trips you'll need.">
+<link rel="canonical" href="https://gnd-website-five.vercel.app/hesaplama-araclari/malzeme-tasima-hesaplama.html">
+<link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gnd-website-five.vercel.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://gnd-website-five.vercel.app/#calculators"},
+    {"@type": "ListItem", "position": 3, "name": "Material Hauling Calculator", "item": "https://gnd-website-five.vercel.app/hesaplama-araclari/malzeme-tasima-hesaplama.html"}
+  ]
+}
+</script>
+</head>
+<body data-calc="tasima">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo"><img src="../assets/logo-header.png" width="160" height="160" alt="GND Machinery" /></a>
+    <nav class="main-nav">
+      <a href="../index.html#home" data-tr="Ana Sayfa">Home</a>
+      <a href="../index.html#categories" data-tr="Makineler">Machines</a>
+      <a href="../index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
+      <a href="../index.html#areas" data-tr="Hizmetler">Services</a>
+      <a href="../index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
+      <a href="../index.html#about" data-tr="Hakkımızda">About</a>
+      <a href="../index.html#contact" data-tr="İletişim">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <select id="lang-select" class="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="tr">TR</option>
+      </select>
+      <a class="btn btn-primary header-cta" href="https://wa.me/905550708034?text=Hi%2C%20I%27d%20like%20more%20information%20about%20GND%20Machinery." target="_blank" rel="noopener">
+        <span data-tr="Teklif Al">Get a Quote</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1 data-tr="Malzeme Taşıma Hesaplama">Material Hauling Calculator</h1>
+    <p data-tr="Toplam malzeme hacmini ve aracınızın kapasitesini girin, gereken sefer sayısını hesaplayın.">Enter the total material volume and your vehicle's capacity to calculate the number of trips required.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      <div class="calc-field"><label data-tr="Toplam Malzeme Hacmi (m³)">Total Material Volume (m³)</label><input type="number" id="toplamHacim" value="50" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Araç Kapasitesi (m³)">Vehicle Capacity (m³)</label><input type="number" id="kapasite" value="10" min="0.1" step="0.1"></div>
+      <button id="calcBtn" class="btn btn-primary" style="width:100%" data-tr="Hesapla">Calculate</button>
+      <div id="calcResult" class="calc-result"></div>
+      
+      <div class="calc-cta">
+        <a href="https://wa.me/905550708034?text=Hi%2C%20I%20have%20a%20question%20about%20Material%20Hauling%20Calculator." class="btn btn-primary" style="width:100%" target="_blank" rel="noopener" data-tr="Kesin Bilgi İçin WhatsApp'tan Sorun →">Ask on WhatsApp for Exact Info →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2 data-tr="Diğer Hesaplama Araçları">Other Calculators</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <h3><a href="hafriyat-dolgu-hesaplama.html" data-tr="Hafriyat / Dolgu Hesaplama">Excavation &amp; Fill Volume Calculator</a></h3>
+        <p data-tr="Hafriyat ve dolgu hacmi hesaplama aracı. Uzunluk, genişlik ve derinlik girin; yerinde ve gevşeme sonrası (kazılmış) hacmi m³ olarak görün.">Free excavation and fill volume calculator for construction projects. Enter length, width and depth to get bank and loose (swelled) volume in cubic meters.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="beton-hesaplama.html" data-tr="Beton Hesaplama">Concrete Volume Calculator</a></h3>
+        <p data-tr="Beton hacmi hesaplama aracı. Uzunluk, genişlik ve kalınlık girin; gerekli beton hacmini m³ olarak, fire payıyla birlikte görün.">Free concrete volume calculator. Enter length, width and thickness to get the required concrete volume in cubic meters, with a waste margin included.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="ekipman-secim-rehberi.html" data-tr="Ekipman Seçim Rehberi">Equipment Selection Guide</a></h3>
+        <p data-tr="Ekipman seçim rehberi. İşinizin türünü seçin, projeniz için önerilen ekskavatör sınıfını görün.">Free equipment selection guide. Answer one question about your job type to get a recommended excavator class for your project.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="yakit-maliyeti-hesaplama.html" data-tr="Yakıt Maliyeti Hesaplama">Fuel Cost Calculator</a></h3>
+        <p data-tr="Ağır iş makinesi yakıt maliyeti hesaplama aracı. Makine tipi, çalışma saati ve yakıt fiyatına göre tahmini yakıt tüketimi ve maliyeti.">Free fuel cost calculator for heavy equipment. Estimate fuel consumption and cost based on machine type, working hours and fuel price.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="kazi-suresi-hesaplama.html" data-tr="Kazı Süresi Tahmini">Excavation Time Estimator</a></h3>
+        <p data-tr="Kazı süresi tahmin aracı. Toplam hacim ve makine tipini girin, işin kaç saat/gün süreceğini tahmin edin.">Free excavation time estimator. Enter total volume and machine type to estimate how many hours or days the job will take.</p>
+      </div>
+    </div>
+    <p class="back-link"><a href="../index.html" data-tr="← Anasayfaya dön">← Back to home</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner footer-inner">
+    <div>© 2026 GND Machinery — GND İş Makineleri Sanayi ve Ticaret A.Ş.</div>
+    <div class="footer-note" data-tr="Ağır iş makinesi ve yedek parça küresel tedarikçisi.">Global supplier of heavy equipment and spare parts.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/905550708034?text=Hi%2C%20I%27d%20like%20more%20information%20about%20GND%20Machinery." class="floating-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.15 8.15 0 0 1-4.2-1.15l-.3-.18-3.1.95.95-3-.2-.32A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.13-1.45-.72-1.68-.8-.22-.08-.39-.13-.55.13-.16.25-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.28.37-.42.13-.14.17-.25.25-.4.08-.16.04-.3-.02-.42-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.25-.85.83-.85 2.03s.87 2.36 1 2.52c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28z"/></svg>
+  <span data-tr="Canlı Destek">Live Support</span>
+</a>
+
+<script src="../js/detail-lang.js"></script>
+<script src="../js/calculators.js"></script>
+</body>
+</html>

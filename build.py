@@ -268,6 +268,85 @@ SERVICES = [
       "Referans temelli tedarik, gümrük rehberliği ve lojistik desteği.")),
 ]
 
+# (slug, name, name_tr, meta_desc, meta_desc_tr, intro, intro_tr, calc_type, form_html, approximate)
+# form_html: the literal <div class="calc-field">...</div> block(s) for this calculator's inputs.
+# approximate: True if results use general industry averages rather than exact geometry (shows an extra disclaimer).
+CALCULATORS = [
+    ("hafriyat-dolgu-hesaplama", "Excavation &amp; Fill Volume Calculator", "Hafriyat / Dolgu Hesaplama",
+     "Free excavation and fill volume calculator for construction projects. Enter length, width and depth to get bank and loose (swelled) volume in cubic meters.",
+     "Hafriyat ve dolgu hacmi hesaplama aracı. Uzunluk, genişlik ve derinlik girin; yerinde ve gevşeme sonrası (kazılmış) hacmi m³ olarak görün.",
+     "Enter your excavation dimensions to calculate the in-place (bank) volume and the loose volume after excavation, accounting for soil swell.",
+     "Kazı ölçülerinizi girin, yerinde (bank) hacmi ve zeminin gevşeme payı ile kazıldıktan sonraki hacmi hesaplayın.",
+     "hafriyat",
+     """<div class="calc-field"><label data-tr="Uzunluk (m)">Length (m)</label><input type="number" id="uzunluk" value="10" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Genişlik (m)">Width (m)</label><input type="number" id="genislik" value="5" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Derinlik (m)">Depth (m)</label><input type="number" id="derinlik" value="1.5" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Şişme Faktörü (%)">Swell Factor (%)</label><input type="number" id="sisme" value="25" min="0" step="1"></div>""",
+     False),
+    ("beton-hesaplama", "Concrete Volume Calculator", "Beton Hesaplama",
+     "Free concrete volume calculator. Enter length, width and thickness to get the required concrete volume in cubic meters, with a waste margin included.",
+     "Beton hacmi hesaplama aracı. Uzunluk, genişlik ve kalınlık girin; gerekli beton hacmini m³ olarak, fire payıyla birlikte görün.",
+     "Enter your slab or foundation dimensions to calculate how much concrete you'll need, including a standard waste margin.",
+     "Döşeme veya temel ölçülerinizi girin, standart fire payı dahil ne kadar beton gerektiğini hesaplayın.",
+     "beton",
+     """<div class="calc-field"><label data-tr="Uzunluk (m)">Length (m)</label><input type="number" id="uzunluk" value="10" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Genişlik (m)">Width (m)</label><input type="number" id="genislik" value="5" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Kalınlık (cm)">Thickness (cm)</label><input type="number" id="kalinlik" value="15" min="0" step="1"></div>""",
+     False),
+    ("malzeme-tasima-hesaplama", "Material Hauling Calculator", "Malzeme Taşıma Hesaplama",
+     "Free material hauling calculator. Enter total material volume and vehicle capacity to find out how many trips you'll need.",
+     "Malzeme taşıma hesaplama aracı. Toplam malzeme hacmini ve araç kapasitesini girin, kaç sefer gerektiğini görün.",
+     "Enter the total material volume and your vehicle's capacity to calculate the number of trips required.",
+     "Toplam malzeme hacmini ve aracınızın kapasitesini girin, gereken sefer sayısını hesaplayın.",
+     "tasima",
+     """<div class="calc-field"><label data-tr="Toplam Malzeme Hacmi (m³)">Total Material Volume (m³)</label><input type="number" id="toplamHacim" value="50" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Araç Kapasitesi (m³)">Vehicle Capacity (m³)</label><input type="number" id="kapasite" value="10" min="0.1" step="0.1"></div>""",
+     False),
+    ("ekipman-secim-rehberi", "Equipment Selection Guide", "Ekipman Seçim Rehberi",
+     "Free equipment selection guide. Answer one question about your job type to get a recommended excavator class for your project.",
+     "Ekipman seçim rehberi. İşinizin türünü seçin, projeniz için önerilen ekskavatör sınıfını görün.",
+     "Not sure which excavator class fits your project? Select your job type below for a general recommendation.",
+     "Projeniz için hangi ekskavatör sınıfının uygun olduğundan emin değil misiniz? İş türünüzü seçin, genel bir öneri alın.",
+     "ekipman",
+     """<div class="calc-field"><label data-tr="İş Türü">Job Type</label>
+      <select id="isTuru">
+        <option value="dar" data-tr="Dar alan / peyzaj / iç mekan">Tight space / landscaping / indoor</option>
+        <option value="genel" selected data-tr="Genel hafriyat / inşaat">General earthmoving / construction</option>
+        <option value="buyuk" data-tr="Büyük ölçekli / maden">Large-scale / mining</option>
+      </select></div>""",
+     True),
+    ("yakit-maliyeti-hesaplama", "Fuel Cost Calculator", "Yakıt Maliyeti Hesaplama",
+     "Free fuel cost calculator for heavy equipment. Estimate fuel consumption and cost based on machine type, working hours and fuel price.",
+     "Ağır iş makinesi yakıt maliyeti hesaplama aracı. Makine tipi, çalışma saati ve yakıt fiyatına göre tahmini yakıt tüketimi ve maliyeti.",
+     "Estimate fuel consumption and cost using general industry averages for each machine class.",
+     "Her makine sınıfı için genel sektör ortalamalarını kullanarak tahmini yakıt tüketimi ve maliyeti hesaplayın.",
+     "yakit",
+     """<div class="calc-field"><label data-tr="Makine Tipi">Machine Type</label>
+      <select id="makineTipi">
+        <option value="mini" data-tr="Mini Ekskavatör (~8 L/saat)">Mini Excavator (~8 L/hr)</option>
+        <option value="orta" selected data-tr="Orta Sınıf Ekskavatör (~15 L/saat)">Mid-size Excavator (~15 L/hr)</option>
+        <option value="agir" data-tr="Ağır Tonaj Ekskavatör (~25 L/saat)">Heavy-duty Excavator (~25 L/hr)</option>
+      </select></div>
+      <div class="calc-field"><label data-tr="Günlük Çalışma Saati">Daily Working Hours</label><input type="number" id="calismaSaati" value="8" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="Gün Sayısı">Number of Days</label><input type="number" id="gunSayisi" value="5" min="1" step="1"></div>
+      <div class="calc-field"><label data-tr="Yakıt Fiyatı (TL/litre)">Fuel Price (TRY/liter)</label><input type="number" id="yakitFiyati" value="45" min="0" step="0.5"></div>""",
+     True),
+    ("kazi-suresi-hesaplama", "Excavation Time Estimator", "Kazı Süresi Tahmini",
+     "Free excavation time estimator. Enter total volume and machine type to estimate how many hours or days the job will take.",
+     "Kazı süresi tahmin aracı. Toplam hacim ve makine tipini girin, işin kaç saat/gün süreceğini tahmin edin.",
+     "Estimate how long an excavation job will take, based on total volume and general production rates per machine class.",
+     "Toplam hacme ve makine sınıfına göre genel üretim hızlarını kullanarak işin ne kadar süreceğini tahmin edin.",
+     "sure",
+     """<div class="calc-field"><label data-tr="Toplam Hacim (m³)">Total Volume (m³)</label><input type="number" id="toplamHacim2" value="200" min="0" step="1"></div>
+      <div class="calc-field"><label data-tr="Makine Tipi">Machine Type</label>
+      <select id="makineTipi2">
+        <option value="mini" data-tr="Mini Ekskavatör (~8 m³/saat)">Mini Excavator (~8 m³/hr)</option>
+        <option value="orta" selected data-tr="Orta Sınıf Ekskavatör (~20 m³/saat)">Mid-size Excavator (~20 m³/hr)</option>
+        <option value="agir" data-tr="Ağır Tonaj Ekskavatör (~40 m³/saat)">Heavy-duty Excavator (~40 m³/hr)</option>
+      </select></div>""",
+     True),
+]
+
 HEADER = """<header class="site-header">
   <div class="header-inner">
     <a href="{root}index.html" class="logo"><img src="{root}assets/logo-header.png" width="160" height="160" alt="GND Machinery" /></a>
@@ -275,6 +354,8 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#home" data-tr="Ana Sayfa">Home</a>
       <a href="{root}index.html#categories" data-tr="Makineler">Machines</a>
       <a href="{root}index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
+      <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
+      <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
       <a href="{root}index.html#about" data-tr="Hakkımızda">About</a>
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
@@ -527,6 +608,108 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
         print(f"  wrote {out_dir}/{slug}.html")
 
 
+CALC_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{name} — {site_name}</title>
+<meta name="description" content="{meta_desc}">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "Home", "item": "{base_url}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "Calculators", "item": "{base_url}/#calculators"}},
+    {{"@type": "ListItem", "position": 3, "name": "{name}", "item": "{canonical}"}}
+  ]
+}}
+</script>
+</head>
+<body data-calc="{calc_type}">
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1 data-tr="{name_tr}">{name}</h1>
+    <p data-tr="{intro_tr}">{intro}</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      {form_html}
+      <button id="calcBtn" class="btn btn-primary" style="width:100%" data-tr="Hesapla">Calculate</button>
+      <div id="calcResult" class="calc-result"></div>
+      {approx_note}
+      <div class="calc-cta">
+        <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener" data-tr="Kesin Bilgi İçin WhatsApp'tan Sorun →">Ask on WhatsApp for Exact Info →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2 data-tr="Diğer Hesaplama Araçları">Other Calculators</h2>
+    <div class="category-grid">
+      {siblings}
+    </div>
+    <p class="back-link"><a href="{root}index.html" data-tr="← Anasayfaya dön">← Back to home</a></p>
+  </div>
+</section>
+
+{footer}
+
+<script src="{root}js/detail-lang.js"></script>
+<script src="{root}js/calculators.js"></script>
+</body>
+</html>
+"""
+
+CALC_APPROX_NOTE = '<p class="calc-note" data-tr="Bu sonuçlar genel sektör ortalamalarına dayanır, yaklaşıktır. Projenize özel kesin bilgi için bize ulaşın.">These results are based on general industry averages and are approximate. Contact us for exact figures specific to your project.</p>'
+
+CALC_SIBLING_CARD = """<div class="category-card">
+        <h3><a href="{href}" data-tr="{name_tr}">{name}</a></h3>
+        <p data-tr="{desc_tr}">{desc}</p>
+      </div>"""
+
+
+def build_calculator_pages(root_dir):
+    out_dir = os.path.join(root_dir, "hesaplama-araclari")
+    os.makedirs(out_dir, exist_ok=True)
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="../", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+
+    for slug, name, name_tr, meta_desc, meta_desc_tr, intro, intro_tr, calc_type, form_html, approximate in CALCULATORS:
+        sibling_parts = []
+        for s, n, n_tr, m, m_tr, *_ in CALCULATORS:
+            if s == slug:
+                continue
+            sibling_parts.append(CALC_SIBLING_CARD.format(href=f"{s}.html", name=n, desc=m, name_tr=esc(n_tr), desc_tr=esc(m_tr)))
+        siblings_html = "\n      ".join(sibling_parts)
+
+        wa_info = wa_link_text(f"Hi, I have a question about {name}.")
+        approx_note = CALC_APPROX_NOTE if approximate else ""
+
+        page = CALC_PAGE_TEMPLATE.format(
+            name=name, site_name=SITE_NAME, meta_desc=meta_desc, intro=intro,
+            canonical=f"{BASE_URL}/hesaplama-araclari/{slug}.html", base_url=BASE_URL,
+            root="../", header=header, footer=footer, calc_type=calc_type,
+            form_html=form_html, approx_note=approx_note, siblings=siblings_html,
+            wa=WHATSAPP_NUMBER, wa_info=wa_info, name_tr=esc(name_tr), intro_tr=esc(intro_tr),
+        )
+        with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(page)
+        print(f"  wrote hesaplama-araclari/{slug}.html")
+
+
 DETAIL_LANG_JS = """(function () {
   var stored = localStorage.getItem('gnd-site-lang');
   var lang = stored === 'tr' ? 'tr' : 'en';
@@ -567,6 +750,8 @@ if __name__ == "__main__":
     build_pages(SPARE_PARTS, os.path.join(root_dir, "yedek-parca"), "Spare Parts", "yedek-parca", "../", "makineler", PARTS_LINKS, kind="parts")
     print("Service pages:")
     build_pages(SERVICES, os.path.join(root_dir, "hizmetler"), "Services", "hizmetler", "../", "makineler", SERVICE_LINKS, kind="service")
+    print("Calculator pages:")
+    build_calculator_pages(root_dir)
 
     urls = [(f"{BASE_URL}/", "weekly", "1.0")]
     for slug, *_ in MACHINES:
@@ -575,6 +760,8 @@ if __name__ == "__main__":
         urls.append((f"{BASE_URL}/yedek-parca/{slug}.html", "monthly", "0.7"))
     for slug, *_ in SERVICES:
         urls.append((f"{BASE_URL}/hizmetler/{slug}.html", "monthly", "0.7"))
+    for slug, *_ in CALCULATORS:
+        urls.append((f"{BASE_URL}/hesaplama-araclari/{slug}.html", "monthly", "0.7"))
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, freq, pri in urls:
         sitemap.append(f"<url><loc>{loc}</loc><changefreq>{freq}</changefreq><priority>{pri}</priority></url>")
