@@ -345,6 +345,18 @@ CALCULATORS = [
         <option value="agir" data-tr="Ağır Tonaj Ekskavatör (~40 m³/saat)">Heavy-duty Excavator (~40 m³/hr)</option>
       </select></div>""",
      True),
+    ("ithalat-maliyet-hesaplama", "Import Cost Estimator", "İthalat Maliyet Hesaplayıcı",
+     "Free heavy equipment import cost estimator for Turkey. Enter FOB price, freight, customs duty and VAT rate to estimate total landed cost.",
+     "Ağır iş makinesi ithalat maliyeti hesaplama aracı. FOB fiyat, navlun, gümrük vergisi ve KDV oranını girin; tahmini toplam maliyeti görün.",
+     "Enter your machine's FOB price and your own freight quote to estimate total landed cost in Turkish Lira. Duty rate depends on the machine's GTİP/HS code — confirm the exact rate with a customs broker before finalizing a purchase.",
+     "Makinenizin FOB fiyatını ve kendi navlun teklifinizi girin, Türk Lirası cinsinden tahmini toplam maliyeti görün. Gümrük vergisi oranı makinenin GTİP koduna göre değişir — kesin oran için satın almadan önce bir gümrük müşavirine danışın.",
+     "ithalat",
+     """<div class="calc-field"><label data-tr="Makine Fiyatı - FOB (USD)">Machine Price - FOB (USD)</label><input type="number" id="fobFiyat" value="50000" min="0" step="100"></div>
+      <div class="calc-field"><label data-tr="Navlun / Nakliye Teklifi (USD)">Freight Quote (USD)</label><input type="number" id="navlun" value="8000" min="0" step="100"></div>
+      <div class="calc-field"><label data-tr="Gümrük Vergisi Oranı (%)">Customs Duty Rate (%)</label><input type="number" id="gumrukOrani" value="0" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="KDV Oranı (%)">VAT Rate (%)</label><input type="number" id="kdvOrani" value="20" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="Güncel USD/TL Kuru">Current USD/TRY Rate</label><input type="number" id="usdKur" value="34" min="0" step="0.01"></div>""",
+     True),
 ]
 
 HEADER = """<header class="site-header">
@@ -710,6 +722,79 @@ def build_calculator_pages(root_dir):
         print(f"  wrote hesaplama-araclari/{slug}.html")
 
 
+TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teklif Talebi Oluştur — {site_name}</title>
+<meta name="description" content="İhtiyacınız olan makineyi seçin, saniyeler içinde kendi teklif talep özetinizi PDF olarak indirin veya WhatsApp'tan gönderin.">
+<link rel="canonical" href="{base_url}/teklif-al.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>Teklif Talebi Oluştur</h1>
+    <p>Bilgilerinizi girin, kendi teklif talep özetinizi anında PDF olarak indirin ya da WhatsApp'tan gönderin.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      <form id="teklifForm">
+        <div class="calc-field"><label>Ad Soyad</label><input type="text" id="adSoyad" required></div>
+        <div class="calc-field"><label>Firma (opsiyonel)</label><input type="text" id="firma"></div>
+        <div class="calc-field"><label>Telefon veya E-posta</label><input type="text" id="iletisim" required></div>
+        <div class="calc-field"><label>Makine Kategorisi</label>
+          <select id="kategori">
+            {machine_options}
+          </select>
+        </div>
+        <div class="calc-field"><label>Adet</label><input type="number" id="adet" value="1" min="1" step="1"></div>
+        <div class="calc-field"><label>Ek Notlar (opsiyonel)</label><textarea id="notlar" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">PDF Talep Özeti Oluştur</button>
+      </form>
+      <p class="calc-note">Bu araç otomatik bir talep özeti PDF'i oluşturur, kesin fiyat teklifi değildir. Ekibimiz size dönüş yapacaktır.</p>
+      <div id="waSendBox" style="display:none" class="calc-cta">
+        <a id="waSendLink" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">Aynı Talebi WhatsApp'tan da Gönder →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{footer}
+
+<script src="js/lib/jspdf.umd.min.js"></script>
+<script src="js/lib/roboto-font-data.js"></script>
+<script src="js/logo-base64.js"></script>
+<script src="js/teklif.js"></script>
+</body>
+</html>
+"""
+
+
+def build_teklif_page(root_dir):
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    options = "\n            ".join(
+        f'<option value="{slug}">{name_tr}</option>' for slug, name, *_rest, tr in MACHINES
+        for name_tr in [tr[0]]
+    )
+    page = TEKLIF_PAGE_TEMPLATE.format(
+        site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer,
+        machine_options=options,
+    )
+    with open(os.path.join(root_dir, "teklif-al.html"), "w", encoding="utf-8") as f:
+        f.write(page)
+    print("wrote teklif-al.html")
+
+
 DETAIL_LANG_JS = """(function () {
   var stored = localStorage.getItem('gnd-site-lang');
   var lang = stored === 'tr' ? 'tr' : 'en';
@@ -752,8 +837,9 @@ if __name__ == "__main__":
     build_pages(SERVICES, os.path.join(root_dir, "hizmetler"), "Services", "hizmetler", "../", "makineler", SERVICE_LINKS, kind="service")
     print("Calculator pages:")
     build_calculator_pages(root_dir)
+    build_teklif_page(root_dir)
 
-    urls = [(f"{BASE_URL}/", "weekly", "1.0")]
+    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8")]
     for slug, *_ in MACHINES:
         urls.append((f"{BASE_URL}/makineler/{slug}.html", "monthly", "0.8"))
     for slug, *_ in SPARE_PARTS:

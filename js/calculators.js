@@ -85,6 +85,22 @@
         "<div>Yaklaşık <strong>" + fmt(days) + " iş günü</strong> (günde 8 saat çalışmayla).</div>"
       );
     },
+    ithalat: function () {
+      var fob = num("fobFiyat"), navlun = num("navlun"), gumrukOrani = num("gumrukOrani"),
+          kdvOrani = num("kdvOrani"), kur = num("usdKur");
+      var cifUsd = fob + navlun;
+      var gumrukUsd = cifUsd * (gumrukOrani / 100);
+      var kdvMatrahiUsd = cifUsd + gumrukUsd;
+      var kdvUsd = kdvMatrahiUsd * (kdvOrani / 100);
+      var toplamUsd = cifUsd + gumrukUsd + kdvUsd;
+      var toplamTl = toplamUsd * kur;
+      showResult(
+        '<div class="calc-result-value">' + fmt(toplamTl) + " TL</div>" +
+        "<div>Tahmini toplam maliyet (≈" + fmt(toplamUsd) + " USD). CIF: " + fmt(cifUsd) +
+        " USD, Gümrük Vergisi: " + fmt(gumrukUsd) + " USD, KDV: " + fmt(kdvUsd) +
+        " USD. <strong>Gümrük vergisi oranı makinenin GTİP koduna göre değişir</strong> — kesin oran için satın almadan önce bir gümrük müşavirine danışın.</div>"
+      );
+    },
   };
 
   var type = document.body.getAttribute("data-calc");
