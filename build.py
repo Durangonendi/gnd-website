@@ -772,6 +772,141 @@ COMPARISONS = [
      ]),
 ]
 
+# (slug, name, meta_desc_tr, intro_tr, specs=[(label,value)], source=(label,url), compare_slug, gnd_category_slug)
+# Same sourcing rule as COMPARISONS: every value here must trace to an official
+# manufacturer document. compare_slug/gnd_category_slug are used for cross-links.
+MACHINE_SPECS = [
+    ("cat-320-teknik-ozellikler", "CAT 320",
+     "CAT 320 ekskavatörün resmi Caterpillar teknik özellikleri: çalışma ağırlığı, motor gücü, kova kapasitesi, kazı derinliği ve erişim mesafesi.",
+     "Caterpillar 320, orta sınıf paletli ekskavatör segmentinin en çok tercih edilen modellerinden biridir. Aşağıdaki veriler doğrudan Caterpillar'ın resmi teknik özellik dokümanından alınmıştır.",
+     [("Çalışma Ağırlığı", "22.500 kg"), ("Motor", "Cat C4.4 ACERT"), ("Motor Gücü", "121 kW (162 HP)"),
+      ("Emisyon Standardı", "Tier 4 Final / EU Stage IV"), ("Kova Kapasitesi", "1,19 m³"),
+      ("Maksimum Kazı Derinliği", "6,72 m"), ("Maksimum Yatay Erişim", "9,86 m")],
+     ("Caterpillar resmi teknik özellik dokümanı", "https://www.petersoncat.com/sites/cat/files/products/documents/1455901915-33586.pdf"),
+     "cat-320-vs-komatsu-pc200", "excavator"),
+    ("komatsu-pc200-8-teknik-ozellikler", "Komatsu PC200-8",
+     "Komatsu PC200-8 ekskavatörün resmi Komatsu teknik özellikleri: çalışma ağırlığı, motor gücü, kova kapasitesi, kazı derinliği ve erişim mesafesi.",
+     "Komatsu PC200-8, dünya genelinde en yaygın kullanılan orta sınıf ekskavatörlerden biridir. Aşağıdaki veriler doğrudan Komatsu'nun resmi satış broşüründen alınmıştır.",
+     [("Çalışma Ağırlığı", "20.010 kg"), ("Motor Gücü", "110 kW (148 HP) @ 2000 rpm"),
+      ("Kova Kapasitesi", "0,50–1,20 m³"), ("Maksimum Kazı Derinliği", "6,62 m"),
+      ("Maksimum Yatay Erişim", "9,70 m"), ("Palet Genişliği", "600 mm")],
+     ("Komatsu resmi satış broşürü (PC200/PC200LC-8)", "http://www.komatsu.pe/images/pdf-construccion/excavadora/PC200200LC-8SALESBROCHUREAESS688-012006EV-2.pdf"),
+     "cat-320-vs-komatsu-pc200", "excavator"),
+    ("jcb-3cx-teknik-ozellikler", "JCB 3CX",
+     "JCB 3CX kepçe-loader'ın resmi JCB teknik özellikleri: çalışma ağırlığı, motor gücü, kazı derinliği, ön kepçe kapasitesi.",
+     "JCB 3CX, Türkiye'de kepçe-loader (beko loader) segmentinin en çok tercih edilen modelidir. Aşağıdaki veriler doğrudan JCB'nin resmi teknik özellik dokümanından alınmıştır.",
+     [("Çalışma Ağırlığı", "7.370–8.070 kg"), ("Motor Gücü", "55–81 kW (74–109 HP), tipik 68,5 kW (92 HP)"),
+      ("Kazı Derinliği", "5,46 m (varyanta göre 4,00–6,14 m)"), ("Ön Kepçe Kapasitesi", "1,1 m³")],
+     ("JCB 3CX resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.companywrench.com/PDF/JCB_3CX_SPECS.pdf"),
+     "jcb-3cx-vs-cat-428", "backhoe-loader"),
+    ("cat-428-teknik-ozellikler", "CAT 428",
+     "CAT 428 kepçe-loader'ın resmi Caterpillar teknik özellikleri: çalışma ağırlığı ve motor gücü.",
+     "Caterpillar 428, kepçe-loader segmentinde CAT'in güncel nesil modelidir. Aşağıdaki veriler doğrudan Caterpillar'ın resmi ürün sayfasından alınmıştır.",
+     [("Çalışma Ağırlığı", "≈11.000 kg (11 ton)"), ("Motor", "Cat 3054C, 4,4L turbo"), ("Motor Gücü", "74 kW (99 HP)")],
+     ("Caterpillar 428 resmi ürün sayfası", "https://www.cat.com/en_US/products/new/equipment/backhoe-loaders/side-shift-backhoe-loaders/102200.html"),
+     "jcb-3cx-vs-cat-428", "backhoe-loader"),
+    ("cat-d6-teknik-ozellikler", "CAT D6",
+     "CAT D6 dozerin resmi Caterpillar teknik özellikleri: çalışma ağırlığı ve motor gücü.",
+     "Caterpillar D6, orta-ağır sınıf paletli dozer segmentinin öncü modellerindendir. Aşağıdaki veriler doğrudan Caterpillar'ın resmi teknik özellik dokümanından alınmıştır.",
+     [("Çalışma Ağırlığı", "≈23.010 kg (50.733 lb)"), ("Motor", "Cat C9.3 ACERT"), ("Motor Gücü", "257 kW (345 HP)")],
+     ("Caterpillar D6/D6 XE resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.hawthornecat.com/wp-content/uploads/2021/03/Technical-Specs-D6-and-D6-XE-Dozers.pdf"),
+     "cat-d6-vs-komatsu-d65", "bulldozer"),
+    ("komatsu-d65-teknik-ozellikler", "Komatsu D65EX-16",
+     "Komatsu D65EX-16 dozerin resmi Komatsu teknik özellikleri: çalışma ağırlığı, motor gücü, bıçak kapasitesi.",
+     "Komatsu D65EX-16, orta-ağır sınıf paletli dozer segmentinde CAT D6'nın doğrudan rakibidir. Aşağıdaki veriler doğrudan Komatsu'nun resmi broşüründen alınmıştır.",
+     [("Çalışma Ağırlığı", "20.500–22.900 kg"), ("Motor Gücü", "155 kW (207 HP)"), ("Bıçak Kapasitesi", "3,55–5,61 m³")],
+     ("Komatsu D65EX/WX/PX-16 resmi broşürü", "https://www.komatsu.eu/Assets/GetBrochureByProductName.aspx?id=D65EX/WX/PX-16&langID=en"),
+     "cat-d6-vs-komatsu-d65", "bulldozer"),
+]
+
+MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{name} Teknik Özellikler — {site_name}</title>
+<meta name="description" content="{meta_desc}">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{base_url}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "{name} Teknik Özellikler", "item": "{canonical}"}}
+  ]
+}}
+</script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>{name} Teknik Özellikler</h1>
+    <p>{intro}</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel" style="overflow-x:auto">
+      <table class="compare-table">
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
+      <p class="calc-note">Kaynak: <a href="{source_url}" target="_blank" rel="noopener">{source_label}</a></p>
+      <div class="calc-cta">
+        <a href="https://wa.me/{wa}?text={wa_text}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">Bu Model İçin Teklif Al →</a>
+      </div>
+    </div>
+
+    <div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">İlgili Sayfalar</h3>
+      <ul>
+        <li><a href="{compare_href}">{compare_label}</a></li>
+        <li><a href="makineler/{category_slug}.html">{category_label}</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{footer}
+
+</body>
+</html>
+"""
+
+
+def build_machine_spec_pages(root_dir):
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    compare_titles = {slug: title for slug, title, *_ in COMPARISONS}
+    category_names = {slug: tr[0] for slug, name, meta, intro, icon, img, specs, tr in MACHINES}
+
+    for slug, name, meta_desc, intro, specs, source, compare_slug, category_slug in MACHINE_SPECS:
+        rows_html = "\n          ".join(
+            f"<tr><td>{esc(label)}</td><td>{esc(value)}</td></tr>" for label, value in specs
+        )
+        wa_text = wa_link_text(f"Hi, I'd like a quote for a {name}.")
+        page = MACHINE_SPEC_PAGE_TEMPLATE.format(
+            name=name, site_name=SITE_NAME, meta_desc=meta_desc,
+            canonical=f"{BASE_URL}/{slug}.html", base_url=BASE_URL,
+            header=header, footer=footer, intro=intro, rows=rows_html,
+            source_url=source[1], source_label=esc(source[0]),
+            wa=WHATSAPP_NUMBER, wa_text=wa_text,
+            compare_href=f"{compare_slug}.html", compare_label=esc(f"{compare_titles[compare_slug]}"),
+            category_slug=category_slug, category_label=esc(f"{category_names[category_slug]} kategorisine göz atın"),
+        )
+        with open(os.path.join(root_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(page)
+        print(f"  wrote {slug}.html")
+
+
 COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -826,6 +961,8 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
         {sources}
       </ul>
     </div>
+
+    {detail_links_block}
   </div>
 </section>
 
@@ -835,12 +972,20 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+COMPARISON_DETAIL_LINKS_BLOCK = """<div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">Tekil Teknik Özellik Sayfaları</h3>
+      <ul>
+        {links}
+      </ul>
+    </div>"""
+
 
 def build_comparison_pages(root_dir):
     out_dir = root_dir
     wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
     header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
     footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    spec_slug_by_name = {name: slug for slug, name, *_ in MACHINE_SPECS}
 
     for slug, title, meta_desc, machine_a, machine_b, spec_rows, sources in COMPARISONS:
         rows_html = "\n          ".join(
@@ -852,11 +997,23 @@ def build_comparison_pages(root_dir):
             for label, url in sources
         )
         wa_text = wa_link_text(f"Hi, I have a question about {machine_a} vs {machine_b}.")
+
+        detail_links = [
+            (name, spec_slug_by_name[name]) for name in (machine_a, machine_b) if name in spec_slug_by_name
+        ]
+        detail_links_block = ""
+        if detail_links:
+            links_html = "\n        ".join(
+                f'<li><a href="{s}.html">{esc(n)} Teknik Özellikler</a></li>' for n, s in detail_links
+            )
+            detail_links_block = COMPARISON_DETAIL_LINKS_BLOCK.format(links=links_html)
+
         page = COMPARISON_PAGE_TEMPLATE.format(
             title=title, site_name=SITE_NAME, meta_desc=meta_desc,
             canonical=f"{BASE_URL}/{slug}.html", base_url=BASE_URL,
             header=header, footer=footer, machine_a=machine_a, machine_b=machine_b,
             rows=rows_html, sources=sources_html, wa=WHATSAPP_NUMBER, wa_text=wa_text,
+            detail_links_block=detail_links_block,
         )
         with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
             f.write(page)
@@ -981,9 +1138,13 @@ if __name__ == "__main__":
     build_teklif_page(root_dir)
     print("Comparison pages:")
     build_comparison_pages(root_dir)
+    print("Machine spec pages:")
+    build_machine_spec_pages(root_dir)
 
     urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8")]
     for slug, *_ in COMPARISONS:
+        urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
+    for slug, *_ in MACHINE_SPECS:
         urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINES:
         urls.append((f"{BASE_URL}/makineler/{slug}.html", "monthly", "0.8"))
