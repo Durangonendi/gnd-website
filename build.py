@@ -722,6 +722,120 @@ def build_calculator_pages(root_dir):
         print(f"  wrote hesaplama-araclari/{slug}.html")
 
 
+# (slug, title_tr, meta_desc_tr, machine_a, machine_b, spec_rows, sources)
+# spec_rows: list of (label_tr, value_a, value_b) — only fields verified from official
+# manufacturer documents go here, never estimated/guessed values.
+# sources: list of (label, url) to the official documents the numbers came from.
+COMPARISONS = [
+    ("cat-320-vs-komatsu-pc200",
+     "CAT 320 vs Komatsu PC200-8 Karşılaştırma — Teknik Özellikler",
+     "CAT 320 ve Komatsu PC200-8 ekskavatörlerin resmi üretici verilerine dayanan teknik özellik karşılaştırması: çalışma ağırlığı, motor gücü, kova kapasitesi, kazı derinliği.",
+     "CAT 320", "Komatsu PC200-8",
+     [
+         ("Çalışma Ağırlığı", "22.500 kg", "20.010 kg"),
+         ("Motor Gücü", "121 kW (162 HP)", "110 kW (148 HP) @ 2000 rpm"),
+         ("Kova Kapasitesi", "1,19 m³", "0,50–1,20 m³"),
+         ("Maksimum Kazı Derinliği", "6,72 m", "6,62 m"),
+         ("Maksimum Yatay Erişim", "9,86 m", "9,70 m"),
+         ("Emisyon Standardı", "Tier 4 Final / EU Stage IV", "Üreticiye danışın"),
+     ],
+     [
+         ("Caterpillar resmi teknik özellik dokümanı", "https://www.petersoncat.com/sites/cat/files/products/documents/1455901915-33586.pdf"),
+         ("Komatsu resmi satış broşürü (PC200/PC200LC-8)", "http://www.komatsu.pe/images/pdf-construccion/excavadora/PC200200LC-8SALESBROCHUREAESS688-012006EV-2.pdf"),
+     ]),
+]
+
+COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} — {site_name}</title>
+<meta name="description" content="{meta_desc}">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "{base_url}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "{title}", "item": "{canonical}"}}
+  ]
+}}
+</script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>{title}</h1>
+    <p>Aşağıdaki veriler her iki üreticinin de kendi resmi teknik dokümanlarından alınmıştır. Amacımız size bir tercih dayatmak değil, karar vermeniz için doğru ve kaynaklı bilgi sunmaktır.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel" style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Özellik</th><th>{machine_a}</th><th>{machine_b}</th></tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
+      <p class="calc-note">Bu tablo bir üstünlük/aşağılık değerlendirmesi değildir — sadece resmi verilerin yan yana karşılaştırmasıdır. Hangi makinenin sizin işinize uygun olduğu; kullanım yoğunluğu, bütçe ve servis ağı gibi faktörlere göre değişir.</p>
+      <div class="calc-cta">
+        <a href="https://wa.me/{wa}?text={wa_text}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">Detaylı Teknik Değerlendirme ve Teklif İçin WhatsApp →</a>
+      </div>
+    </div>
+
+    <div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">Kaynaklar</h3>
+      <ul>
+        {sources}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{footer}
+
+</body>
+</html>
+"""
+
+
+def build_comparison_pages(root_dir):
+    out_dir = root_dir
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+
+    for slug, title, meta_desc, machine_a, machine_b, spec_rows, sources in COMPARISONS:
+        rows_html = "\n          ".join(
+            f"<tr><td>{esc(label)}</td><td>{esc(a)}</td><td>{esc(b)}</td></tr>"
+            for label, a, b in spec_rows
+        )
+        sources_html = "\n        ".join(
+            f'<li><a href="{url}" target="_blank" rel="noopener">{esc(label)}</a></li>'
+            for label, url in sources
+        )
+        wa_text = wa_link_text(f"Hi, I have a question about {machine_a} vs {machine_b}.")
+        page = COMPARISON_PAGE_TEMPLATE.format(
+            title=title, site_name=SITE_NAME, meta_desc=meta_desc,
+            canonical=f"{BASE_URL}/{slug}.html", base_url=BASE_URL,
+            header=header, footer=footer, machine_a=machine_a, machine_b=machine_b,
+            rows=rows_html, sources=sources_html, wa=WHATSAPP_NUMBER, wa_text=wa_text,
+        )
+        with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(page)
+        print(f"  wrote {slug}.html")
+
+
 TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -838,8 +952,12 @@ if __name__ == "__main__":
     print("Calculator pages:")
     build_calculator_pages(root_dir)
     build_teklif_page(root_dir)
+    print("Comparison pages:")
+    build_comparison_pages(root_dir)
 
     urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8")]
+    for slug, *_ in COMPARISONS:
+        urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINES:
         urls.append((f"{BASE_URL}/makineler/{slug}.html", "monthly", "0.8"))
     for slug, *_ in SPARE_PARTS:
