@@ -743,6 +743,33 @@ COMPARISONS = [
          ("Caterpillar resmi teknik özellik dokümanı", "https://www.petersoncat.com/sites/cat/files/products/documents/1455901915-33586.pdf"),
          ("Komatsu resmi satış broşürü (PC200/PC200LC-8)", "http://www.komatsu.pe/images/pdf-construccion/excavadora/PC200200LC-8SALESBROCHUREAESS688-012006EV-2.pdf"),
      ]),
+    ("jcb-3cx-vs-cat-428",
+     "JCB 3CX vs CAT 428 Karşılaştırma — Kepçe-Loader Teknik Özellikler",
+     "JCB 3CX ve CAT 428 kepçe-loader (beko loader) modellerinin resmi üretici verilerine dayanan teknik özellik karşılaştırması: çalışma ağırlığı, motor gücü, kazı derinliği, kepçe kapasitesi.",
+     "JCB 3CX", "CAT 428",
+     [
+         ("Çalışma Ağırlığı", "7.370–8.070 kg", "≈11.000 kg (11 ton)"),
+         ("Motor Gücü", "68,5 kW (92 HP)", "74 kW (99 HP)"),
+         ("Kazı Derinliği", "5,46 m", "Üreticiye danışın"),
+         ("Ön Kepçe Kapasitesi", "1,1 m³", "Üreticiye danışın"),
+     ],
+     [
+         ("JCB 3CX resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.companywrench.com/PDF/JCB_3CX_SPECS.pdf"),
+         ("Caterpillar 428 resmi ürün sayfası", "https://www.cat.com/en_US/products/new/equipment/backhoe-loaders/side-shift-backhoe-loaders/102200.html"),
+     ]),
+    ("cat-d6-vs-komatsu-d65",
+     "CAT D6 vs Komatsu D65EX-16 Karşılaştırma — Dozer Teknik Özellikler",
+     "CAT D6 ve Komatsu D65EX-16 dozerlerin resmi üretici verilerine dayanan teknik özellik karşılaştırması: çalışma ağırlığı, motor gücü, bıçak kapasitesi.",
+     "CAT D6", "Komatsu D65EX-16",
+     [
+         ("Çalışma Ağırlığı", "≈23.010 kg (50.733 lb)", "20.500–22.900 kg"),
+         ("Motor Gücü", "257 kW (345 HP) — C9.3 ACERT", "155 kW (207 HP)"),
+         ("Bıçak Kapasitesi", "Üreticiye danışın", "3,55–5,61 m³"),
+     ],
+     [
+         ("Caterpillar D6/D6 XE resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.hawthornecat.com/wp-content/uploads/2021/03/Technical-Specs-D6-and-D6-XE-Dozers.pdf"),
+         ("Komatsu D65EX/WX/PX-16 resmi broşürü", "https://www.komatsu.eu/Assets/GetBrochureByProductName.aspx?id=D65EX/WX/PX-16&langID=en"),
+     ]),
 ]
 
 COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
