@@ -770,7 +770,7 @@ TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 {footer}
 
 <script src="js/lib/jspdf.umd.min.js"></script>
-<script src="js/lib/roboto-font-data.js"></script>
+<script src="js/lib/notosans-font-data.js"></script>
 <script src="js/logo-base64.js"></script>
 <script src="js/teklif.js"></script>
 </body>

@@ -18,12 +18,12 @@
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF({ unit: "mm", format: "a4" });
 
-    if (window.GND_ROBOTO_REGULAR && window.GND_ROBOTO_BOLD) {
-      doc.addFileToVFS("Roboto-Regular.ttf", window.GND_ROBOTO_REGULAR);
-      doc.addFont("Roboto-Regular.ttf", "Roboto", "normal");
-      doc.addFileToVFS("Roboto-Bold.ttf", window.GND_ROBOTO_BOLD);
-      doc.addFont("Roboto-Bold.ttf", "Roboto", "bold");
-      doc.setFont("Roboto", "normal");
+    if (window.GND_NOTOSANS_REGULAR && window.GND_NOTOSANS_BOLD) {
+      doc.addFileToVFS("NotoSans-Regular.ttf", window.GND_NOTOSANS_REGULAR);
+      doc.addFont("NotoSans-Regular.ttf", "NotoSans", "normal");
+      doc.addFileToVFS("NotoSans-Bold.ttf", window.GND_NOTOSANS_BOLD);
+      doc.addFont("NotoSans-Bold.ttf", "NotoSans", "bold");
+      doc.setFont("NotoSans", "normal");
     }
 
     var pageW = doc.internal.pageSize.getWidth();
@@ -32,11 +32,11 @@
     if (logoDataUrl) {
       doc.addImage(logoDataUrl, "PNG", 15, y, 28, 28);
     }
-    doc.setFont("Roboto", "bold");
+    doc.setFont("NotoSans", "bold");
     doc.setFontSize(18);
     doc.setTextColor(20, 20, 20);
     doc.text("GND İş Makineleri", 50, y + 10);
-    doc.setFont("Roboto", "normal");
+    doc.setFont("NotoSans", "normal");
     doc.setFontSize(11);
     doc.setTextColor(120, 120, 120);
     doc.text("Teklif Talebi", 50, y + 18);
