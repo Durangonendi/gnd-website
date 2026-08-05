@@ -14,14 +14,26 @@
     var title = document.getElementById("authPageTitle");
     var submitBtn = document.getElementById("authSubmitBtn");
     var toggle = document.getElementById("authToggleMode");
+    var adSoyadField = document.getElementById("authAdSoyadField");
+    var telefonField = document.getElementById("authTelefonField");
+    var adSoyadInput = document.getElementById("authAdSoyad");
+    var telefonInput = document.getElementById("authTelefon");
     if (mode === "login") {
       title.textContent = "Giriş Yap";
       submitBtn.textContent = "Giriş Yap";
       toggle.textContent = "Hesabın yok mu? Kayıt ol";
+      adSoyadField.style.display = "none";
+      telefonField.style.display = "none";
+      adSoyadInput.required = false;
+      telefonInput.required = false;
     } else {
       title.textContent = "Kayıt Ol";
       submitBtn.textContent = "Kayıt Ol";
       toggle.textContent = "Zaten hesabın var mı? Giriş yap";
+      adSoyadField.style.display = "";
+      telefonField.style.display = "";
+      adSoyadInput.required = true;
+      telefonInput.required = true;
     }
   }
 
@@ -32,6 +44,7 @@
       return;
     }
 
+    applyMode();
     document.getElementById("authToggleMode").addEventListener("click", function (e) {
       e.preventDefault();
       mode = mode === "login" ? "signup" : "login";
@@ -51,7 +64,14 @@
           if (res.error) throw res.error;
           window.location.href = "hesabim.html";
         } else {
-          var res2 = await window.gndAuth.signUp(email, password);
+          var adSoyad = document.getElementById("authAdSoyad").value.trim();
+          var telefon = document.getElementById("authTelefon").value.trim();
+          if (!adSoyad || !telefon) {
+            showMessage("Lütfen ad soyad ve telefon numaranı da girin.", true);
+            submitBtn.disabled = false;
+            return;
+          }
+          var res2 = await window.gndAuth.signUp(email, password, { ad_soyad: adSoyad, telefon: telefon });
           if (res2.error) throw res2.error;
           if (res2.data && res2.data.session) {
             window.location.href = "hesabim.html";

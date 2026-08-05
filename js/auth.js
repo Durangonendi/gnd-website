@@ -8,8 +8,8 @@
   window.gndSupabase = client;
 
   window.gndAuth = {
-    signUp: function (email, password) {
-      return client.auth.signUp({ email: email, password: password });
+    signUp: function (email, password, metadata) {
+      return client.auth.signUp({ email: email, password: password, options: { data: metadata || {} } });
     },
     signIn: function (email, password) {
       return client.auth.signInWithPassword({ email: email, password: password });
@@ -35,8 +35,9 @@
     var root = siteRoot();
     var user = await window.gndAuth.getUser();
     if (user) {
+      var displayName = (user.user_metadata && user.user_metadata.ad_soyad) || user.email || "Hesabım";
       slot.innerHTML =
-        '<a href="' + root + 'hesabim.html" class="auth-link">' + (user.email || "Hesabım") + "</a>" +
+        '<a href="' + root + 'hesabim.html" class="auth-link">' + displayName + "</a>" +
         '<a href="#" id="auth-logout-link" class="auth-link">Çıkış</a>';
       var logoutLink = document.getElementById("auth-logout-link");
       if (logoutLink) {

@@ -1151,6 +1151,8 @@ GIRIS_PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="section-inner">
     <div class="calc-panel">
       <form id="authForm">
+        <div class="calc-field" id="authAdSoyadField" style="display:none"><label>Ad Soyad</label><input type="text" id="authAdSoyad"></div>
+        <div class="calc-field" id="authTelefonField" style="display:none"><label>Telefon</label><input type="text" id="authTelefon" placeholder="05XX XXX XX XX"></div>
         <div class="calc-field"><label>E-posta</label><input type="email" id="authEmail" required></div>
         <div class="calc-field"><label>Şifre</label><input type="password" id="authPassword" required minlength="6"></div>
         <button type="submit" class="btn btn-primary" style="width:100%" id="authSubmitBtn">Giriş Yap</button>

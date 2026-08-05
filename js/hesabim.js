@@ -12,7 +12,9 @@
       window.location.href = "giris.html";
       return;
     }
-    document.getElementById("hesabimEmail").textContent = user.email;
+    var meta = user.user_metadata || {};
+    var parts = [meta.ad_soyad, user.email, meta.telefon].filter(Boolean);
+    document.getElementById("hesabimEmail").textContent = parts.join(" · ");
 
     var listEl = document.getElementById("hesabimList");
     var { data, error } = await window.gndSupabase
