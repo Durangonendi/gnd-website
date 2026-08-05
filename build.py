@@ -394,6 +394,7 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
     <div class="header-actions">
+      <span id="auth-nav-slot" class="auth-nav-slot"></span>
       <select id="lang-select" class="lang-select" aria-label="Language">
         <option value="en">EN</option>
         <option value="tr">TR</option>
@@ -489,6 +490,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 {footer}
 
 <script src="{root}js/detail-lang.js"></script>
+<script src="{root}js/lib/supabase.min.js"></script>
+<script src="{root}js/auth.js"></script>
 </body>
 </html>
 """
@@ -702,6 +705,8 @@ CALC_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <script src="{root}js/detail-lang.js"></script>
 <script src="{root}js/calculators.js"></script>
+<script src="{root}js/lib/supabase.min.js"></script>
+<script src="{root}js/auth.js"></script>
 </body>
 </html>
 """
@@ -898,6 +903,8 @@ MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 {footer}
 
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
 </body>
 </html>
 """
@@ -990,6 +997,8 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 {footer}
 
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
 </body>
 </html>
 """
@@ -1092,6 +1101,8 @@ TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 <script src="js/lib/jspdf.umd.min.js"></script>
 <script src="js/lib/notosans-font-data.js"></script>
 <script src="js/logo-base64.js"></script>
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
 <script src="js/teklif.js"></script>
 </body>
 </html>
@@ -1113,6 +1124,106 @@ def build_teklif_page(root_dir):
     with open(os.path.join(root_dir, "teklif-al.html"), "w", encoding="utf-8") as f:
         f.write(page)
     print("wrote teklif-al.html")
+
+
+GIRIS_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giriş Yap / Kayıt Ol — {site_name}</title>
+<meta name="description" content="GND Machinery müşteri hesabınıza giriş yapın veya yeni hesap oluşturun.">
+<link rel="canonical" href="{base_url}/giris.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1 id="authPageTitle">Giriş Yap</h1>
+    <p>Hesabınla önceki teklif taleplerini görebilirsin.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      <form id="authForm">
+        <div class="calc-field"><label>E-posta</label><input type="email" id="authEmail" required></div>
+        <div class="calc-field"><label>Şifre</label><input type="password" id="authPassword" required minlength="6"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="authSubmitBtn">Giriş Yap</button>
+      </form>
+      <p id="authMessage" class="calc-note" style="display:none"></p>
+      <p class="calc-note" style="margin-top:16px">
+        <a href="#" id="authToggleMode">Hesabın yok mu? Kayıt ol</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{footer}
+
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/auth-page.js"></script>
+</body>
+</html>
+"""
+
+HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hesabım — {site_name}</title>
+<meta name="description" content="GND Machinery hesabınız ve önceki teklif talepleriniz.">
+<link rel="canonical" href="{base_url}/hesabim.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>Hesabım</h1>
+    <p id="hesabimEmail">Yükleniyor...</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel" style="max-width:760px">
+      <h3 style="margin-top:0">Teklif Taleplerim</h3>
+      <div id="hesabimList">Yükleniyor...</div>
+    </div>
+  </div>
+</section>
+
+{footer}
+
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/hesabim.js"></script>
+</body>
+</html>
+"""
+
+
+def build_auth_pages(root_dir):
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+
+    with open(os.path.join(root_dir, "giris.html"), "w", encoding="utf-8") as f:
+        f.write(GIRIS_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
+    print("wrote giris.html")
+
+    with open(os.path.join(root_dir, "hesabim.html"), "w", encoding="utf-8") as f:
+        f.write(HESABIM_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
+    print("wrote hesabim.html")
 
 
 DETAIL_LANG_JS = """(function () {
@@ -1158,12 +1269,13 @@ if __name__ == "__main__":
     print("Calculator pages:")
     build_calculator_pages(root_dir)
     build_teklif_page(root_dir)
+    build_auth_pages(root_dir)
     print("Comparison pages:")
     build_comparison_pages(root_dir)
     print("Machine spec pages:")
     build_machine_spec_pages(root_dir)
 
-    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8")]
+    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
     for slug, *_ in COMPARISONS:
         urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINE_SPECS:

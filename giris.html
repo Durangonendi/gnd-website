@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teklif Talebi Oluştur — GND Machinery</title>
-<meta name="description" content="İhtiyacınız olan makineyi seçin, saniyeler içinde kendi teklif talep özetinizi PDF olarak indirin veya WhatsApp'tan gönderin.">
-<link rel="canonical" href="https://gnd-website-five.vercel.app/teklif-al.html">
+<title>Giriş Yap / Kayıt Ol — GND Machinery</title>
+<meta name="description" content="GND Machinery müşteri hesabınıza giriş yapın veya yeni hesap oluşturun.">
+<link rel="canonical" href="https://gnd-website-five.vercel.app/giris.html">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -37,42 +37,23 @@
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <h1>Teklif Talebi Oluştur</h1>
-    <p>Bilgilerinizi girin, kendi teklif talep özetinizi anında PDF olarak indirin ya da WhatsApp'tan gönderin.</p>
+    <h1 id="authPageTitle">Giriş Yap</h1>
+    <p>Hesabınla önceki teklif taleplerini görebilirsin.</p>
   </div>
 </section>
 
 <section class="categories-section">
   <div class="section-inner">
     <div class="calc-panel">
-      <form id="teklifForm">
-        <div class="calc-field"><label>Ad Soyad</label><input type="text" id="adSoyad" required></div>
-        <div class="calc-field"><label>Firma (opsiyonel)</label><input type="text" id="firma"></div>
-        <div class="calc-field"><label>Telefon veya E-posta</label><input type="text" id="iletisim" required></div>
-        <div class="calc-field"><label>Makine Kategorisi</label>
-          <select id="kategori">
-            <option value="mini-excavator">Mini Ekskavatörler</option>
-            <option value="excavator">Ekskavatörler</option>
-            <option value="mining-excavator">Madencilik ve Ağır Tonaj Ekskavatörler</option>
-            <option value="wheel-loader">Lastikli Yükleyiciler</option>
-            <option value="backhoe-loader">Bekoloaderler</option>
-            <option value="boom-lift">Platform ve Manliftler</option>
-            <option value="telehandler">Telehandlerlar</option>
-            <option value="road-roller">Silindirler ve Kompaktörler</option>
-            <option value="asphalt-paver">Asfalt Finişerleri</option>
-            <option value="motor-grader">Greyderler</option>
-            <option value="bulldozer">Dozerler</option>
-            <option value="skid-steer-loader">Skid Steer Loaderlar</option>
-          </select>
-        </div>
-        <div class="calc-field"><label>Adet</label><input type="number" id="adet" value="1" min="1" step="1"></div>
-        <div class="calc-field"><label>Ek Notlar (opsiyonel)</label><textarea id="notlar" rows="3"></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%">PDF Talep Özeti Oluştur</button>
+      <form id="authForm">
+        <div class="calc-field"><label>E-posta</label><input type="email" id="authEmail" required></div>
+        <div class="calc-field"><label>Şifre</label><input type="password" id="authPassword" required minlength="6"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="authSubmitBtn">Giriş Yap</button>
       </form>
-      <p class="calc-note">Bu araç otomatik bir talep özeti PDF'i oluşturur, kesin fiyat teklifi değildir. Ekibimiz size dönüş yapacaktır.</p>
-      <div id="waSendBox" style="display:none" class="calc-cta">
-        <a id="waSendLink" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">Aynı Talebi WhatsApp'tan da Gönder →</a>
-      </div>
+      <p id="authMessage" class="calc-note" style="display:none"></p>
+      <p class="calc-note" style="margin-top:16px">
+        <a href="#" id="authToggleMode">Hesabın yok mu? Kayıt ol</a>
+      </p>
     </div>
   </div>
 </section>
@@ -89,11 +70,8 @@
   <span data-tr="Canlı Destek">Live Support</span>
 </a>
 
-<script src="js/lib/jspdf.umd.min.js"></script>
-<script src="js/lib/notosans-font-data.js"></script>
-<script src="js/logo-base64.js"></script>
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/teklif.js"></script>
+<script src="js/auth-page.js"></script>
 </body>
 </html>

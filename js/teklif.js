@@ -97,6 +97,28 @@
     doc.save("GND_Teklif_Talebi_" + data.adSoyad.replace(/\s+/g, "_") + ".pdf");
   }
 
+  async function saveToAccountIfLoggedIn(data) {
+    var noteEl = document.getElementById("waSendBox");
+    if (!window.gndAuth || !window.gndSupabase) return;
+    var user = await window.gndAuth.getUser();
+    if (!user) return;
+    var { error } = await window.gndSupabase.from("website_quote_requests").insert({
+      user_id: user.id,
+      ad_soyad: data.adSoyad,
+      firma: data.firma || null,
+      iletisim: data.iletisim,
+      kategori: data.kategori,
+      adet: Number(data.adet) || 1,
+      notlar: data.notlar || null,
+    });
+    var savedNote = document.createElement("p");
+    savedNote.className = "calc-note";
+    savedNote.textContent = error
+      ? "Not: talebin hesabına kaydedilemedi (" + error.message + ")."
+      : "Bu talep hesabına da kaydedildi — Hesabım sayfasından görebilirsin.";
+    if (noteEl) noteEl.parentNode.insertBefore(savedNote, noteEl);
+  }
+
   function onSubmit(e) {
     e.preventDefault();
     var data = {
@@ -113,6 +135,7 @@
     }
 
     generatePdf(data, window.GND_LOGO_DATAURL || null);
+    saveToAccountIfLoggedIn(data);
 
     var waText = encodeURIComponent(buildWhatsAppText(data));
     var waLink = document.getElementById("waSendLink");
