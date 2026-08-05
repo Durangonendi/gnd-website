@@ -101,6 +101,25 @@
         " USD. <strong>Gümrük vergisi oranı makinenin GTİP koduna göre değişir</strong> — kesin oran için satın almadan önce bir gümrük müşavirine danışın.</div>"
       );
     },
+    atasman: function () {
+      var sinif = document.getElementById("agirlikSinifi").value;
+      var is = document.getElementById("isTuruAtasman").value;
+
+      var oneriler = {
+        kazi: { ad: "Standart Kova", aciklama: "Genel kazı ve hafriyat işleri için standart toprak kovası." },
+        kirma: { ad: "Hidrolik Kırıcı (Breaker)", aciklama: "Beton, kaya ve asfalt kırma, yıkım işleri için." },
+        delme: { ad: "Toprak Burgusu (Auger)", aciklama: "Kazık, direk ve temel delme işleri için." },
+        hurda: { ad: "Manyetik Ataşman veya Pense", aciklama: "Hurda ve metal ayrıştırma, sökme işleri için." },
+        tasima: { ad: "Çelik Pençe (Grapple)", aciklama: "Malzeme, kütük veya moloz taşıma ve istifleme için." },
+        sikistirma: { ad: "Vibrasyonlu Plaka Kompaktör", aciklama: "Zemin sıkıştırma işleri için." },
+      };
+      var sinifAdi = { mini: "Mini Ekskavatör (0,8–6 ton)", orta: "Orta Sınıf Ekskavatör (13–25 ton)", agir: "Ağır Tonaj Ekskavatör (30+ ton)" };
+      var r = oneriler[is];
+      showResult(
+        '<div class="calc-result-value">' + r.ad + "</div>" +
+        "<div>" + r.aciklama + " " + sinifAdi[sinif] + " sınıfı için hidrolik akış/basınç uyumluluğu makine modeline göre değişir.</div>"
+      );
+    },
   };
 
   var type = document.body.getAttribute("data-calc");

@@ -357,6 +357,28 @@ CALCULATORS = [
       <div class="calc-field"><label data-tr="KDV Oranı (%)">VAT Rate (%)</label><input type="number" id="kdvOrani" value="20" min="0" step="0.5"></div>
       <div class="calc-field"><label data-tr="Güncel USD/TL Kuru">Current USD/TRY Rate</label><input type="number" id="usdKur" value="34" min="0" step="0.01"></div>""",
      True),
+    ("atasman-secim-rehberi", "Attachment Selection Guide", "Ataşman Seçim Rehberi",
+     "Free excavator attachment selection guide. Select your machine's weight class and job type to get a recommended attachment.",
+     "Ekskavatör ataşman seçim rehberi. Makinenizin ağırlık sınıfını ve yapacağınız işi seçin, önerilen ataşmanı görün.",
+     "Not sure which attachment fits your machine and job? Select your excavator's weight class and the work you'll do for a general recommendation.",
+     "Makinenize ve işinize hangi ataşmanın uygun olduğundan emin değil misiniz? Ekskavatörünüzün ağırlık sınıfını ve yapacağınız işi seçin, genel bir öneri alın.",
+     "atasman",
+     """<div class="calc-field"><label data-tr="Makine Ağırlık Sınıfı">Machine Weight Class</label>
+      <select id="agirlikSinifi">
+        <option value="mini" data-tr="Mini Ekskavatör (0,8–6 ton)">Mini Excavator (0.8–6 t)</option>
+        <option value="orta" selected data-tr="Orta Sınıf Ekskavatör (13–25 ton)">Mid-size Excavator (13–25 t)</option>
+        <option value="agir" data-tr="Ağır Tonaj Ekskavatör (30+ ton)">Heavy-duty Excavator (30+ t)</option>
+      </select></div>
+      <div class="calc-field"><label data-tr="Yapılacak İş">Job Type</label>
+      <select id="isTuruAtasman">
+        <option value="kazi" selected data-tr="Genel Kazı / Hafriyat">General Digging / Earthmoving</option>
+        <option value="kirma" data-tr="Beton / Asfalt Kırma, Yıkım">Concrete / Asphalt Breaking, Demolition</option>
+        <option value="delme" data-tr="Delme / Kazık Sondajı">Drilling / Pile Boring</option>
+        <option value="hurda" data-tr="Hurda / Metal Ayırma">Scrap / Metal Sorting</option>
+        <option value="tasima" data-tr="Malzeme Taşıma / İstifleme">Material Handling / Stacking</option>
+        <option value="sikistirma" data-tr="Zemin Sıkıştırma">Soil Compaction</option>
+      </select></div>""",
+     True),
 ]
 
 HEADER = """<header class="site-header">

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Import Cost Estimator — GND Machinery</title>
-<meta name="description" content="Free heavy equipment import cost estimator for Turkey. Enter FOB price, freight, customs duty and VAT rate to estimate total landed cost.">
-<link rel="canonical" href="https://gnd-website-five.vercel.app/hesaplama-araclari/ithalat-maliyet-hesaplama.html">
+<title>Attachment Selection Guide — GND Machinery</title>
+<meta name="description" content="Free excavator attachment selection guide. Select your machine's weight class and job type to get a recommended attachment.">
+<link rel="canonical" href="https://gnd-website-five.vercel.app/hesaplama-araclari/atasman-secim-rehberi.html">
 <link rel="stylesheet" href="../css/style.css">
 <script type="application/ld+json">
 {
@@ -14,12 +14,12 @@
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gnd-website-five.vercel.app/"},
     {"@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://gnd-website-five.vercel.app/#calculators"},
-    {"@type": "ListItem", "position": 3, "name": "Import Cost Estimator", "item": "https://gnd-website-five.vercel.app/hesaplama-araclari/ithalat-maliyet-hesaplama.html"}
+    {"@type": "ListItem", "position": 3, "name": "Attachment Selection Guide", "item": "https://gnd-website-five.vercel.app/hesaplama-araclari/atasman-secim-rehberi.html"}
   ]
 }
 </script>
 </head>
-<body data-calc="ithalat">
+<body data-calc="atasman">
 
 <header class="site-header">
   <div class="header-inner">
@@ -47,24 +47,34 @@
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <h1 data-tr="İthalat Maliyet Hesaplayıcı">Import Cost Estimator</h1>
-    <p data-tr="Makinenizin FOB fiyatını ve kendi navlun teklifinizi girin, Türk Lirası cinsinden tahmini toplam maliyeti görün. Gümrük vergisi oranı makinenin GTİP koduna göre değişir — kesin oran için satın almadan önce bir gümrük müşavirine danışın.">Enter your machine's FOB price and your own freight quote to estimate total landed cost in Turkish Lira. Duty rate depends on the machine's GTİP/HS code — confirm the exact rate with a customs broker before finalizing a purchase.</p>
+    <h1 data-tr="Ataşman Seçim Rehberi">Attachment Selection Guide</h1>
+    <p data-tr="Makinenize ve işinize hangi ataşmanın uygun olduğundan emin değil misiniz? Ekskavatörünüzün ağırlık sınıfını ve yapacağınız işi seçin, genel bir öneri alın.">Not sure which attachment fits your machine and job? Select your excavator's weight class and the work you'll do for a general recommendation.</p>
   </div>
 </section>
 
 <section class="categories-section">
   <div class="section-inner">
     <div class="calc-panel">
-      <div class="calc-field"><label data-tr="Makine Fiyatı - FOB (USD)">Machine Price - FOB (USD)</label><input type="number" id="fobFiyat" value="50000" min="0" step="100"></div>
-      <div class="calc-field"><label data-tr="Navlun / Nakliye Teklifi (USD)">Freight Quote (USD)</label><input type="number" id="navlun" value="8000" min="0" step="100"></div>
-      <div class="calc-field"><label data-tr="Gümrük Vergisi Oranı (%)">Customs Duty Rate (%)</label><input type="number" id="gumrukOrani" value="0" min="0" step="0.5"></div>
-      <div class="calc-field"><label data-tr="KDV Oranı (%)">VAT Rate (%)</label><input type="number" id="kdvOrani" value="20" min="0" step="0.5"></div>
-      <div class="calc-field"><label data-tr="Güncel USD/TL Kuru">Current USD/TRY Rate</label><input type="number" id="usdKur" value="34" min="0" step="0.01"></div>
+      <div class="calc-field"><label data-tr="Makine Ağırlık Sınıfı">Machine Weight Class</label>
+      <select id="agirlikSinifi">
+        <option value="mini" data-tr="Mini Ekskavatör (0,8–6 ton)">Mini Excavator (0.8–6 t)</option>
+        <option value="orta" selected data-tr="Orta Sınıf Ekskavatör (13–25 ton)">Mid-size Excavator (13–25 t)</option>
+        <option value="agir" data-tr="Ağır Tonaj Ekskavatör (30+ ton)">Heavy-duty Excavator (30+ t)</option>
+      </select></div>
+      <div class="calc-field"><label data-tr="Yapılacak İş">Job Type</label>
+      <select id="isTuruAtasman">
+        <option value="kazi" selected data-tr="Genel Kazı / Hafriyat">General Digging / Earthmoving</option>
+        <option value="kirma" data-tr="Beton / Asfalt Kırma, Yıkım">Concrete / Asphalt Breaking, Demolition</option>
+        <option value="delme" data-tr="Delme / Kazık Sondajı">Drilling / Pile Boring</option>
+        <option value="hurda" data-tr="Hurda / Metal Ayırma">Scrap / Metal Sorting</option>
+        <option value="tasima" data-tr="Malzeme Taşıma / İstifleme">Material Handling / Stacking</option>
+        <option value="sikistirma" data-tr="Zemin Sıkıştırma">Soil Compaction</option>
+      </select></div>
       <button id="calcBtn" class="btn btn-primary" style="width:100%" data-tr="Hesapla">Calculate</button>
       <div id="calcResult" class="calc-result"></div>
       <p class="calc-note" data-tr="Bu sonuçlar genel sektör ortalamalarına dayanır, yaklaşıktır. Projenize özel kesin bilgi için bize ulaşın.">These results are based on general industry averages and are approximate. Contact us for exact figures specific to your project.</p>
       <div class="calc-cta">
-        <a href="https://wa.me/905550708034?text=Hi%2C%20I%20have%20a%20question%20about%20Import%20Cost%20Estimator." class="btn btn-primary" style="width:100%" target="_blank" rel="noopener" data-tr="Kesin Bilgi İçin WhatsApp'tan Sorun →">Ask on WhatsApp for Exact Info →</a>
+        <a href="https://wa.me/905550708034?text=Hi%2C%20I%20have%20a%20question%20about%20Attachment%20Selection%20Guide." class="btn btn-primary" style="width:100%" target="_blank" rel="noopener" data-tr="Kesin Bilgi İçin WhatsApp'tan Sorun →">Ask on WhatsApp for Exact Info →</a>
       </div>
     </div>
   </div>
@@ -99,8 +109,8 @@
         <p data-tr="Kazı süresi tahmin aracı. Toplam hacim ve makine tipini girin, işin kaç saat/gün süreceğini tahmin edin.">Free excavation time estimator. Enter total volume and machine type to estimate how many hours or days the job will take.</p>
       </div>
       <div class="category-card">
-        <h3><a href="atasman-secim-rehberi.html" data-tr="Ataşman Seçim Rehberi">Attachment Selection Guide</a></h3>
-        <p data-tr="Ekskavatör ataşman seçim rehberi. Makinenizin ağırlık sınıfını ve yapacağınız işi seçin, önerilen ataşmanı görün.">Free excavator attachment selection guide. Select your machine's weight class and job type to get a recommended attachment.</p>
+        <h3><a href="ithalat-maliyet-hesaplama.html" data-tr="İthalat Maliyet Hesaplayıcı">Import Cost Estimator</a></h3>
+        <p data-tr="Ağır iş makinesi ithalat maliyeti hesaplama aracı. FOB fiyat, navlun, gümrük vergisi ve KDV oranını girin; tahmini toplam maliyeti görün.">Free heavy equipment import cost estimator for Turkey. Enter FOB price, freight, customs duty and VAT rate to estimate total landed cost.</p>
       </div>
     </div>
     <p class="back-link"><a href="../index.html" data-tr="← Anasayfaya dön">← Back to home</a></p>
