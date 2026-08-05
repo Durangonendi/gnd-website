@@ -9,7 +9,12 @@
 
   window.gndAuth = {
     signUp: function (email, password, metadata) {
-      return client.auth.signUp({ email: email, password: password, options: { data: metadata || {} } });
+      var redirectTo = window.location.origin + window.location.pathname.replace(/[^/]*$/, "") + "giris.html";
+      return client.auth.signUp({
+        email: email,
+        password: password,
+        options: { data: metadata || {}, emailRedirectTo: redirectTo },
+      });
     },
     signIn: function (email, password) {
       return client.auth.signInWithPassword({ email: email, password: password });
@@ -18,8 +23,8 @@
       return client.auth.signOut();
     },
     getUser: async function () {
-      var res = await client.auth.getUser();
-      return res.data ? res.data.user : null;
+      var res = await client.auth.getSession();
+      return res.data && res.data.session ? res.data.session.user : null;
     },
   };
 
