@@ -492,6 +492,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <script src="{root}js/detail-lang.js"></script>
 <script src="{root}js/lib/supabase.min.js"></script>
 <script src="{root}js/auth.js"></script>
+<script src="{root}js/advisor-widget.js"></script>
 </body>
 </html>
 """
@@ -707,6 +708,7 @@ CALC_PAGE_TEMPLATE = """<!DOCTYPE html>
 <script src="{root}js/calculators.js"></script>
 <script src="{root}js/lib/supabase.min.js"></script>
 <script src="{root}js/auth.js"></script>
+<script src="{root}js/advisor-widget.js"></script>
 </body>
 </html>
 """
@@ -905,6 +907,7 @@ MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
 </body>
 </html>
 """
@@ -999,6 +1002,7 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
 </body>
 </html>
 """
@@ -1103,6 +1107,7 @@ TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 <script src="js/logo-base64.js"></script>
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
 <script src="js/teklif.js"></script>
 </body>
 </html>
@@ -1169,6 +1174,7 @@ GIRIS_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
 <script src="js/auth-page.js"></script>
 </body>
 </html>
@@ -1208,6 +1214,7 @@ HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
 <script src="js/hesabim.js"></script>
 </body>
 </html>
