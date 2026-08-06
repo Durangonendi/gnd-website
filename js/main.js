@@ -1,6 +1,7 @@
 const STORAGE_KEY = "gnd-site-lang";
 let currentCondition = "new"; // "new" | "used"
 let searchTerm = "";
+let currentGroup = "all";
 
 function buildWhatsAppLink(message) {
   const encoded = encodeURIComponent(message);
@@ -58,8 +59,29 @@ function renderCategoryGrid(gridId, list, lang, includeCondition) {
 
 function filteredCategories(lang) {
   const term = searchTerm.trim().toLocaleLowerCase("tr");
-  if (!term) return CATEGORIES;
-  return CATEGORIES.filter((cat) => cat.name[lang].toLocaleLowerCase("tr").includes(term));
+  return CATEGORIES.filter((cat) => {
+    const matchesTerm = !term || cat.name[lang].toLocaleLowerCase("tr").includes(term);
+    const matchesGroup = currentGroup === "all" || cat.group === currentGroup;
+    return matchesTerm && matchesGroup;
+  });
+}
+
+function renderGroupFilter(lang) {
+  const wrap = document.getElementById("group-filter");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  CATEGORY_GROUPS.forEach((g) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "group-filter-btn" + (g.id === currentGroup ? " active" : "");
+    btn.textContent = g.label[lang];
+    btn.addEventListener("click", () => {
+      currentGroup = g.id;
+      renderGroupFilter(lang);
+      renderMachines(lang);
+    });
+    wrap.appendChild(btn);
+  });
 }
 
 function renderMachines(lang) {
@@ -70,6 +92,7 @@ function renderMachines(lang) {
 }
 
 function renderAll(lang) {
+  renderGroupFilter(lang);
   renderMachines(lang);
   renderCategoryGrid("spareparts-grid", SPARE_PARTS_CATEGORIES, lang, false);
 }

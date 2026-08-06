@@ -77,6 +77,11 @@ const TRANSLATIONS = {
     compare_2_text: "Kepçe-loader teknik özellik karşılaştırması.",
     compare_3_title: "CAT D6 vs Komatsu D65EX-16",
     compare_3_text: "Dozer teknik özellik karşılaştırması.",
+    founder_title: "Kurucudan",
+    founder_name: "Duran Gönendi",
+    founder_role: "Kurucu / Saha Operasyonları",
+    founder_bio: "İş makineleri sektörüne teoride değil doğrudan sahada başladım — yıllarca kazı operasyonları, makine bakım-onarım süreçleri ve saha yönetiminde bizzat çalıştım. 2022'de GND Hafriyat'ı kurdum, 2024'te bunu GND İş Makineleri Sanayi ve Ticaret A.Ş.'ye dönüştürdüm. Ekskavatör operatörlüğü sertifikam ve Endüstriyel Otomasyon Teknolojisi eğitimimle, müşterilerime sahada bizzat yaşanmış bir tecrübeyi sunuyorum.",
+    founder_facebook: "Facebook'ta takip et →",
     why_title: "Neden GND?",
     why_1: "Uluslararası iş ağı",
     why_2: "Güvenilir üretici ve tedarikçi ağı",
@@ -182,6 +187,11 @@ const TRANSLATIONS = {
     compare_2_text: "Backhoe loader technical comparison.",
     compare_3_title: "CAT D6 vs Komatsu D65EX-16",
     compare_3_text: "Bulldozer technical comparison.",
+    founder_title: "From the Founder",
+    founder_name: "Duran Gönendi",
+    founder_role: "Founder / Field Operations",
+    founder_bio: "I started in the heavy equipment industry not in theory, but directly in the field — years of hands-on excavation operations, machinery maintenance and repair, and site management. I founded GND Hafriyat in 2022, and turned it into GND İş Makineleri Sanayi ve Ticaret A.Ş. in 2024. With my excavator operator certification and Industrial Automation Technology training, I bring my customers experience earned on the job, not from a textbook.",
+    founder_facebook: "Follow on Facebook →",
     why_title: "Why GND?",
     why_1: "International business network",
     why_2: "Reliable manufacturer and supplier network",
@@ -239,7 +249,8 @@ const CATEGORIES = [
     desc: { tr: "Dar alan ve hafif hafriyat işleri için kompakt ekskavatörler.", en: "Compact excavators for tight spaces and light earthmoving." },
     icon: ICONS.excavator,
     page: "makineler/mini-excavator.html",
-    image: "assets/categories/mini-ekskavator.jpg"
+    image: "assets/categories/mini-ekskavator.jpg",
+    group: "kazi"
   },
   {
     id: "mid-excavator",
@@ -247,7 +258,8 @@ const CATEGORIES = [
     desc: { tr: "Genel hafriyat ve inşaat işleri için orta sınıf ekskavatörler.", en: "Mid-class excavators for general earthmoving and construction." },
     icon: ICONS.excavator,
     page: "makineler/excavator.html",
-    image: "assets/categories/orta-ekskavator.jpg"
+    image: "assets/categories/orta-ekskavator.jpg",
+    group: "kazi"
   },
   {
     id: "heavy-excavator",
@@ -255,7 +267,8 @@ const CATEGORIES = [
     desc: { tr: "Maden ve büyük ölçekli hafriyat için ağır tonajlı ekskavatörler.", en: "Heavy-tonnage excavators for mining and large-scale earthmoving." },
     icon: ICONS.excavator,
     page: "makineler/mining-excavator.html",
-    image: "assets/categories/agir-tonaj-ekskavator.jpg"
+    image: "assets/categories/agir-tonaj-ekskavator.jpg",
+    group: "kazi"
   },
   {
     id: "loader",
@@ -263,7 +276,8 @@ const CATEGORIES = [
     desc: { tr: "Lastikli yükleyiciler, her ölçekte yükleme işi için.", en: "Wheel loaders for loading jobs of any scale." },
     icon: ICONS.loader,
     page: "makineler/wheel-loader.html",
-    image: "assets/categories/loader.jpg"
+    image: "assets/categories/loader.jpg",
+    group: "yukleme"
   },
   {
     id: "backhoe-loader",
@@ -271,7 +285,8 @@ const CATEGORIES = [
     desc: { tr: "Kazı ve yükleme işini tek makinede birleştiren bekoloaderler.", en: "Backhoe loaders combining digging and loading in one machine." },
     icon: ICONS["backhoe-loader"],
     page: "makineler/backhoe-loader.html",
-    image: "assets/categories/bekoloader.jpg"
+    image: "assets/categories/bekoloader.jpg",
+    group: "kazi"
   },
   {
     id: "manlift",
@@ -279,7 +294,8 @@ const CATEGORIES = [
     desc: { tr: "Yüksekte çalışma platformları, bakım ve montaj işleri için.", en: "Aerial work platforms for maintenance and installation work." },
     icon: ICONS.manlift,
     page: "makineler/boom-lift.html",
-    image: "assets/categories/manlift.jpg"
+    image: "assets/categories/manlift.jpg",
+    group: "yukseklik"
   },
   {
     id: "telehandler",
@@ -287,7 +303,8 @@ const CATEGORIES = [
     desc: { tr: "Teleskopik kollu yükleyiciler, yüksek ve uzak noktalara taşıma için.", en: "Telescopic handlers for reaching high and far load points." },
     icon: ICONS.telehandler,
     page: "makineler/telehandler.html",
-    image: "assets/categories/telehandler.jpg"
+    image: "assets/categories/telehandler.jpg",
+    group: "yukleme"
   },
   {
     id: "roller",
@@ -295,7 +312,8 @@ const CATEGORIES = [
     desc: { tr: "Zemin ve asfalt sıkıştırma işleri için silindirler.", en: "Rollers for ground and asphalt compaction." },
     icon: ICONS.roller,
     page: "makineler/road-roller.html",
-    image: "assets/categories/silindir.jpg"
+    image: "assets/categories/silindir.jpg",
+    group: "yuzey"
   },
   {
     id: "finisher",
@@ -303,7 +321,8 @@ const CATEGORIES = [
     desc: { tr: "Asfalt serimi için finişer makineleri.", en: "Paver finishers for asphalt laying." },
     icon: ICONS.finisher,
     page: "makineler/asphalt-paver.html",
-    image: "assets/categories/finiser.jpg"
+    image: "assets/categories/finiser.jpg",
+    group: "yuzey"
   },
   {
     id: "grader",
@@ -311,7 +330,8 @@ const CATEGORIES = [
     desc: { tr: "Zemin tesviyesi ve yol yapımı için greyderler.", en: "Graders for ground leveling and road construction." },
     icon: ICONS.grader,
     page: "makineler/motor-grader.html",
-    image: "assets/categories/greyder.jpg"
+    image: "assets/categories/greyder.jpg",
+    group: "yuzey"
   },
   {
     id: "dozer",
@@ -319,7 +339,8 @@ const CATEGORIES = [
     desc: { tr: "Ağır zemin çalışmaları için güçlü dozer seçenekleri.", en: "Powerful dozers for heavy grading work." },
     icon: ICONS.dozer,
     page: "makineler/bulldozer.html",
-    image: "assets/categories/dozer.jpg"
+    image: "assets/categories/dozer.jpg",
+    group: "zemin"
   },
   {
     id: "skid-steer",
@@ -327,8 +348,18 @@ const CATEGORIES = [
     desc: { tr: "Dar alanlarda manevra kabiliyeti yüksek kompakt yükleyiciler.", en: "Compact loaders with high maneuverability in tight spaces." },
     icon: ICONS["skid-steer"],
     page: "makineler/skid-steer-loader.html",
-    image: "assets/categories/skid-steer-loader.jpg"
+    image: "assets/categories/skid-steer-loader.jpg",
+    group: "yukleme"
   }
+];
+
+const CATEGORY_GROUPS = [
+  { id: "all", label: { tr: "Tümü", en: "All" } },
+  { id: "kazi", label: { tr: "Kazı", en: "Digging" } },
+  { id: "yukleme", label: { tr: "Yükleme", en: "Loading" } },
+  { id: "yuzey", label: { tr: "Yüzey / Yol", en: "Surface / Road" } },
+  { id: "zemin", label: { tr: "Zemin İşleri", en: "Grading" } },
+  { id: "yukseklik", label: { tr: "Yükseğe Erişim", en: "Aerial Access" } },
 ];
 
 // Yedek parça kategorileri (durum/koşul ayrımı yok)
