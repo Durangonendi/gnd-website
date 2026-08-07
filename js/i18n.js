@@ -119,7 +119,7 @@ const TRANSLATIONS = {
     contact_title: "Bize Ulaşın",
     contact_subtitle: "İhtiyacınızı iletin, size en kısa sürede dönüş yapalım.",
     contact_cta: "WhatsApp'tan Teklif Al",
-    footer_note: "Bu site içeriği yer tutucu görsellerle hazırlanmıştır.",
+    footer_note: "Ağır iş makinesi ve yedek parça küresel tedarikçisi.",
     quote_intro: "Merhaba, ",
     quote_middle: " için teklif almak istiyorum.",
     quote_generic: "Merhaba, GND İş Makineleri hakkında bilgi almak istiyorum."
@@ -242,7 +242,7 @@ const TRANSLATIONS = {
     contact_title: "Get in Touch",
     contact_subtitle: "Tell us what you need and we'll get back to you shortly.",
     contact_cta: "Get a Quote on WhatsApp",
-    footer_note: "This site currently uses placeholder content and images.",
+    footer_note: "Global supplier of heavy equipment and spare parts.",
     quote_intro: "Hi, I'd like a quote for ",
     quote_middle: ".",
     quote_generic: "Hi, I'd like more information about GND İş Makineleri."

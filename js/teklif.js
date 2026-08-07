@@ -92,7 +92,7 @@
     y += 5;
     doc.text("Kesin fiyat ve stok bilgisi için ekibimiz sizinle iletişime geçecektir.", 15, y);
     y += 8;
-    doc.text("WhatsApp: +90 555 070 80 34   ·   gnd-website-five.vercel.app", 15, y);
+    doc.text("WhatsApp: +90 555 070 80 34   ·   gndmachinery.com", 15, y);
 
     doc.save("GND_Teklif_Talebi_" + data.adSoyad.replace(/\s+/g, "_") + ".pdf");
   }

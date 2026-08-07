@@ -11,7 +11,7 @@
 import os
 
 SITE_NAME = "GND Machinery"
-BASE_URL = "https://gnd-website-five.vercel.app"
+BASE_URL = "https://gndmachinery.com"
 WHATSAPP_NUMBER = "905550708034"
 
 ICONS = {
@@ -44,9 +44,9 @@ BENEFITS = [
      "Orijinal parça desteği", "Kendi yedek parça ve satış sonrası ağımızla desteklenir."),
 ]
 
-MACHINE_LINKS = [("filters", "Filters"), ("hydraulic-parts", "Hydraulic Parts"), ("attachments", "Attachments")]
-PARTS_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("bulldozer", "Bulldozers")]
-SERVICE_LINKS = [("excavator", "Excavators"), ("wheel-loader", "Wheel Loaders"), ("attachments", "Attachments")]
+MACHINE_LINKS = [("filters", "Filters", "Filtreler"), ("hydraulic-parts", "Hydraulic Parts", "Hidrolik Gruplar"), ("attachments", "Attachments", "Ataşmanlar")]
+PARTS_LINKS = [("excavator", "Excavators", "Ekskavatörler"), ("wheel-loader", "Wheel Loaders", "Loaderlar"), ("bulldozer", "Bulldozers", "Dozerler")]
+SERVICE_LINKS = [("excavator", "Excavators", "Ekskavatörler"), ("wheel-loader", "Wheel Loaders", "Loaderlar"), ("attachments", "Attachments", "Ataşmanlar")]
 
 
 def esc(s):
@@ -423,7 +423,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{name} | {title_suffix} — {site_name}</title>
+<title data-tr="{title_tr}">{name} | {title_suffix} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{root}css/style.css">
@@ -462,7 +462,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     {media}
     <h1 data-tr="{name_tr}">{name}</h1>
     <p data-tr="{intro_tr}">{intro}</p>
-    <a href="https://wa.me/{wa}?text={wa_quote}" class="btn btn-primary btn-lg" target="_blank" rel="noopener" data-tr="Teklif Al →">Get a Quote →</a>
+    <a href="https://wa.me/{wa}?text={wa_quote}" data-href-tr="https://wa.me/{wa}?text={wa_quote_tr}" class="btn btn-primary btn-lg" target="_blank" rel="noopener" data-tr="Teklif Al →">Get a Quote →</a>
   </div>
 </section>
 
@@ -516,7 +516,7 @@ SUPPLY_SECTION = """<section class="categories-section">
 </section>"""
 
 SIBLING_CARD_PHOTO = """<div class="category-card">
-        <div class="category-photo-wrap"><img class="category-photo" src="{root}assets/categories/{image}" alt="{name} supplied by GND Machinery" loading="lazy"></div>
+        <div class="category-photo-wrap"><img class="category-photo" src="{root}assets/categories/{image}" alt="{name} supplied by GND Machinery" data-alt-tr="{name_tr} — GND İş Makineleri" loading="lazy"></div>
         <h3><a href="{href}" data-tr="{name_tr}">{name}</a></h3>
         <p data-tr="{desc_tr}">{desc}</p>
       </div>"""
@@ -552,7 +552,7 @@ MACHINE_INFO_SECTION = """<section class="categories-section">
       </div>
     </div>
     <p class="section-sub" style="margin-top:16px" data-tr="Kesin fiyat; marka, model yılı, çalışma saati ve konfigürasyona göre değişir. Bütçenize uygun fiyat-performans karşılaştırması için WhatsApp'tan bize ulaşın — başlamak için tam teknik döküman gerekmiyor.">Exact pricing depends on brand, model year, working hours and configuration. For a price-performance comparison matched to your budget, message us on WhatsApp — no full spec sheet needed to get started.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Fiyat Sorun →">Ask About Pricing on WhatsApp →</a>
+    <a href="https://wa.me/{wa}?text={wa_info}" data-href-tr="https://wa.me/{wa}?text={wa_info_tr}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Fiyat Sorun →">Ask About Pricing on WhatsApp →</a>
   </div>
 </section>"""
 
@@ -565,7 +565,7 @@ PARTS_INFO_SECTION = """<section class="categories-section">
       <div class="category-card"><h3 data-tr="OEM İthal">OEM Imported</h3><p data-tr="{oem_tr}">{oem}</p></div>
     </div>
     <p class="section-sub" style="margin-top:16px" data-tr="Doğru seçenek; makinenizin markasına, modeline ve parçanın operasyonunuz için ne kadar kritik olduğuna bağlıdır. Size özel bir öneri için makine bilgilerinizle WhatsApp'tan bize ulaşın.">The right option depends on your machine's brand, model and how critical the part is to your operation. Message us on WhatsApp with your machine details for a tailored recommendation.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Tedarik Sorun →">Ask About Sourcing on WhatsApp →</a>
+    <a href="https://wa.me/{wa}?text={wa_info}" data-href-tr="https://wa.me/{wa}?text={wa_info_tr}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Tedarik Sorun →">Ask About Sourcing on WhatsApp →</a>
   </div>
 </section>"""
 
@@ -578,7 +578,7 @@ SERVICE_INFO_SECTION = """<section class="categories-section">
       <div class="category-card"><h3 data-tr="Lojistik Koordinasyonu">Logistics Coordination</h3><p data-tr="{logistics_tr}">{logistics}</p></div>
     </div>
     <p class="section-sub" style="margin-top:16px" data-tr="Her ülke ve işlemin kendine has gereksinimleri vardır. Sizin ithalat veya ihracat durumunuza özel rehberlik için doğrudan WhatsApp'tan bize ulaşın.">Every country and transaction has its own requirements. For guidance specific to your import or export case, message us directly on WhatsApp.</p>
-    <a href="https://wa.me/{wa}?text={wa_info}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Durumunuzu Sorun →">Ask About Your Case on WhatsApp →</a>
+    <a href="https://wa.me/{wa}?text={wa_info}" data-href-tr="https://wa.me/{wa}?text={wa_info_tr}" class="btn btn-primary" target="_blank" rel="noopener" data-tr="WhatsApp'tan Durumunuzu Sorun →">Ask About Your Case on WhatsApp →</a>
   </div>
 </section>"""
 
@@ -592,7 +592,9 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
         BENEFIT_CARD.format(title=t, text=x, title_tr=esc(tt), text_tr=esc(tx))
         for t, x, tt, tx in BENEFITS
     )
-    cross_links_html = " &middot; ".join(f'<a href="{root}{cross_link_target_prefix}/{s}.html">{n}</a>' for s, n in cross_links_list)
+    cross_links_html = " &middot; ".join(
+        f'<a href="{root}{cross_link_target_prefix}/{s}.html" data-tr="{esc(n_tr)}">{n}</a>' for s, n, n_tr in cross_links_list
+    )
 
     for slug, name, meta_desc, intro, icon_key, image, extra, tr in items:
         name_tr, intro_tr, extra_tr, desc_tr = tr
@@ -609,39 +611,45 @@ def build_pages(items, out_dir, group_title, url_prefix, root, cross_link_target
         siblings_html = "\n      ".join(sibling_parts)
 
         wa_quote = wa_link_text(f"Hi, I'd like a quote for {name}.")
+        wa_quote_tr = wa_link_text(f"Merhaba, {name_tr} için teklif almak istiyorum.")
         wa_info = wa_link_text(f"Hi, I have a question about {name}.")
+        wa_info_tr = wa_link_text(f"Merhaba, {name_tr} hakkında bir sorum var.")
         if image:
-            media = f'<div class="category-detail-photo"><img src="{root}assets/categories/{image}" alt="{name} for sale — GND Machinery" loading="lazy"></div>'
+            media = f'<div class="category-detail-photo"><img src="{root}assets/categories/{image}" alt="{name} for sale — GND Machinery" data-alt-tr="{esc(name_tr)} — GND İş Makineleri" loading="lazy"></div>'
         else:
             media = f'<div class="category-detail-icon">{ICONS[icon_key]}</div>'
 
         if kind == "machine":
             spec_range, applications = extra
             spec_range_tr, applications_tr = extra_tr
-            info_section = MACHINE_INFO_SECTION.format(spec_range=spec_range, applications=applications, spec_range_tr=esc(spec_range_tr), applications_tr=esc(applications_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            info_section = MACHINE_INFO_SECTION.format(spec_range=spec_range, applications=applications, spec_range_tr=esc(spec_range_tr), applications_tr=esc(applications_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info, wa_info_tr=wa_info_tr)
             title_suffix = "New & Used Supplier"
+            title_suffix_tr = "Sıfır ve İkinci El Tedarikçisi"
             supply_section = SUPPLY_SECTION.format(name=name, name_tr=esc(name_tr))
         elif kind == "service":
             sourcing, customs, logistics = extra
             sourcing_tr, customs_tr, logistics_tr = extra_tr
-            info_section = SERVICE_INFO_SECTION.format(sourcing=sourcing, customs=customs, logistics=logistics, sourcing_tr=esc(sourcing_tr), customs_tr=esc(customs_tr), logistics_tr=esc(logistics_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            info_section = SERVICE_INFO_SECTION.format(sourcing=sourcing, customs=customs, logistics=logistics, sourcing_tr=esc(sourcing_tr), customs_tr=esc(customs_tr), logistics_tr=esc(logistics_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info, wa_info_tr=wa_info_tr)
             title_suffix = "Consultancy Services"
+            title_suffix_tr = "Danışmanlık Hizmetleri"
             supply_section = ""
         else:
             domestic, imported, oem = extra
             domestic_tr, imported_tr, oem_tr = extra_tr
-            info_section = PARTS_INFO_SECTION.format(domestic=domestic, imported=imported, oem=oem, domestic_tr=esc(domestic_tr), imported_tr=esc(imported_tr), oem_tr=esc(oem_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info)
+            info_section = PARTS_INFO_SECTION.format(domestic=domestic, imported=imported, oem=oem, domestic_tr=esc(domestic_tr), imported_tr=esc(imported_tr), oem_tr=esc(oem_tr), wa=WHATSAPP_NUMBER, wa_info=wa_info, wa_info_tr=wa_info_tr)
             title_suffix = "New & Used Supplier"
+            title_suffix_tr = "Sıfır ve İkinci El Tedarikçisi"
             supply_section = SUPPLY_SECTION.format(name=name, name_tr=esc(name_tr))
 
+        title_tr = esc(f"{name_tr} | {title_suffix_tr} — {SITE_NAME}")
         page = PAGE_TEMPLATE.format(
             name=name, site_name=SITE_NAME, meta_desc=meta_desc, intro=intro,
             canonical=f"{BASE_URL}/{url_prefix}/{slug}.html", base_url=BASE_URL,
             root=root, header=header, media=media, benefits=benefits_html,
-            wa=WHATSAPP_NUMBER, wa_quote=wa_quote, cross_links=cross_links_html,
+            wa=WHATSAPP_NUMBER, wa_quote=wa_quote, wa_quote_tr=wa_quote_tr, cross_links=cross_links_html,
             group_title=group_title, siblings=siblings_html, footer=footer,
             info_section=info_section, title_suffix=title_suffix, supply_section=supply_section,
-            name_tr=esc(name_tr), intro_tr=esc(intro_tr),
+            name_tr=esc(name_tr), intro_tr=esc(intro_tr), title_tr=title_tr,
         )
         with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
             f.write(page)
@@ -1408,6 +1416,14 @@ DETAIL_LANG_JS = """(function () {
     document.querySelectorAll('[data-tr]').forEach(function (el) {
       if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
       el.innerHTML = l === 'tr' ? el.dataset.tr : el.dataset.en;
+    });
+    document.querySelectorAll('[data-href-tr]').forEach(function (el) {
+      if (el.dataset.hrefEn === undefined) el.dataset.hrefEn = el.getAttribute('href');
+      el.setAttribute('href', l === 'tr' ? el.dataset.hrefTr : el.dataset.hrefEn);
+    });
+    document.querySelectorAll('[data-alt-tr]').forEach(function (el) {
+      if (el.dataset.altEn === undefined) el.dataset.altEn = el.getAttribute('alt');
+      el.setAttribute('alt', l === 'tr' ? el.dataset.altTr : el.dataset.altEn);
     });
     var sel = document.getElementById('lang-select');
     if (sel) sel.value = l;
