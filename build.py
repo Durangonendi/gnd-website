@@ -427,6 +427,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="{root}css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="{root}js/analytics.js"></script>
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -655,6 +657,8 @@ CALC_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="../js/analytics.js"></script>
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -857,6 +861,8 @@ MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -948,6 +954,8 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -1064,6 +1072,8 @@ TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="İhtiyacınız olan makineyi seçin, saniyeler içinde kendi teklif talep özetinizi PDF olarak indirin veya WhatsApp'tan gönderin.">
 <link rel="canonical" href="{base_url}/teklif-al.html">
 <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
 </head>
 <body>
 
@@ -1140,6 +1150,8 @@ GIRIS_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="GND Machinery müşteri hesabınıza giriş yapın veya yeni hesap oluşturun.">
 <link rel="canonical" href="{base_url}/giris.html">
 <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
 </head>
 <body>
 
@@ -1189,6 +1201,8 @@ HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="GND Machinery hesabınız ve önceki teklif talepleriniz.">
 <link rel="canonical" href="{base_url}/hesabim.html">
 <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
 </head>
 <body>
 
