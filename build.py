@@ -803,6 +803,35 @@ COMPARISONS = [
          ("Caterpillar D6/D6 XE resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.hawthornecat.com/wp-content/uploads/2021/03/Technical-Specs-D6-and-D6-XE-Dozers.pdf"),
          ("Komatsu D65EX/WX/PX-16 resmi broşürü", "https://www.komatsu.eu/Assets/GetBrochureByProductName.aspx?id=D65EX/WX/PX-16&langID=en"),
      ]),
+    ("cat-950gc-vs-komatsu-wa380",
+     "CAT 950 GC vs Komatsu WA380-8 Karşılaştırma — Lastikli Yükleyici Teknik Özellikler",
+     "CAT 950 GC ve Komatsu WA380-8 lastikli yükleyicilerin resmi üretici verilerine dayanan teknik özellik karşılaştırması: çalışma ağırlığı, motor gücü, kova kapasitesi, emisyon standardı.",
+     "CAT 950 GC", "Komatsu WA380-8",
+     [
+         ("Çalışma Ağırlığı", "19.069 kg", "18.155–19.765 kg"),
+         ("Motor Gücü", "180 kW (241 HP)", "143 kW (192 HP) @ 2100 rpm"),
+         ("Kova Kapasitesi", "Üreticiye danışın", "3,2–6,5 m³"),
+         ("Emisyon Standardı", "Tier 4 Final / EU Stage V–IV", "EU Stage IV"),
+     ],
+     [
+         ("Caterpillar 950 GC resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.teknoxgroup.com/fileadmin/user_upload/950GC.pdf"),
+         ("Komatsu WA380-8 resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.ridgwayrentals.com/wp-content/uploads/2021/02/Komatsu-WA380-8-wheel-loader-spec-sheet.pdf"),
+     ]),
+    ("hidromek-220lc-vs-cat-320",
+     "Hidromek HMK 220 LC vs CAT 320 Karşılaştırma — Ekskavatör Teknik Özellikler",
+     "Yerli üretici Hidromek'in HMK 220 LC modeli ile küresel lider Caterpillar'ın 320 modelinin teknik özellik karşılaştırması: çalışma ağırlığı, motor gücü, kova kapasitesi, kazı derinliği.",
+     "Hidromek HMK 220 LC", "CAT 320",
+     [
+         ("Çalışma Ağırlığı", "23.350 kg", "22.500 kg"),
+         ("Motor Gücü", "119 kW (162 HP) — Isuzu", "121 kW (162 HP)"),
+         ("Kova Kapasitesi", "1,0 m³", "1,19 m³"),
+         ("Maksimum Kazı Derinliği", "6,67 m", "6,72 m"),
+         ("Maksimum Yatay Erişim", "10,05 m", "9,86 m"),
+     ],
+     [
+         ("Hidromek HMK 220 LC teknik verisi (lectura-specs.com — üretici verilerini derleyen bağımsız kaynak; Hidromek'in kendi sitesine bu oturumda erişilemedi)", "https://www.lectura-specs.com/en/model/construction-machinery/crawler-excavators-hidromek/hmk-220-lc-11682240"),
+         ("Caterpillar resmi teknik özellik dokümanı", "https://www.petersoncat.com/sites/cat/files/products/documents/1455901915-33586.pdf"),
+     ]),
 ]
 
 # (slug, name, meta_desc_tr, intro_tr, specs=[(label,value)], source=(label,url), compare_slug, gnd_category_slug)
@@ -850,6 +879,24 @@ MACHINE_SPECS = [
      [("Çalışma Ağırlığı", "20.500–22.900 kg"), ("Motor Gücü", "155 kW (207 HP)"), ("Bıçak Kapasitesi", "3,55–5,61 m³")],
      ("Komatsu D65EX/WX/PX-16 resmi broşürü", "https://www.komatsu.eu/Assets/GetBrochureByProductName.aspx?id=D65EX/WX/PX-16&langID=en"),
      "cat-d6-vs-komatsu-d65", "bulldozer"),
+    ("cat-950gc-teknik-ozellikler", "CAT 950 GC",
+     "CAT 950 GC lastikli yükleyicinin resmi Caterpillar teknik özellikleri: çalışma ağırlığı, motor gücü, emisyon standardı.",
+     "Caterpillar 950 GC, orta sınıf lastikli yükleyici segmentinde CAT'in güncel nesil modelidir. Aşağıdaki veriler doğrudan Caterpillar'ın resmi teknik özellik dokümanından alınmıştır.",
+     [("Çalışma Ağırlığı", "19.069 kg"), ("Motor Gücü", "180 kW (241 HP)"), ("Emisyon Standardı", "Tier 4 Final / EU Stage V–IV")],
+     ("Caterpillar 950 GC resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.teknoxgroup.com/fileadmin/user_upload/950GC.pdf"),
+     "cat-950gc-vs-komatsu-wa380", "wheel-loader"),
+    ("komatsu-wa380-8-teknik-ozellikler", "Komatsu WA380-8",
+     "Komatsu WA380-8 lastikli yükleyicinin resmi Komatsu teknik özellikleri: çalışma ağırlığı, motor gücü, kova kapasitesi, emisyon standardı.",
+     "Komatsu WA380-8, orta sınıf lastikli yükleyici segmentinde CAT 950 GC'nin doğrudan rakibidir. Aşağıdaki veriler doğrudan Komatsu'nun resmi teknik özellik dokümanından alınmıştır.",
+     [("Çalışma Ağırlığı", "18.155–19.765 kg"), ("Motor Gücü", "143 kW (192 HP) @ 2100 rpm"), ("Kova Kapasitesi", "3,2–6,5 m³"), ("Emisyon Standardı", "EU Stage IV")],
+     ("Komatsu WA380-8 resmi teknik özellik dokümanı (bayi kaynaklı)", "https://www.ridgwayrentals.com/wp-content/uploads/2021/02/Komatsu-WA380-8-wheel-loader-spec-sheet.pdf"),
+     "cat-950gc-vs-komatsu-wa380", "wheel-loader"),
+    ("hidromek-220lc-teknik-ozellikler", "Hidromek HMK 220 LC",
+     "Hidromek HMK 220 LC ekskavatörün teknik özellikleri: çalışma ağırlığı, motor gücü, kova kapasitesi, kazı derinliği.",
+     "Hidromek HMK 220 LC, Türkiye'nin küresel ölçekte üretim yapan iş makinesi üreticisi Hidromek'in orta-ağır sınıf paletli ekskavatörüdür. Aşağıdaki veriler bağımsız bir teknik veri kaynağından derlenmiştir.",
+     [("Çalışma Ağırlığı", "23.350 kg"), ("Motor Gücü", "119 kW (162 HP) — Isuzu"), ("Kova Kapasitesi", "1,0 m³"), ("Maksimum Kazı Derinliği", "6,67 m"), ("Maksimum Yatay Erişim", "10,05 m")],
+     ("Hidromek HMK 220 LC teknik verisi (lectura-specs.com)", "https://www.lectura-specs.com/en/model/construction-machinery/crawler-excavators-hidromek/hmk-220-lc-11682240"),
+     "hidromek-220lc-vs-cat-320", "excavator"),
 ]
 
 MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
