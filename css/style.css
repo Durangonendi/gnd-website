@@ -583,6 +583,11 @@ a { color: inherit; text-decoration: none; }
 .contact-email-link:hover {
   color: var(--accent-hover);
 }
+.contact-address {
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
 
 .social-links {
   display: flex;
