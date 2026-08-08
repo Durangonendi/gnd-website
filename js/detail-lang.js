@@ -16,6 +16,10 @@
       if (el.dataset.altEn === undefined) el.dataset.altEn = el.getAttribute('alt');
       el.setAttribute('alt', l === 'tr' ? el.dataset.altTr : el.dataset.altEn);
     });
+    document.querySelectorAll('[data-tr-placeholder]').forEach(function (el) {
+      if (el.dataset.placeholderEn === undefined) el.dataset.placeholderEn = el.getAttribute('placeholder');
+      el.setAttribute('placeholder', l === 'tr' ? el.dataset.trPlaceholder : el.dataset.placeholderEn);
+    });
     var sel = document.getElementById('lang-select');
     if (sel) sel.value = l;
   }

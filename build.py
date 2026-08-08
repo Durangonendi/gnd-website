@@ -1397,12 +1397,12 @@ HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 
 PAZAR_TERMS_TEMPLATE = """<!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alım-Satım Kullanım Şartları — {site_name}</title>
-<meta name="description" content="GND Makine Pazarı alım-satım talebi kullanım şartları ve sorumluluk reddi.">
+<title data-tr="Alım-Satım Kullanım Şartları — {site_name}">Buy/Sell Terms of Use — {site_name}</title>
+<meta name="description" content="GND Machine Market buy/sell request terms of use and liability disclaimer.">
 <link rel="canonical" href="{base_url}/pazar-sartlari.html">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
@@ -1414,35 +1414,36 @@ PAZAR_TERMS_TEMPLATE = """<!DOCTYPE html>
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <h1>Alım-Satım Kullanım Şartları</h1>
-    <p>GND Makine Pazarı üzerinden ilan veya talep oluşturmadan önce lütfen okuyun.</p>
+    <h1 data-tr="Alım-Satım Kullanım Şartları">Buy/Sell Terms of Use</h1>
+    <p data-tr="GND Makine Pazarı üzerinden ilan veya talep oluşturmadan önce lütfen okuyun.">Please read before creating a listing or request on GND Machine Market.</p>
   </div>
 </section>
 
 <section class="categories-section">
   <div class="section-inner">
     <div class="calc-panel blog-post-body">
-      <h2>Aracılık Rolü</h2>
-      <p>GND İş Makineleri Sanayi ve Ticaret A.Ş. ("GND"), bu bölümde paylaşılan satış ilanı ve alım taleplerinde yalnızca bilgilendirme ve iletişim aracılığı sağlar. GND, ilan/talep sahibi ile karşı taraf arasında gerçekleşecek alım-satım işleminin tarafı değildir.</p>
-      <h2>Bilgilerin Doğruluğu</h2>
-      <p>İlan veya talep oluşturan kullanıcı, paylaştığı bilgilerin (makine/parça durumu, fiyat, marka/model vb.) doğru ve güncel olduğunu beyan eder. Yanlış veya yanıltıcı bilgi paylaşımından kullanıcı sorumludur.</p>
-      <h2>Fiyat ve Şartlardan Vazgeçmeme</h2>
-      <p>Kullanıcı, ilan veya talebinde belirttiği fiyat ve şartlardan haklı bir neden olmaksızın tek taraflı olarak vazgeçmeyeceğini kabul eder.</p>
-      <h2>Sorumluluk</h2>
-      <p>Taraflar arasında gerçekleşecek alım-satım işleminin hukuki ve mali sorumluluğu (ödeme, teslimat, fatura, garanti, ayıp ve anlaşmazlıklar dahil) tamamen ilgili taraflara aittir. GND, bu süreçte doğabilecek anlaşmazlık, zarar veya kayıplardan sorumlu tutulamaz.</p>
-      <h2>Komisyon</h2>
-      <p>İşlem üzerinden bir komisyon uygulanması durumunda, oran ve şartlar ilgili taraflara işlem öncesinde ayrıca bildirilir.</p>
-      <h2>Yayın Onayı</h2>
-      <p>GND, gönderilen ilan veya talepleri yayınlamadan önce inceler; uygun görmediği içerikleri yayınlamama veya sonradan kaldırma hakkını saklı tutar.</p>
-      <h2>Kişisel Veriler</h2>
-      <p>Paylaştığınız iletişim bilgileri, yalnızca ilgili alım-satım süreciyle ilgili olarak karşı taraf ve GND tarafından iletişim amacıyla kullanılır.</p>
+      <h2 data-tr="Aracılık Rolü">Intermediary Role</h2>
+      <p data-tr="GND İş Makineleri Sanayi ve Ticaret A.Ş. (&quot;GND&quot;), bu bölümde paylaşılan satış ilanı ve alım taleplerinde yalnızca bilgilendirme ve iletişim aracılığı sağlar. GND, ilan/talep sahibi ile karşı taraf arasında gerçekleşecek alım-satım işleminin tarafı değildir.">GND İş Makineleri Sanayi ve Ticaret A.Ş. ("GND") only provides information and communication intermediary services for the sell listings and buy requests shared in this section. GND is not a party to the actual transaction between the listing/request owner and the counterparty.</p>
+      <h2 data-tr="Bilgilerin Doğruluğu">Accuracy of Information</h2>
+      <p data-tr="İlan veya talep oluşturan kullanıcı, paylaştığı bilgilerin (makine/parça durumu, fiyat, marka/model vb.) doğru ve güncel olduğunu beyan eder. Yanlış veya yanıltıcı bilgi paylaşımından kullanıcı sorumludur.">The user creating a listing or request declares that the information shared (machine/part condition, price, brand/model, etc.) is accurate and up to date. The user is responsible for any false or misleading information.</p>
+      <h2 data-tr="Fiyat ve Şartlardan Vazgeçmeme">Not Withdrawing from Price and Terms</h2>
+      <p data-tr="Kullanıcı, ilan veya talebinde belirttiği fiyat ve şartlardan haklı bir neden olmaksızın tek taraflı olarak vazgeçmeyeceğini kabul eder.">The user agrees not to unilaterally withdraw from the price and terms stated in their listing or request without a justified reason.</p>
+      <h2 data-tr="Sorumluluk">Liability</h2>
+      <p data-tr="Taraflar arasında gerçekleşecek alım-satım işleminin hukuki ve mali sorumluluğu (ödeme, teslimat, fatura, garanti, ayıp ve anlaşmazlıklar dahil) tamamen ilgili taraflara aittir. GND, bu süreçte doğabilecek anlaşmazlık, zarar veya kayıplardan sorumlu tutulamaz.">Legal and financial responsibility for the transaction between the parties (including payment, delivery, invoicing, warranty, defects and disputes) belongs entirely to the parties involved. GND cannot be held responsible for any disputes, damages or losses arising during this process.</p>
+      <h2 data-tr="Komisyon">Commission</h2>
+      <p data-tr="İşlem üzerinden bir komisyon uygulanması durumunda, oran ve şartlar ilgili taraflara işlem öncesinde ayrıca bildirilir.">If a commission is applied on the transaction, the rate and terms will be separately communicated to the relevant parties before the transaction.</p>
+      <h2 data-tr="Yayın Onayı">Publication Approval</h2>
+      <p data-tr="GND, gönderilen ilan veya talepleri yayınlamadan önce inceler; uygun görmediği içerikleri yayınlamama veya sonradan kaldırma hakkını saklı tutar.">GND reviews submitted listings or requests before publishing and reserves the right not to publish, or to later remove, content it does not deem appropriate.</p>
+      <h2 data-tr="Kişisel Veriler">Personal Data</h2>
+      <p data-tr="Paylaştığınız iletişim bilgileri, yalnızca ilgili alım-satım süreciyle ilgili olarak karşı taraf ve GND tarafından iletişim amacıyla kullanılır.">The contact information you share is used only for communication purposes by the counterparty and GND, related to the relevant buy/sell process.</p>
     </div>
-    <p class="back-link"><a href="pazar.html">← Makine Pazarına Dön</a></p>
+    <p class="back-link"><a href="pazar.html" data-tr="← Makine Pazarına Dön">← Back to Machine Market</a></p>
   </div>
 </section>
 
 {footer}
 
+<script src="js/detail-lang.js"></script>
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/advisor-widget.js"></script>
@@ -1451,12 +1452,12 @@ PAZAR_TERMS_TEMPLATE = """<!DOCTYPE html>
 """
 
 PAZAR_PAGE_TEMPLATE = """<!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makine Pazarı — Alım / Satım Talebi — {site_name}</title>
-<meta name="description" content="Elinizdeki iş makinesi veya yedek parçayı satmak ya da aradığınız makine için talep oluşturmak istiyorsanız bilgilerinizi bize iletin, sizin adınıza paylaşalım.">
+<title data-tr="Makine Pazarı — Alım / Satım Talebi — {site_name}">Machine Market — Buy/Sell Request — {site_name}</title>
+<meta name="description" content="Tell us about the machine or spare part you want to sell, or the one you're looking for, and we'll publish it on your behalf.">
 <link rel="canonical" href="{base_url}/pazar.html">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
@@ -1468,18 +1469,18 @@ PAZAR_PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <h1>Makine Pazarı</h1>
-    <p>Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.</p>
+    <h1 data-tr="Makine Pazarı">Machine Market</h1>
+    <p data-tr="Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.">Do you want to sell a machine or spare part you own, or are you looking for one? Send us the details and we'll publish it on your behalf.</p>
   </div>
 </section>
 
 <section class="categories-section spareparts-section">
   <div class="section-inner">
     <div class="category-grid">
-      <div class="category-card"><h3>Ücretsiz İlan</h3><p>Bilgilerinizi paylaşmanın herhangi bir ücreti yoktur.</p></div>
-      <div class="category-card"><h3>Güvenilir ve Şeffaf Süreç</h3><p>Her talep yayınlanmadan önce GND tarafından incelenir.</p></div>
-      <div class="category-card"><h3>Geniş Tedarik Ağı</h3><p>Talebiniz, GND'nin mevcut iletişim ağı üzerinden ilgili taraflara ulaştırılır.</p></div>
-      <div class="category-card"><h3>Hızlı Teslimat</h3><p>Anlaşma sağlanan işlemlerde lojistik süreçlerinde GND yanınızda.</p></div>
+      <div class="category-card"><h3 data-tr="Ücretsiz İlan">Free Listing</h3><p data-tr="Bilgilerinizi paylaşmanın herhangi bir ücreti yoktur.">There is no fee to share your information.</p></div>
+      <div class="category-card"><h3 data-tr="Güvenilir ve Şeffaf Süreç">Trustworthy, Transparent Process</h3><p data-tr="Her talep yayınlanmadan önce GND tarafından incelenir.">Every request is reviewed by GND before being published.</p></div>
+      <div class="category-card"><h3 data-tr="Geniş Tedarik Ağı">Wide Supply Network</h3><p data-tr="Talebiniz, GND'nin mevcut iletişim ağı üzerinden ilgili taraflara ulaştırılır.">Your request is shared with relevant parties through GND's existing network.</p></div>
+      <div class="category-card"><h3 data-tr="Hızlı Teslimat">Fast Delivery</h3><p data-tr="Anlaşma sağlanan işlemlerde lojistik süreçlerinde GND yanınızda.">GND supports the logistics process once a deal is agreed.</p></div>
     </div>
   </div>
 </section>
@@ -1487,83 +1488,84 @@ PAZAR_PAGE_TEMPLATE = """<!DOCTYPE html>
 <section class="categories-section">
   <div class="section-inner">
     <div id="pazarLoginPrompt" class="calc-panel" style="display:none">
-      <h3 style="margin-top:0">Talep Oluşturmak İçin Giriş Yapın</h3>
-      <p class="calc-note">İlan veya talep oluşturmak için önce üye girişi yapmanız gerekiyor.</p>
-      <a href="giris.html" class="btn btn-primary" style="width:100%">Giriş Yap / Üye Ol →</a>
+      <h3 style="margin-top:0" data-tr="Talep Oluşturmak İçin Giriş Yapın">Log In to Create a Request</h3>
+      <p class="calc-note" data-tr="İlan veya talep oluşturmak için önce üye girişi yapmanız gerekiyor.">You need to log in as a member before creating a listing or request.</p>
+      <a href="giris.html" class="btn btn-primary" style="width:100%" data-tr="Giriş Yap / Üye Ol →">Log In / Sign Up →</a>
     </div>
 
     <form id="pazarForm" class="calc-panel" style="display:none">
-      <h3 style="margin-top:0">Talep Oluştur</h3>
+      <h3 style="margin-top:0" data-tr="Talep Oluştur">Create a Request</h3>
       <div class="condition-toggle" style="margin-bottom:16px">
-        <button type="button" data-turu="satis" class="active">Satış</button>
-        <button type="button" data-turu="alim">Alım Talebi</button>
+        <button type="button" data-turu="satis" class="active" data-tr="Satış">Sell</button>
+        <button type="button" data-turu="alim" data-tr="Alım Talebi">Buy Request</button>
       </div>
       <input type="hidden" id="pazarTuru" value="satis">
 
       <div class="calc-field">
-        <label for="pazarAdSoyad">Ad Soyad</label>
+        <label for="pazarAdSoyad" data-tr="Ad Soyad">Full Name</label>
         <input type="text" id="pazarAdSoyad" required>
       </div>
 
       <div class="calc-field">
-        <label for="pazarTelefon">Telefon</label>
+        <label for="pazarTelefon" data-tr="Telefon">Phone</label>
         <input type="tel" id="pazarTelefon" required placeholder="05xx xxx xx xx">
       </div>
 
       <div class="calc-field">
-        <label for="pazarBaslik" id="pazarBaslikLabel">Makine / Parça Adı</label>
-        <input type="text" id="pazarBaslik" required placeholder="Örn: 2019 model mini ekskavatör">
+        <label for="pazarBaslik" id="pazarBaslikLabel" data-tr="Makine / Parça Adı">Machine / Part Name</label>
+        <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör" placeholder="e.g. 2019 model mini excavator">
       </div>
 
       <div class="calc-field" id="pazarDurumWrap">
-        <label for="pazarDurum">Durumu</label>
+        <label for="pazarDurum" data-tr="Durumu">Condition</label>
         <select id="pazarDurum">
-          <option value="Sıfır">Sıfır</option>
-          <option value="2. El">2. El</option>
+          <option value="Sıfır" data-tr="Sıfır">New</option>
+          <option value="2. El" data-tr="2. El">Used</option>
         </select>
       </div>
 
       <div class="calc-field">
-        <label for="pazarFiyat" id="pazarFiyatLabel">Fiyat Beklentisi</label>
-        <input type="text" id="pazarFiyat" placeholder="Örn: 850.000 TL veya pazarlıklı">
+        <label for="pazarFiyat" id="pazarFiyatLabel" data-tr="Fiyat Beklentisi">Expected Price</label>
+        <input type="text" id="pazarFiyat" data-tr-placeholder="Örn: 850.000 TL veya pazarlıklı" placeholder="e.g. 850,000 TL or negotiable">
       </div>
 
       <div class="calc-field">
-        <label for="pazarAciklama">Açıklama</label>
-        <textarea id="pazarAciklama" rows="4" placeholder="Marka, model, çalışma saati, konum ve diğer detaylar"></textarea>
+        <label for="pazarAciklama" data-tr="Açıklama">Description</label>
+        <textarea id="pazarAciklama" rows="4" data-tr-placeholder="Marka, model, çalışma saati, konum ve diğer detaylar" placeholder="Brand, model, working hours, location and other details"></textarea>
       </div>
 
-      <p class="calc-note">Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.</p>
+      <p class="calc-note" data-tr="Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.">If you'd like to add photos, you can share them with us on WhatsApp once your request is approved.</p>
 
       <label class="pazar-checkbox">
         <input type="checkbox" id="pazarOnay1" required>
-        <span>Verdiğim bilgilerin doğru olduğunu ve belirttiğim fiyat/şartlardan haklı bir neden olmaksızın vazgeçmeyeceğimi kabul ediyorum.</span>
+        <span data-tr="Verdiğim bilgilerin doğru olduğunu ve belirttiğim fiyat/şartlardan haklı bir neden olmaksızın vazgeçmeyeceğimi kabul ediyorum.">I confirm the information I provided is accurate and that I will not withdraw from the stated price/terms without a justified reason.</span>
       </label>
       <label class="pazar-checkbox">
         <input type="checkbox" id="pazarOnay2" required>
-        <span>Bu işlemden doğabilecek anlaşmazlıklardan şahsen sorumlu olduğumu, GND İş Makineleri'nin yalnızca bilgilendirme/iletişim aracılığı yaptığını ve <a href="pazar-sartlari.html" target="_blank">Kullanım Şartları</a>'nı okuyup kabul ettiğimi onaylıyorum.</span>
+        <span data-tr="Bu işlemden doğabilecek anlaşmazlıklardan şahsen sorumlu olduğumu, GND İş Makineleri'nin yalnızca bilgilendirme/iletişim aracılığı yaptığını ve &lt;a href=&quot;pazar-sartlari.html&quot; target=&quot;_blank&quot;&gt;Kullanım Şartları&lt;/a&gt;'nı okuyup kabul ettiğimi onaylıyorum.">I accept personal responsibility for any disputes arising from this transaction, understand GND İş Makineleri only acts as an information/communication intermediary, and confirm I have read and accept the <a href="pazar-sartlari.html" target="_blank">Terms of Use</a>.</span>
       </label>
 
       <div id="pazarMsg" class="calc-note"></div>
-      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px">Talebi Gönder</button>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px" data-tr="Talebi Gönder">Submit Request</button>
     </form>
   </div>
 </section>
 
 <section class="categories-section spareparts-section">
   <div class="section-inner">
-    <h2>Yayındaki Talepler</h2>
+    <h2 data-tr="Yayındaki Talepler">Published Requests</h2>
     <div class="condition-toggle" style="margin-bottom:16px">
-      <button type="button" data-filter="all" class="active">Tümü</button>
-      <button type="button" data-filter="satis">Satış</button>
-      <button type="button" data-filter="alim">Alım Talebi</button>
+      <button type="button" data-filter="all" class="active" data-tr="Tümü">All</button>
+      <button type="button" data-filter="satis" data-tr="Satış">Sell</button>
+      <button type="button" data-filter="alim" data-tr="Alım Talebi">Buy Request</button>
     </div>
-    <div id="pazarList" class="category-grid"><p>Yükleniyor...</p></div>
+    <div id="pazarList" class="category-grid"><p data-tr="Yükleniyor...">Loading...</p></div>
   </div>
 </section>
 
 {footer}
 
+<script src="js/detail-lang.js"></script>
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/advisor-widget.js"></script>
@@ -1925,6 +1927,10 @@ DETAIL_LANG_JS = """(function () {
     document.querySelectorAll('[data-alt-tr]').forEach(function (el) {
       if (el.dataset.altEn === undefined) el.dataset.altEn = el.getAttribute('alt');
       el.setAttribute('alt', l === 'tr' ? el.dataset.altTr : el.dataset.altEn);
+    });
+    document.querySelectorAll('[data-tr-placeholder]').forEach(function (el) {
+      if (el.dataset.placeholderEn === undefined) el.dataset.placeholderEn = el.getAttribute('placeholder');
+      el.setAttribute('placeholder', l === 'tr' ? el.dataset.trPlaceholder : el.dataset.placeholderEn);
     });
     var sel = document.getElementById('lang-select');
     if (sel) sel.value = l;

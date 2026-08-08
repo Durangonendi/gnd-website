@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makine Pazarı — Alım / Satım Talebi — GND Machinery</title>
-<meta name="description" content="Elinizdeki iş makinesi veya yedek parçayı satmak ya da aradığınız makine için talep oluşturmak istiyorsanız bilgilerinizi bize iletin, sizin adınıza paylaşalım.">
+<title data-tr="Makine Pazarı — Alım / Satım Talebi — GND Machinery">Machine Market — Buy/Sell Request — GND Machinery</title>
+<meta name="description" content="Tell us about the machine or spare part you want to sell, or the one you're looking for, and we'll publish it on your behalf.">
 <link rel="canonical" href="https://gndmachinery.com/pazar.html">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
@@ -41,18 +41,18 @@
 
 <section class="hero category-hero">
   <div class="hero-inner">
-    <h1>Makine Pazarı</h1>
-    <p>Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.</p>
+    <h1 data-tr="Makine Pazarı">Machine Market</h1>
+    <p data-tr="Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.">Do you want to sell a machine or spare part you own, or are you looking for one? Send us the details and we'll publish it on your behalf.</p>
   </div>
 </section>
 
 <section class="categories-section spareparts-section">
   <div class="section-inner">
     <div class="category-grid">
-      <div class="category-card"><h3>Ücretsiz İlan</h3><p>Bilgilerinizi paylaşmanın herhangi bir ücreti yoktur.</p></div>
-      <div class="category-card"><h3>Güvenilir ve Şeffaf Süreç</h3><p>Her talep yayınlanmadan önce GND tarafından incelenir.</p></div>
-      <div class="category-card"><h3>Geniş Tedarik Ağı</h3><p>Talebiniz, GND'nin mevcut iletişim ağı üzerinden ilgili taraflara ulaştırılır.</p></div>
-      <div class="category-card"><h3>Hızlı Teslimat</h3><p>Anlaşma sağlanan işlemlerde lojistik süreçlerinde GND yanınızda.</p></div>
+      <div class="category-card"><h3 data-tr="Ücretsiz İlan">Free Listing</h3><p data-tr="Bilgilerinizi paylaşmanın herhangi bir ücreti yoktur.">There is no fee to share your information.</p></div>
+      <div class="category-card"><h3 data-tr="Güvenilir ve Şeffaf Süreç">Trustworthy, Transparent Process</h3><p data-tr="Her talep yayınlanmadan önce GND tarafından incelenir.">Every request is reviewed by GND before being published.</p></div>
+      <div class="category-card"><h3 data-tr="Geniş Tedarik Ağı">Wide Supply Network</h3><p data-tr="Talebiniz, GND'nin mevcut iletişim ağı üzerinden ilgili taraflara ulaştırılır.">Your request is shared with relevant parties through GND's existing network.</p></div>
+      <div class="category-card"><h3 data-tr="Hızlı Teslimat">Fast Delivery</h3><p data-tr="Anlaşma sağlanan işlemlerde lojistik süreçlerinde GND yanınızda.">GND supports the logistics process once a deal is agreed.</p></div>
     </div>
   </div>
 </section>
@@ -60,78 +60,78 @@
 <section class="categories-section">
   <div class="section-inner">
     <div id="pazarLoginPrompt" class="calc-panel" style="display:none">
-      <h3 style="margin-top:0">Talep Oluşturmak İçin Giriş Yapın</h3>
-      <p class="calc-note">İlan veya talep oluşturmak için önce üye girişi yapmanız gerekiyor.</p>
-      <a href="giris.html" class="btn btn-primary" style="width:100%">Giriş Yap / Üye Ol →</a>
+      <h3 style="margin-top:0" data-tr="Talep Oluşturmak İçin Giriş Yapın">Log In to Create a Request</h3>
+      <p class="calc-note" data-tr="İlan veya talep oluşturmak için önce üye girişi yapmanız gerekiyor.">You need to log in as a member before creating a listing or request.</p>
+      <a href="giris.html" class="btn btn-primary" style="width:100%" data-tr="Giriş Yap / Üye Ol →">Log In / Sign Up →</a>
     </div>
 
     <form id="pazarForm" class="calc-panel" style="display:none">
-      <h3 style="margin-top:0">Talep Oluştur</h3>
+      <h3 style="margin-top:0" data-tr="Talep Oluştur">Create a Request</h3>
       <div class="condition-toggle" style="margin-bottom:16px">
-        <button type="button" data-turu="satis" class="active">Satış</button>
-        <button type="button" data-turu="alim">Alım Talebi</button>
+        <button type="button" data-turu="satis" class="active" data-tr="Satış">Sell</button>
+        <button type="button" data-turu="alim" data-tr="Alım Talebi">Buy Request</button>
       </div>
       <input type="hidden" id="pazarTuru" value="satis">
 
       <div class="calc-field">
-        <label for="pazarAdSoyad">Ad Soyad</label>
+        <label for="pazarAdSoyad" data-tr="Ad Soyad">Full Name</label>
         <input type="text" id="pazarAdSoyad" required>
       </div>
 
       <div class="calc-field">
-        <label for="pazarTelefon">Telefon</label>
+        <label for="pazarTelefon" data-tr="Telefon">Phone</label>
         <input type="tel" id="pazarTelefon" required placeholder="05xx xxx xx xx">
       </div>
 
       <div class="calc-field">
-        <label for="pazarBaslik" id="pazarBaslikLabel">Makine / Parça Adı</label>
-        <input type="text" id="pazarBaslik" required placeholder="Örn: 2019 model mini ekskavatör">
+        <label for="pazarBaslik" id="pazarBaslikLabel" data-tr="Makine / Parça Adı">Machine / Part Name</label>
+        <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör" placeholder="e.g. 2019 model mini excavator">
       </div>
 
       <div class="calc-field" id="pazarDurumWrap">
-        <label for="pazarDurum">Durumu</label>
+        <label for="pazarDurum" data-tr="Durumu">Condition</label>
         <select id="pazarDurum">
-          <option value="Sıfır">Sıfır</option>
-          <option value="2. El">2. El</option>
+          <option value="Sıfır" data-tr="Sıfır">New</option>
+          <option value="2. El" data-tr="2. El">Used</option>
         </select>
       </div>
 
       <div class="calc-field">
-        <label for="pazarFiyat" id="pazarFiyatLabel">Fiyat Beklentisi</label>
-        <input type="text" id="pazarFiyat" placeholder="Örn: 850.000 TL veya pazarlıklı">
+        <label for="pazarFiyat" id="pazarFiyatLabel" data-tr="Fiyat Beklentisi">Expected Price</label>
+        <input type="text" id="pazarFiyat" data-tr-placeholder="Örn: 850.000 TL veya pazarlıklı" placeholder="e.g. 850,000 TL or negotiable">
       </div>
 
       <div class="calc-field">
-        <label for="pazarAciklama">Açıklama</label>
-        <textarea id="pazarAciklama" rows="4" placeholder="Marka, model, çalışma saati, konum ve diğer detaylar"></textarea>
+        <label for="pazarAciklama" data-tr="Açıklama">Description</label>
+        <textarea id="pazarAciklama" rows="4" data-tr-placeholder="Marka, model, çalışma saati, konum ve diğer detaylar" placeholder="Brand, model, working hours, location and other details"></textarea>
       </div>
 
-      <p class="calc-note">Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.</p>
+      <p class="calc-note" data-tr="Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.">If you'd like to add photos, you can share them with us on WhatsApp once your request is approved.</p>
 
       <label class="pazar-checkbox">
         <input type="checkbox" id="pazarOnay1" required>
-        <span>Verdiğim bilgilerin doğru olduğunu ve belirttiğim fiyat/şartlardan haklı bir neden olmaksızın vazgeçmeyeceğimi kabul ediyorum.</span>
+        <span data-tr="Verdiğim bilgilerin doğru olduğunu ve belirttiğim fiyat/şartlardan haklı bir neden olmaksızın vazgeçmeyeceğimi kabul ediyorum.">I confirm the information I provided is accurate and that I will not withdraw from the stated price/terms without a justified reason.</span>
       </label>
       <label class="pazar-checkbox">
         <input type="checkbox" id="pazarOnay2" required>
-        <span>Bu işlemden doğabilecek anlaşmazlıklardan şahsen sorumlu olduğumu, GND İş Makineleri'nin yalnızca bilgilendirme/iletişim aracılığı yaptığını ve <a href="pazar-sartlari.html" target="_blank">Kullanım Şartları</a>'nı okuyup kabul ettiğimi onaylıyorum.</span>
+        <span data-tr="Bu işlemden doğabilecek anlaşmazlıklardan şahsen sorumlu olduğumu, GND İş Makineleri'nin yalnızca bilgilendirme/iletişim aracılığı yaptığını ve &lt;a href=&quot;pazar-sartlari.html&quot; target=&quot;_blank&quot;&gt;Kullanım Şartları&lt;/a&gt;'nı okuyup kabul ettiğimi onaylıyorum.">I accept personal responsibility for any disputes arising from this transaction, understand GND İş Makineleri only acts as an information/communication intermediary, and confirm I have read and accept the <a href="pazar-sartlari.html" target="_blank">Terms of Use</a>.</span>
       </label>
 
       <div id="pazarMsg" class="calc-note"></div>
-      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px">Talebi Gönder</button>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px" data-tr="Talebi Gönder">Submit Request</button>
     </form>
   </div>
 </section>
 
 <section class="categories-section spareparts-section">
   <div class="section-inner">
-    <h2>Yayındaki Talepler</h2>
+    <h2 data-tr="Yayındaki Talepler">Published Requests</h2>
     <div class="condition-toggle" style="margin-bottom:16px">
-      <button type="button" data-filter="all" class="active">Tümü</button>
-      <button type="button" data-filter="satis">Satış</button>
-      <button type="button" data-filter="alim">Alım Talebi</button>
+      <button type="button" data-filter="all" class="active" data-tr="Tümü">All</button>
+      <button type="button" data-filter="satis" data-tr="Satış">Sell</button>
+      <button type="button" data-filter="alim" data-tr="Alım Talebi">Buy Request</button>
     </div>
-    <div id="pazarList" class="category-grid"><p>Yükleniyor...</p></div>
+    <div id="pazarList" class="category-grid"><p data-tr="Yükleniyor...">Loading...</p></div>
   </div>
 </section>
 
@@ -147,6 +147,7 @@
   <span data-tr="Canlı Destek">Live Support</span>
 </a>
 
+<script src="js/detail-lang.js"></script>
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/advisor-widget.js"></script>

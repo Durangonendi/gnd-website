@@ -5,6 +5,26 @@
   var allListings = [];
   var currentFilter = "all";
 
+  var TXT = {
+    baslikSatis: { tr: "Makine / Parça Adı", en: "Machine / Part Name" },
+    baslikAlim: { tr: "Aradığınız Makine / Parça", en: "Machine / Part You're Looking For" },
+    fiyatSatis: { tr: "Fiyat Beklentisi", en: "Expected Price" },
+    fiyatAlim: { tr: "Bütçeniz", en: "Your Budget" },
+    badgeSatis: { tr: "Satış", en: "Sell" },
+    badgeAlim: { tr: "Alım Talebi", en: "Buy Request" },
+    waBtn: { tr: "WhatsApp'tan Sor →", en: "Ask on WhatsApp →" },
+    noListings: { tr: "Şu an bu kategoride yayında bir talep yok.", en: "There are no published requests in this category right now." },
+    loadError: { tr: "Talepler yüklenemedi: ", en: "Could not load requests: " },
+  };
+
+  function getLang() {
+    return localStorage.getItem("gnd-site-lang") === "tr" ? "tr" : "en";
+  }
+
+  function t(key) {
+    return TXT[key][getLang()];
+  }
+
   function escapeHtml(s) {
     var d = document.createElement("div");
     d.textContent = s || "";
@@ -22,12 +42,12 @@
     var fiyatLabel = document.getElementById("pazarFiyatLabel");
     if (turu === "satis") {
       durumWrap.style.display = "";
-      baslikLabel.textContent = "Makine / Parça Adı";
-      fiyatLabel.textContent = "Fiyat Beklentisi";
+      baslikLabel.textContent = t("baslikSatis");
+      fiyatLabel.textContent = t("fiyatSatis");
     } else {
       durumWrap.style.display = "none";
-      baslikLabel.textContent = "Aradığınız Makine / Parça";
-      fiyatLabel.textContent = "Bütçeniz";
+      baslikLabel.textContent = t("baslikAlim");
+      fiyatLabel.textContent = t("fiyatAlim");
     }
   }
 
@@ -35,11 +55,11 @@
     var listEl = document.getElementById("pazarList");
     var filtered = currentFilter === "all" ? allListings : allListings.filter(function (r) { return r.islem_turu === currentFilter; });
     if (filtered.length === 0) {
-      listEl.innerHTML = "<p>Şu an bu kategoride yayında bir talep yok.</p>";
+      listEl.innerHTML = "<p>" + t("noListings") + "</p>";
       return;
     }
     listEl.innerHTML = filtered.map(function (r) {
-      var badge = r.islem_turu === "satis" ? "Satış" : "Alım Talebi";
+      var badge = r.islem_turu === "satis" ? t("badgeSatis") : t("badgeAlim");
       return (
         '<div class="category-card">' +
         "<h3>" + escapeHtml(r.baslik) + "</h3>" +
@@ -48,7 +68,7 @@
         (r.aciklama ? "<p>" + escapeHtml(r.aciklama) + "</p>" : "") +
         '<a class="btn btn-primary" style="width:100%;margin-top:8px" target="_blank" rel="noopener" href="https://wa.me/905550708034?text=' +
         encodeURIComponent("Merhaba, \"" + r.baslik + "\" ilanı/talebi hakkında bilgi almak istiyorum.") +
-        '">WhatsApp\'tan Sor →</a>' +
+        '">' + t("waBtn") + "</a>" +
         "</div>"
       );
     }).join("");
@@ -61,7 +81,7 @@
       .eq("onay_durumu", "yayinda")
       .order("created_at", { ascending: false });
     if (error) {
-      document.getElementById("pazarList").textContent = "Talepler yüklenemedi: " + error.message;
+      document.getElementById("pazarList").textContent = t("loadError") + error.message;
       return;
     }
     allListings = data || [];
@@ -79,6 +99,14 @@
         renderListings();
       });
     });
+
+    var langSelect = document.getElementById("lang-select");
+    if (langSelect) {
+      langSelect.addEventListener("change", function () {
+        setTuru(currentTuru);
+        renderListings();
+      });
+    }
 
     var user = await window.gndAuth.getUser();
     if (user) {
@@ -98,7 +126,7 @@
       var msgEl = document.getElementById("pazarMsg");
       var currentUser = await window.gndAuth.getUser();
       if (!currentUser) {
-        msgEl.textContent = "Oturumunuz sona ermiş, lütfen tekrar giriş yapın.";
+        msgEl.textContent = getLang() === "tr" ? "Oturumunuz sona ermiş, lütfen tekrar giriş yapın." : "Your session has expired, please log in again.";
         return;
       }
       var payload = {
@@ -111,17 +139,20 @@
         fiyat: document.getElementById("pazarFiyat").value.trim() || null,
         aciklama: document.getElementById("pazarAciklama").value.trim() || null,
       };
-      msgEl.textContent = "Gönderiliyor...";
+      msgEl.textContent = getLang() === "tr" ? "Gönderiliyor..." : "Submitting...";
       var { error } = await window.gndSupabase.from("market_requests").insert(payload);
       if (error) {
-        msgEl.textContent = "Bir hata oluştu: " + error.message;
+        msgEl.textContent = (getLang() === "tr" ? "Bir hata oluştu: " : "An error occurred: ") + error.message;
         return;
       }
-      msgEl.textContent = "Talebiniz alındı. İncelendikten sonra onaylanırsa yayına alınacaktır.";
+      msgEl.textContent = getLang() === "tr"
+        ? "Talebiniz alındı. İncelendikten sonra onaylanırsa yayına alınacaktır."
+        : "Your request has been received. It will be published once reviewed and approved.";
       form.reset();
       setTuru("satis");
     });
 
+    setTuru("satis");
     loadListings();
   });
 })();
