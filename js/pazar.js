@@ -83,10 +83,12 @@
     var user = await window.gndAuth.getUser();
     if (user) {
       document.getElementById("pazarForm").style.display = "";
+      document.getElementById("pazarLoginPrompt").style.display = "none";
       var meta = user.user_metadata || {};
       if (meta.ad_soyad) document.getElementById("pazarAdSoyad").value = meta.ad_soyad;
       if (meta.telefon) document.getElementById("pazarTelefon").value = meta.telefon;
     } else {
+      document.getElementById("pazarForm").style.display = "none";
       document.getElementById("pazarLoginPrompt").style.display = "";
     }
 
