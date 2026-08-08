@@ -9,6 +9,7 @@
 # picked it via the lang-select on this site before. First-time visitors with no stored
 # preference keep seeing English, same as today.
 import os
+import json
 
 SITE_NAME = "GND Machinery"
 BASE_URL = "https://gndmachinery.com"
@@ -1403,6 +1404,10 @@ def build_auth_pages(root_dir):
         f.write(GIRIS_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
     print("wrote giris.html")
 
+    with open(os.path.join(root_dir, "hesabim.html"), "w", encoding="utf-8") as f:
+        f.write(HESABIM_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
+    print("wrote hesabim.html")
+
 
 # (slug, title, meta_desc, date, intro, sections=[(heading, [paragraphs])], sources=[(label, url)])
 # Same sourcing rule as COMPARISONS/MACHINE_SPECS: facts and figures must trace to a
@@ -1517,7 +1522,7 @@ BLOG_POSTS = [
 ]
 
 BLOG_POST_TEMPLATE = """<!DOCTYPE html>
-<html lang="tr">
+<html lang="{lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1557,19 +1562,14 @@ BLOG_POST_TEMPLATE = """<!DOCTYPE html>
       {content}
     </div>
 
-    <div class="calc-panel" style="margin-top:24px">
-      <h3 style="margin-top:0">Kaynaklar</h3>
-      <ul>
-        {sources}
-      </ul>
-    </div>
+    {sources_block}
 
     <div class="calc-panel" style="margin-top:24px">
-      <p class="calc-note">İhtiyacınıza uygun makine veya yedek parça tedariki için doğrudan bize ulaşın.</p>
-      <a href="https://wa.me/{wa}?text={wa_text}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">WhatsApp'tan Bize Ulaşın →</a>
+      <p class="calc-note">{cta_note}</p>
+      <a href="https://wa.me/{wa}?text={wa_text}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">{cta_label}</a>
     </div>
 
-    <p class="back-link"><a href="index.html">← Tüm Yazılar</a></p>
+    <p class="back-link"><a href="index.html">{back_label}</a></p>
   </div>
 </section>
 
@@ -1581,6 +1581,13 @@ BLOG_POST_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>
 """
+
+BLOG_SOURCES_BLOCK = """<div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">Kaynaklar</h3>
+      <ul>
+        {sources}
+      </ul>
+    </div>"""
 
 BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
 <html lang="tr">
@@ -1635,31 +1642,69 @@ def build_blog_pages(root_dir):
     header = HEADER.format(root="../", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
     footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
 
+    CTA_BY_LANG = {
+        "tr": {
+            "cta_note": "İhtiyacınıza uygun makine veya yedek parça tedariki için doğrudan bize ulaşın.",
+            "cta_label": "WhatsApp'tan Bize Ulaşın →",
+            "back_label": "← Tüm Yazılar",
+            "wa_msg": "Hi, I have a question after reading '{title}'.",
+        },
+        "en": {
+            "cta_note": "Contact us directly for equipment or spare parts sourcing tailored to your needs.",
+            "cta_label": "Contact Us on WhatsApp →",
+            "back_label": "← All Articles",
+            "wa_msg": "Hi, I have a question after reading '{title}'.",
+        },
+    }
+
+    all_posts = []  # normalized: dict(slug, title, meta_desc, date, lang, intro, sections=[(heading,[paras])], sources=[(label,url)])
     for slug, title, meta_desc, date, intro, sections, sources in BLOG_POSTS:
+        all_posts.append(dict(slug=slug, title=title, meta_desc=meta_desc, date=date, lang="tr",
+                               intro=intro, sections=sections, sources=sources))
+
+    guides_path = os.path.join(root_dir, "content_blog_guides.json")
+    if os.path.exists(guides_path):
+        with open(guides_path, encoding="utf-8") as f:
+            guides = json.load(f)
+        for g in guides:
+            sections = [(s["heading"], s["paragraphs"]) for s in g["sections"]]
+            all_posts.append(dict(slug=g["slug"], title=g["title"], meta_desc=g["meta_desc"], date=g["date"],
+                                   lang=g.get("lang", "tr"), intro=g["intro"], sections=sections,
+                                   sources=g.get("sources", [])))
+
+    for post in all_posts:
+        lang = post["lang"]
+        cta = CTA_BY_LANG.get(lang, CTA_BY_LANG["tr"])
         content_parts = []
-        for heading, paragraphs in sections:
+        for heading, paragraphs in post["sections"]:
             content_parts.append(f"<h2>{esc(heading)}</h2>")
             for p in paragraphs:
                 content_parts.append(f"<p>{esc(p)}</p>")
         content_html = "\n      ".join(content_parts)
-        sources_html = "\n        ".join(
-            f'<li><a href="{url}" target="_blank" rel="noopener">{esc(label)}</a></li>' for label, url in sources
-        )
-        wa_text = wa_link_text(f"Hi, I have a question after reading '{title}'.")
+
+        sources_block = ""
+        if post["sources"]:
+            sources_html = "\n        ".join(
+                f'<li><a href="{url}" target="_blank" rel="noopener">{esc(label)}</a></li>' for label, url in post["sources"]
+            )
+            sources_block = BLOG_SOURCES_BLOCK.format(sources=sources_html)
+
+        wa_text = wa_link_text(cta["wa_msg"].format(title=post["title"]))
 
         page = BLOG_POST_TEMPLATE.format(
-            title=esc(title), site_name=SITE_NAME, meta_desc=esc(meta_desc),
-            canonical=f"{BASE_URL}/blog/{slug}.html", date=date, intro=esc(intro),
-            header=header, footer=footer, content=content_html, sources=sources_html,
-            wa=WHATSAPP_NUMBER, wa_text=wa_text,
+            title=esc(post["title"]), site_name=SITE_NAME, meta_desc=esc(post["meta_desc"]),
+            canonical=f"{BASE_URL}/blog/{post['slug']}.html", date=post["date"], intro=esc(post["intro"]),
+            header=header, footer=footer, content=content_html, sources_block=sources_block,
+            wa=WHATSAPP_NUMBER, wa_text=wa_text, lang=lang,
+            cta_note=cta["cta_note"], cta_label=cta["cta_label"], back_label=cta["back_label"],
         )
-        with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+        with open(os.path.join(out_dir, f"{post['slug']}.html"), "w", encoding="utf-8") as f:
             f.write(page)
-        print(f"  wrote blog/{slug}.html")
+        print(f"  wrote blog/{post['slug']}.html")
 
     cards_html = "\n      ".join(
-        BLOG_CARD.format(slug=slug, title=esc(title), meta_desc=esc(meta_desc))
-        for slug, title, meta_desc, *_ in BLOG_POSTS
+        BLOG_CARD.format(slug=post["slug"], title=esc(post["title"]), meta_desc=esc(post["meta_desc"]))
+        for post in all_posts
     )
     index_page = BLOG_INDEX_TEMPLATE.format(
         site_name=SITE_NAME, canonical=f"{BASE_URL}/blog/index.html",
@@ -1668,10 +1713,7 @@ def build_blog_pages(root_dir):
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(index_page)
     print("  wrote blog/index.html")
-
-    with open(os.path.join(root_dir, "hesabim.html"), "w", encoding="utf-8") as f:
-        f.write(HESABIM_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
-    print("wrote hesabim.html")
+    return all_posts
 
 
 DETAIL_LANG_JS = """(function () {
@@ -1731,11 +1773,11 @@ if __name__ == "__main__":
     print("Machine spec pages:")
     build_machine_spec_pages(root_dir)
     print("Blog pages:")
-    build_blog_pages(root_dir)
+    all_blog_posts = build_blog_pages(root_dir)
 
     urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/blog/index.html", "weekly", "0.7"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
-    for slug, *_ in BLOG_POSTS:
-        urls.append((f"{BASE_URL}/blog/{slug}.html", "monthly", "0.6"))
+    for post in all_blog_posts:
+        urls.append((f"{BASE_URL}/blog/{post['slug']}.html", "monthly", "0.6"))
     for slug, *_ in COMPARISONS:
         urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINE_SPECS:
