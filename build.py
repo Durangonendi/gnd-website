@@ -392,6 +392,7 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
       <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
       <a href="{root}blog/index.html" data-tr="Blog">Blog</a>
+      <a href="{root}pazar.html" data-tr="Makine Pazarı">Machine Market</a>
       <a href="{root}kurumsal.html" data-tr="Hakkımızda">About</a>
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
@@ -1395,6 +1396,197 @@ HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
+PAZAR_TERMS_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alım-Satım Kullanım Şartları — {site_name}</title>
+<meta name="description" content="GND Makine Pazarı alım-satım talebi kullanım şartları ve sorumluluk reddi.">
+<link rel="canonical" href="{base_url}/pazar-sartlari.html">
+<link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>Alım-Satım Kullanım Şartları</h1>
+    <p>GND Makine Pazarı üzerinden ilan veya talep oluşturmadan önce lütfen okuyun.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel blog-post-body">
+      <h2>Aracılık Rolü</h2>
+      <p>GND İş Makineleri Sanayi ve Ticaret A.Ş. ("GND"), bu bölümde paylaşılan satış ilanı ve alım taleplerinde yalnızca bilgilendirme ve iletişim aracılığı sağlar. GND, ilan/talep sahibi ile karşı taraf arasında gerçekleşecek alım-satım işleminin tarafı değildir.</p>
+      <h2>Bilgilerin Doğruluğu</h2>
+      <p>İlan veya talep oluşturan kullanıcı, paylaştığı bilgilerin (makine/parça durumu, fiyat, marka/model vb.) doğru ve güncel olduğunu beyan eder. Yanlış veya yanıltıcı bilgi paylaşımından kullanıcı sorumludur.</p>
+      <h2>Fiyat ve Şartlardan Vazgeçmeme</h2>
+      <p>Kullanıcı, ilan veya talebinde belirttiği fiyat ve şartlardan haklı bir neden olmaksızın tek taraflı olarak vazgeçmeyeceğini kabul eder.</p>
+      <h2>Sorumluluk</h2>
+      <p>Taraflar arasında gerçekleşecek alım-satım işleminin hukuki ve mali sorumluluğu (ödeme, teslimat, fatura, garanti, ayıp ve anlaşmazlıklar dahil) tamamen ilgili taraflara aittir. GND, bu süreçte doğabilecek anlaşmazlık, zarar veya kayıplardan sorumlu tutulamaz.</p>
+      <h2>Komisyon</h2>
+      <p>İşlem üzerinden bir komisyon uygulanması durumunda, oran ve şartlar ilgili taraflara işlem öncesinde ayrıca bildirilir.</p>
+      <h2>Yayın Onayı</h2>
+      <p>GND, gönderilen ilan veya talepleri yayınlamadan önce inceler; uygun görmediği içerikleri yayınlamama veya sonradan kaldırma hakkını saklı tutar.</p>
+      <h2>Kişisel Veriler</h2>
+      <p>Paylaştığınız iletişim bilgileri, yalnızca ilgili alım-satım süreciyle ilgili olarak karşı taraf ve GND tarafından iletişim amacıyla kullanılır.</p>
+    </div>
+    <p class="back-link"><a href="pazar.html">← Makine Pazarına Dön</a></p>
+  </div>
+</section>
+
+{footer}
+
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
+</body>
+</html>
+"""
+
+PAZAR_PAGE_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makine Pazarı — Alım / Satım Talebi — {site_name}</title>
+<meta name="description" content="Elinizdeki iş makinesi veya yedek parçayı satmak ya da aradığınız makine için talep oluşturmak istiyorsanız bilgilerinizi bize iletin, sizin adınıza paylaşalım.">
+<link rel="canonical" href="{base_url}/pazar.html">
+<link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="js/analytics.js"></script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>Makine Pazarı</h1>
+    <p>Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.</p>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <div class="category-grid">
+      <div class="category-card"><h3>Ücretsiz İlan</h3><p>Bilgilerinizi paylaşmanın herhangi bir ücreti yoktur.</p></div>
+      <div class="category-card"><h3>Güvenilir ve Şeffaf Süreç</h3><p>Her talep yayınlanmadan önce GND tarafından incelenir.</p></div>
+      <div class="category-card"><h3>Geniş Tedarik Ağı</h3><p>Talebiniz, GND'nin mevcut iletişim ağı üzerinden ilgili taraflara ulaştırılır.</p></div>
+      <div class="category-card"><h3>Hızlı Teslimat</h3><p>Anlaşma sağlanan işlemlerde lojistik süreçlerinde GND yanınızda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div id="pazarLoginPrompt" class="calc-panel" style="display:none">
+      <h3 style="margin-top:0">Talep Oluşturmak İçin Giriş Yapın</h3>
+      <p class="calc-note">İlan veya talep oluşturmak için önce üye girişi yapmanız gerekiyor.</p>
+      <a href="giris.html" class="btn btn-primary" style="width:100%">Giriş Yap / Üye Ol →</a>
+    </div>
+
+    <form id="pazarForm" class="calc-panel" style="display:none">
+      <h3 style="margin-top:0">Talep Oluştur</h3>
+      <div class="condition-toggle" style="margin-bottom:16px">
+        <button type="button" data-turu="satis" class="active">Satış</button>
+        <button type="button" data-turu="alim">Alım Talebi</button>
+      </div>
+      <input type="hidden" id="pazarTuru" value="satis">
+
+      <div class="calc-field">
+        <label for="pazarAdSoyad">Ad Soyad</label>
+        <input type="text" id="pazarAdSoyad" required>
+      </div>
+
+      <div class="calc-field">
+        <label for="pazarTelefon">Telefon</label>
+        <input type="tel" id="pazarTelefon" required placeholder="05xx xxx xx xx">
+      </div>
+
+      <div class="calc-field">
+        <label for="pazarBaslik" id="pazarBaslikLabel">Makine / Parça Adı</label>
+        <input type="text" id="pazarBaslik" required placeholder="Örn: 2019 model mini ekskavatör">
+      </div>
+
+      <div class="calc-field" id="pazarDurumWrap">
+        <label for="pazarDurum">Durumu</label>
+        <select id="pazarDurum">
+          <option value="Sıfır">Sıfır</option>
+          <option value="2. El">2. El</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label for="pazarFiyat" id="pazarFiyatLabel">Fiyat Beklentisi</label>
+        <input type="text" id="pazarFiyat" placeholder="Örn: 850.000 TL veya pazarlıklı">
+      </div>
+
+      <div class="calc-field">
+        <label for="pazarAciklama">Açıklama</label>
+        <textarea id="pazarAciklama" rows="4" placeholder="Marka, model, çalışma saati, konum ve diğer detaylar"></textarea>
+      </div>
+
+      <p class="calc-note">Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.</p>
+
+      <label class="pazar-checkbox">
+        <input type="checkbox" id="pazarOnay1" required>
+        <span>Verdiğim bilgilerin doğru olduğunu ve belirttiğim fiyat/şartlardan haklı bir neden olmaksızın vazgeçmeyeceğimi kabul ediyorum.</span>
+      </label>
+      <label class="pazar-checkbox">
+        <input type="checkbox" id="pazarOnay2" required>
+        <span>Bu işlemden doğabilecek anlaşmazlıklardan şahsen sorumlu olduğumu, GND İş Makineleri'nin yalnızca bilgilendirme/iletişim aracılığı yaptığını ve <a href="pazar-sartlari.html" target="_blank">Kullanım Şartları</a>'nı okuyup kabul ettiğimi onaylıyorum.</span>
+      </label>
+
+      <div id="pazarMsg" class="calc-note"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px">Talebi Gönder</button>
+    </form>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2>Yayındaki Talepler</h2>
+    <div class="condition-toggle" style="margin-bottom:16px">
+      <button type="button" data-filter="all" class="active">Tümü</button>
+      <button type="button" data-filter="satis">Satış</button>
+      <button type="button" data-filter="alim">Alım Talebi</button>
+    </div>
+    <div id="pazarList" class="category-grid"><p>Yükleniyor...</p></div>
+  </div>
+</section>
+
+{footer}
+
+<script src="js/lib/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/advisor-widget.js"></script>
+<script src="js/pazar.js"></script>
+</body>
+</html>
+"""
+
+
+def build_market_pages(root_dir):
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+
+    with open(os.path.join(root_dir, "pazar.html"), "w", encoding="utf-8") as f:
+        f.write(PAZAR_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
+    print("wrote pazar.html")
+
+    with open(os.path.join(root_dir, "pazar-sartlari.html"), "w", encoding="utf-8") as f:
+        f.write(PAZAR_TERMS_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
+    print("wrote pazar-sartlari.html")
+
+
 def build_auth_pages(root_dir):
     wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
     header = HEADER.format(root="", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
@@ -1768,6 +1960,7 @@ if __name__ == "__main__":
     build_calculator_pages(root_dir)
     build_teklif_page(root_dir)
     build_auth_pages(root_dir)
+    build_market_pages(root_dir)
     print("Comparison pages:")
     build_comparison_pages(root_dir)
     print("Machine spec pages:")
@@ -1775,7 +1968,7 @@ if __name__ == "__main__":
     print("Blog pages:")
     all_blog_posts = build_blog_pages(root_dir)
 
-    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/blog/index.html", "weekly", "0.7"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
+    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/blog/index.html", "weekly", "0.7"), (f"{BASE_URL}/pazar.html", "daily", "0.7"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
     for post in all_blog_posts:
         urls.append((f"{BASE_URL}/blog/{post['slug']}.html", "monthly", "0.6"))
     for slug, *_ in COMPARISONS:

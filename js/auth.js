@@ -30,7 +30,7 @@
 
   function siteRoot() {
     // pages under /makineler/, /yedek-parca/, /hizmetler/, /hesaplama-araclari/ are one level deep
-    var deep = /\/(makineler|yedek-parca|hizmetler|hesaplama-araclari)\//.test(window.location.pathname);
+    var deep = /\/(makineler|yedek-parca|hizmetler|hesaplama-araclari|blog)\//.test(window.location.pathname);
     return deep ? "../" : "";
   }
 

@@ -237,6 +237,29 @@ a { color: inherit; text-decoration: none; }
   font-size: 15px;
 }
 .calc-field input:focus, .calc-field select:focus { outline: none; border-color: var(--accent); }
+.calc-field textarea {
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+}
+.calc-field textarea:focus { outline: none; border-color: var(--accent); }
+
+.pazar-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.pazar-checkbox input { margin-top: 3px; flex-shrink: 0; }
+.pazar-checkbox a { color: var(--accent); }
 .calc-result {
   margin-top: 20px;
   padding: 20px;
