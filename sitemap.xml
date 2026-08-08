@@ -2,8 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://gndmachinery.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>https://gndmachinery.com/kurumsal.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/index.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 <url><loc>https://gndmachinery.com/teklif-al.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://gndmachinery.com/giris.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+<url><loc>https://gndmachinery.com/blog/is-makinesi-operator-guvenligi-sik-yapilan-hatalar.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/is-makinesinde-yakit-tasarrufu-operator-aliskanliklari.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/sahte-yedek-parca-nasil-anlasilir.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/yatirim-tesvik-belgesi-is-makinesi-ithalati-vergi-avantajlari.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/is-makinesi-kiralama-sozlesmesi-dikkat-edilmesi-gerekenler.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://gndmachinery.com/blog/makine-kirilmasi-sigortasi-kapsam.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://gndmachinery.com/cat-320-vs-komatsu-pc200.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://gndmachinery.com/jcb-3cx-vs-cat-428.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://gndmachinery.com/cat-d6-vs-komatsu-d65.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

@@ -390,6 +390,7 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
       <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
       <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
+      <a href="{root}blog/index.html" data-tr="Blog">Blog</a>
       <a href="{root}kurumsal.html" data-tr="Hakkımızda">About</a>
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
@@ -1402,6 +1403,272 @@ def build_auth_pages(root_dir):
         f.write(GIRIS_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
     print("wrote giris.html")
 
+
+# (slug, title, meta_desc, date, intro, sections=[(heading, [paragraphs])], sources=[(label, url)])
+# Same sourcing rule as COMPARISONS/MACHINE_SPECS: facts and figures must trace to a
+# real source (government body, official industry association, professional/legal
+# source, or manufacturer/dealer documentation) — never estimated or invented.
+BLOG_POSTS = [
+    ("is-makinesi-operator-guvenligi-sik-yapilan-hatalar",
+     "İş Makinesi Operatöründe En Sık Yapılan 3 Güvenlik Hatası",
+     "Türkiye'de inşaat sektöründeki iş kazası rakamları ve iş makinesi operasyonlarında en sık yapılan 3 güvenlik hatası.",
+     "2026-08-08",
+     "İnşaat sektörü, Türkiye'de ölümlü iş kazalarının önemli bir bölümünün yaşandığı alanlardan biri. Bu yazıda güncel rakamları ve sahada en sık karşılaşılan 3 güvenlik hatasını ele alıyoruz.",
+     [
+         ("Rakamlarla Durum",
+          ["Çalışma ve Sosyal Güvenlik Bakanlığı'na bağlı Güvenli İnşaat platformunun yayınladığı verilere göre 2024 yılında inşaat sektöründe 86.736 iş kazası meydana geldi, 552 çalışan hayatını kaybetti. Sektörün yüz bin çalışanda ölüm oranı (mortalite hızı) 27,7 olarak hesaplandı.",
+           "İnşaat sektörü, Türkiye'deki ölümlü iş kazalarının yaklaşık üçte birinin yaşandığı bir alan. Bu tablo, iş makinesi operasyonlarında güvenliğin neden bir tercih değil, zorunluluk olduğunu açıkça gösteriyor."]),
+         ("1. Sertifikasız veya Yetersiz Eğitimli Operatör",
+          ["İş makinesi kullanımı, sadece makineyi hareket ettirebilmek değil; sahadaki diğer çalışanları, çevredeki yapıları ve makinenin kendisini de gözeten bir sorumluluktur. Sertifikasız ya da yetersiz eğitimli bir operatörün saha koşullarını doğru okuyamaması, kazaların en sık rastlanan nedenlerinden biri."]),
+         ("2. Aksatılan Periyodik Bakım",
+          ["Bakımı aksatılan bir makinede fren, hidrolik sistem veya görüş açısını etkileyen ekipmanlar zamanla güvenlik risk taşımaya başlar. Düzenli bakım, sadece makinenin ömrünü değil, sahadaki güvenliği de doğrudan etkiler."]),
+         ("3. Sahada İş Güvenliği Tedbirlerinin İhmali",
+          ["Baret, uyarı sinyalizasyonu, güvenlik mesafesi gibi temel tedbirlerin atlanması, kaza riskini artırmanın yanında; bir kaza yaşandığında işveren ve saha yöneticisi için hukuki sorumluluk doğurabiliyor."]),
+     ],
+     [("Güvenli İnşaat (ÇSGB) — 2024 Yılı SGK İş Kazası İstatistikleri", "https://guvenliinsaat.csgb.gov.tr/haberler/2024-yili-sgk-is-kazasi-istatistikleri-yayinlandi/")]),
+
+    ("is-makinesinde-yakit-tasarrufu-operator-aliskanliklari",
+     "İş Makinesinde Yakıt Tasarrufu: Operatör Alışkanlıkları Neden Motor Teknolojisinden Daha Önemli?",
+     "İş makinesinde yakıt tüketimini en çok etkileyen faktör operatör alışkanlıkları. Ani hızlanma, rölanti ve doğru vites kullanımı ile yakıt tasarrufu nasıl sağlanır?",
+     "2026-08-08",
+     "Bir makinenin teknik olarak ne kadar verimli ve modern olduğu önemli, ama sürüş alışkanlıkları bilinçsizse bu verimlilik kağıt üzerinde kalır. Yakıt tüketimini en çok etkileyen faktör, çoğu zaman motor teknolojisinden çok operatörün kullanım alışkanlıklarıdır.",
+     [
+         ("Ani Hızlanma ve Sert Kullanım",
+          ["Ani hızlanmalar, sert frenlemeler ve gereksiz gazlama, yakıt tüketimini belirgin şekilde artıran faktörler arasında yer alıyor. Yumuşak ve öngörülü kullanım, aynı işi daha az yakıtla tamamlamayı mümkün kılıyor."]),
+         ("Gereksiz Rölanti Süresi",
+          ["Boşta çalışan motor, iş yapmadan yakıt tüketmeye devam eder. Sahada makinenin gerçekten ihtiyaç duyulmadığı sürelerde rölantide bekletilmesi, uzun vadede ciddi bir yakıt kaybına dönüşebilir."]),
+         ("Doğru Vites ve Mod Kullanımı",
+          ["Yanlış vites seçimi motor devrini gereksiz yükseltip yakıt tüketimini artırabilir. Modern makinelerdeki 'Eco' modu, operatörün agresif gaz kullanımını dahi filtreleyerek motora yalnızca o an gereken optimum yakıtı gönderecek şekilde tasarlanmıştır — ama bu mod da doğru kullanılmadığında beklenen tasarrufu sağlamaz."]),
+         ("Sonuç: Eğitim, Teknolojiden Önce Gelir",
+          ["Doğru kullanım alışkanlıkları kazandırmak amacıyla verilecek operatör eğitimi, tek başına önemli ölçüde yakıt tasarrufu sağlayabilir — üstelik hiçbir ek donanım yatırımı gerektirmeden."]),
+     ],
+     [("PetrolTTS — Yakıt Tüketimi Nasıl Azaltılır? Filo Perspektifi ile Pratik Yöntemler", "https://petroltts.com.tr/yakit-tuketimi-nasil-azaltilir-filo-perspektifi-ile-pratik-yontemler/")]),
+
+    ("sahte-yedek-parca-nasil-anlasilir",
+     "Sahte Yedek Parçayı Bu 5 Yöntemle Tespit Edin",
+     "İş makinesi yedek parçasında sahtecilik riskine karşı hologram, seri numarası, karekod ve fiyat kontrolü ile orijinal parça nasıl anlaşılır?",
+     "2026-08-08",
+     "İş makinesi yedek parçasında sahtecilik, hem makinenin ömrünü kısaltıyor hem de beklenmedik arızalara yol açabiliyor. İşte orijinal parçayı sahtesinden ayırmak için kontrol edebileceğiniz 5 nokta.",
+     [
+         ("1. Hologram ve Güvenlik Etiketleri",
+          ["Orijinal parça ambalajlarında genellikle taklit edilmesi zor hologram etiketleri bulunur. Bu etiketler ışık altında renk değiştirir veya üç boyutlu bir görüntü verir — düz, tek renkli bir etiket şüphe uyandırmalı."]),
+         ("2. Seri Numarası Doğrulama",
+          ["Üretilen parçalar genellikle firmanın veritabanına kayıtlı bir seri numarasıyla işaretlenir. Üreticinin web sitesinde bir doğrulama paneli varsa, seri numarasını buradan sorgulamak mümkün."]),
+         ("3. Karekod / QR Kod Kontrolü",
+          ["Ambalajdaki karekodu mobil uygulamayla okutarak ürünün orijinalliğini üretici veritabanından anlık olarak sorgulayabilirsiniz."]),
+         ("4. Ambalaj ve İşçilik Kalitesi",
+          ["Yazım hataları, soluk renkler, özensiz yapıştırılmış etiketler ve kalitesiz baskı sahtecilik işareti olabilir. Parçanın kendisinde de ağırlık farkı, yüzey işlemi ve boya kalitesi dikkatle incelenmeli."]),
+         ("5. Fiyat ve Satıcı Kontrolü",
+          ["Piyasa ortalamasının belirgin şekilde altındaki teklifler çoğu zaman bir tuzak. Satıcının iletişim bilgilerini, fiziksel adresini ve referanslarını doğrulamak, sahte parça riskini büyük ölçüde azaltır."]),
+     ],
+     [("AloParça — Sahte Yedek Parça Nasıl Anlaşılır?", "https://aloparca.com/blog-detay/sahte-yedek-parca-nasil-anlasilir")]),
+
+    ("yatirim-tesvik-belgesi-is-makinesi-ithalati-vergi-avantajlari",
+     "İş Makinesi İthalatında Yatırım Teşvik Belgesi İle Vergi Avantajları",
+     "Yatırım Teşvik Belgesi kapsamında iş makinesi ithalatında gümrük vergisi muafiyeti ve KDV istisnası nasıl işliyor?",
+     "2026-08-08",
+     "Yatırım Teşvik Belgesi, iş makinesi ithal eden işletmeler için önemli bir maliyet avantajı sunuyor. İşte belgenin sağladığı iki temel destek unsuru.",
+     [
+         ("Gümrük Vergisi Muafiyeti",
+          ["Teşvik belgesi kapsamındaki yatırım malı makine ve teçhizatın ithalatı, yürürlükteki İthalat Rejimi Kararı gereğince ödenmesi gereken gümrük vergisinden muaf tutuluyor. Muafiyetin uygulanabilmesi için ithal edilecek malın 'makine ve teçhizat' niteliği taşıması gerekiyor."]),
+         ("KDV İstisnası",
+          ["Yatırım Teşvik Belgesi sahibi yatırımcı, yurt içi ve yurt dışından yapacağı makine-teçhizat alımlarında KDV ödemiyor. Gümrük vergisi muafiyeti ve KDV istisnası birbirinden bağımsız iki destek unsuru olup, aynı belge kapsamında bir arada uygulanabiliyor."]),
+         ("Önemli: Tutarlar Her Yıl Güncelleniyor",
+          ["Teşvik mevzuatındaki asgari yatırım tutarları ve destek üst sınırları her yıl yeniden değerleme oranına göre güncelleniyor. Bu nedenle bir önceki yıla ait rakamları doğrudan kullanmak yerine, başvuru anındaki güncel tutarları Sanayi ve Teknoloji Bakanlığı kaynaklarından ya da mali müşavirinizden teyit etmeniz gerekiyor."]),
+     ],
+     [("Sun & Sun International — İthal Makine Alımlarında Gümrük Vergisi Muafiyeti Nasıl Kullanılır?", "https://www.sunandsun.com.tr/ithal-makine-alimlarinda-gumruk-vergisi-muafiyeti-nasil-kullanilir/"),
+      ("Yatırım Destek ve Tanıtım Ajansı (T.C. Cumhurbaşkanlığı) — Yatırımlarda Devlet Yardımları Hakkında Karar", "https://www.yatirimadestek.gov.tr/pdf/assets/upload/dosyalar/karar-yatirim_tesvik_uygulamalari.pdf")]),
+
+    ("is-makinesi-kiralama-sozlesmesi-dikkat-edilmesi-gerekenler",
+     "İş Makinesi Kiralama Sözleşmesinde Dikkat Edilmesi Gereken 5 Madde",
+     "İş makinesi kiralarken sözleşmede mutlaka bulunması gereken teslim tutanağı, sorumluluk ve cezai şart maddeleri.",
+     "2026-08-08",
+     "İş makinesi kiralama, doğru sözleşme olmadan hem kiracı hem kiraya veren için risk taşıyor. İşte imzalamadan önce kontrol etmeniz gereken 5 madde.",
+     [
+         ("1. Teslim Tutanağı ve Makine Özellikleri",
+          ["Kiralanan makinenin teknik özellikleri tek tek yazılmalı, hangi durumda (çalışma saati, hasar, aşınma) teslim edildiği fotoğraflarla birlikte tutanağa geçirilmelidir. Bu, sözleşme sonunda yaşanabilecek anlaşmazlıkların önüne geçer."]),
+         ("2. Sözleşmenin Temel Maddeleri",
+          ["Teslim ve iade tarihi, ödeme şekli ve bedeli, tarafların sorumlulukları ve makinenin teslim adresi sözleşmede açıkça yer almalıdır."]),
+         ("3. Sorumluluk ve Sigorta",
+          ["Makinenin yetkisiz, eğitimsiz veya belgesiz personel tarafından ya da amacı dışında kullanılmasından doğabilecek zararlardan genellikle kiracı sorumlu tutulur. Bu sorumluluğun sözleşmede net şekilde tanımlanması önemlidir."]),
+         ("4. Operatörlü Kiralamada Ek Şartlar",
+          ["Makine operatörlü kiralanıyorsa, operatörün sigortalı olduğu ve iş sağlığı-güvenliği ile makine kullanımı konusunda gerekli eğitimleri aldığı sözleşmede teyit edilmelidir."]),
+         ("5. Cezai Şart",
+          ["Makinenin sözleşme süresinden önce erken iadesi ya da sözleşme ihlali durumunda uygulanacak cezai şart, kiraya verenin olası zararını karşılamak için sözleşmeye eklenmelidir."]),
+     ],
+     [("AKKOR Hukuk Bürosu — İş Makinası Kiralama Sözleşmesi", "https://akkor.av.tr/makaleler/is-makinasi-kiralama-sozlesmesi")]),
+
+    ("makine-kirilmasi-sigortasi-kapsam",
+     "Makine Kırılması Sigortası Neleri Kapsar, Neleri Kapsamaz?",
+     "İş makinesi için makine kırılması sigortasının kapsadığı ve kapsam dışı bıraktığı riskler nelerdir?",
+     "2026-08-08",
+     "Makine kırılması sigortası, iş makinenizi beklenmedik teknik arızalara karşı korur — ama her riski kapsamaz. İmza atmadan önce kapsamı doğru anlamak önemli.",
+     [
+         ("Kapsam İçinde Olanlar",
+          ["Türkiye Sigorta Birliği'nin genel şartlarına göre makine kırılması sigortası; işletme kazaları, kusurlu model/imalat/montaj/malzeme, yağlama kusurları, elektrik enerjisinin kısa devre veya voltaj yükselmesinden kaynaklanan hasarları, ayrıca ani ve aşırı ısınma-soğumadan oluşan su çekiçlemesi (su darbesi) hasarlarını kapsar."]),
+         ("Kapsam Dışında Kalanlar",
+          ["Yangın, yangın nedeniyle yapılan söndürme/kurtarma faaliyetleri, deprem, sel-su baskını ile hırsızlık veya hırsızlığa teşebbüsten kaynaklanan zararlar makine kırılması sigortasının kapsamı dışındadır — bu riskler için ayrı bir teminat gerekir."]),
+         ("İş Makineleri İçin Geniş Kasko Seçeneği",
+          ["Ekskavatör, dozer, loader, vinç, forklift gibi hareketli iş makineleri için; yangın, deprem, sel, toprak çökmesi, kaya düşmesi, çarpma, çarpışma, devrilme ve talep halinde hırsızlığı da kapsayan daha geniş bir kasko teminatı ayrıca sağlanabilir."]),
+         ("Poliçeyi İmzalamadan Önce",
+          ["Kapsam maddeleri poliçeden poliçeye farklılık gösterebilir. Genel şartları ve varsa istisnaları sigorta şirketinizle birebir teyit etmeniz, ilerideki bir hasar talebinde sürpriz yaşamamanızı sağlar."]),
+     ],
+     [("Türkiye Sigorta Birliği — Makina Kırılması Sigortası Genel Şartları", "https://www.tsb.org.tr/content/Legislations/Makina_K%C4%B1r%C4%B1lmas%C4%B1_Sigortas%C4%B1_Genel_Sartlar%C4%B1.pdf")]),
+]
+
+BLOG_POST_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} — {site_name}</title>
+<meta name="description" content="{meta_desc}">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="../js/analytics.js"></script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{title}",
+  "description": "{meta_desc}",
+  "datePublished": "{date}",
+  "author": {{"@type": "Organization", "name": "GND İş Makineleri Sanayi ve Ticaret A.Ş."}},
+  "publisher": {{"@type": "Organization", "name": "GND İş Makineleri Sanayi ve Ticaret A.Ş."}},
+  "mainEntityOfPage": "{canonical}"
+}}
+</script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>{title}</h1>
+    <p>{intro}</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel blog-post-body">
+      {content}
+    </div>
+
+    <div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">Kaynaklar</h3>
+      <ul>
+        {sources}
+      </ul>
+    </div>
+
+    <div class="calc-panel" style="margin-top:24px">
+      <p class="calc-note">İhtiyacınıza uygun makine veya yedek parça tedariki için doğrudan bize ulaşın.</p>
+      <a href="https://wa.me/{wa}?text={wa_text}" class="btn btn-primary" style="width:100%" target="_blank" rel="noopener">WhatsApp'tan Bize Ulaşın →</a>
+    </div>
+
+    <p class="back-link"><a href="index.html">← Tüm Yazılar</a></p>
+  </div>
+</section>
+
+{footer}
+
+<script src="../js/lib/supabase.min.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/advisor-widget.js"></script>
+</body>
+</html>
+"""
+
+BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — {site_name}</title>
+<meta name="description" content="İş makinesi sahipliği, tedariki, ithalatı ve bakımı hakkında güncel ve kaynaklı yazılar.">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="../js/analytics.js"></script>
+</head>
+<body>
+
+{header}
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1>Blog</h1>
+    <p>İş makinesi sahipliği, tedariki, ithalatı ve bakımı hakkında güncel ve kaynaklı yazılar.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="category-grid">
+      {cards}
+    </div>
+  </div>
+</section>
+
+{footer}
+
+<script src="../js/lib/supabase.min.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/advisor-widget.js"></script>
+</body>
+</html>
+"""
+
+BLOG_CARD = """<div class="category-card">
+        <h3><a href="{slug}.html">{title}</a></h3>
+        <p>{meta_desc}</p>
+      </div>"""
+
+
+def build_blog_pages(root_dir):
+    out_dir = os.path.join(root_dir, "blog")
+    os.makedirs(out_dir, exist_ok=True)
+    wa_generic = wa_link_text("Hi, I'd like more information about GND Machinery.")
+    header = HEADER.format(root="../", wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+    footer = FOOTER.format(wa=WHATSAPP_NUMBER, wa_generic=wa_generic)
+
+    for slug, title, meta_desc, date, intro, sections, sources in BLOG_POSTS:
+        content_parts = []
+        for heading, paragraphs in sections:
+            content_parts.append(f"<h2>{esc(heading)}</h2>")
+            for p in paragraphs:
+                content_parts.append(f"<p>{esc(p)}</p>")
+        content_html = "\n      ".join(content_parts)
+        sources_html = "\n        ".join(
+            f'<li><a href="{url}" target="_blank" rel="noopener">{esc(label)}</a></li>' for label, url in sources
+        )
+        wa_text = wa_link_text(f"Hi, I have a question after reading '{title}'.")
+
+        page = BLOG_POST_TEMPLATE.format(
+            title=esc(title), site_name=SITE_NAME, meta_desc=esc(meta_desc),
+            canonical=f"{BASE_URL}/blog/{slug}.html", date=date, intro=esc(intro),
+            header=header, footer=footer, content=content_html, sources=sources_html,
+            wa=WHATSAPP_NUMBER, wa_text=wa_text,
+        )
+        with open(os.path.join(out_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(page)
+        print(f"  wrote blog/{slug}.html")
+
+    cards_html = "\n      ".join(
+        BLOG_CARD.format(slug=slug, title=esc(title), meta_desc=esc(meta_desc))
+        for slug, title, meta_desc, *_ in BLOG_POSTS
+    )
+    index_page = BLOG_INDEX_TEMPLATE.format(
+        site_name=SITE_NAME, canonical=f"{BASE_URL}/blog/index.html",
+        header=header, footer=footer, cards=cards_html,
+    )
+    with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(index_page)
+    print("  wrote blog/index.html")
+
     with open(os.path.join(root_dir, "hesabim.html"), "w", encoding="utf-8") as f:
         f.write(HESABIM_PAGE_TEMPLATE.format(site_name=SITE_NAME, base_url=BASE_URL, header=header, footer=footer))
     print("wrote hesabim.html")
@@ -1463,8 +1730,12 @@ if __name__ == "__main__":
     build_comparison_pages(root_dir)
     print("Machine spec pages:")
     build_machine_spec_pages(root_dir)
+    print("Blog pages:")
+    build_blog_pages(root_dir)
 
-    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
+    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/blog/index.html", "weekly", "0.7"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
+    for slug, *_ in BLOG_POSTS:
+        urls.append((f"{BASE_URL}/blog/{slug}.html", "monthly", "0.6"))
     for slug, *_ in COMPARISONS:
         urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINE_SPECS:
