@@ -390,7 +390,7 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
       <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
       <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
-      <a href="{root}index.html#about" data-tr="Hakkımızda">About</a>
+      <a href="{root}kurumsal.html" data-tr="Hakkımızda">About</a>
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
     <div class="header-actions">
@@ -1464,7 +1464,7 @@ if __name__ == "__main__":
     print("Machine spec pages:")
     build_machine_spec_pages(root_dir)
 
-    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
+    urls = [(f"{BASE_URL}/", "weekly", "1.0"), (f"{BASE_URL}/kurumsal.html", "monthly", "0.6"), (f"{BASE_URL}/teklif-al.html", "monthly", "0.8"), (f"{BASE_URL}/giris.html", "yearly", "0.3")]
     for slug, *_ in COMPARISONS:
         urls.append((f"{BASE_URL}/{slug}.html", "monthly", "0.7"))
     for slug, *_ in MACHINE_SPECS:

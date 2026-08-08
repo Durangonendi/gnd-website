@@ -53,7 +53,7 @@
       <a href="#spareparts" data-i18n="nav_spareparts">Yedek Parça</a>
       <a href="#areas" data-i18n="nav_areas">Hizmetler</a>
       <a href="#calculators" data-i18n="nav_calculators">Hesaplama Araçları</a>
-      <a href="#about" data-i18n="nav_about">Hakkımızda</a>
+      <a href="kurumsal.html" data-i18n="nav_about">Hakkımızda</a>
       <a href="#contact" data-i18n="nav_contact">İletişim</a>
     </nav>
     <div class="header-actions">
@@ -106,89 +106,43 @@
   </div>
 </section>
 
+<section id="categories" class="categories-section">
+  <div class="section-inner">
+    <h2 data-i18n="categories_title">Makine Kategorilerimiz</h2>
+    <p class="section-sub" data-i18n="categories_subtitle">Her kategori için detaylı teklif almak üzere doğrudan WhatsApp üzerinden bize ulaşın.</p>
+    <div class="category-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="category-search-input" data-i18n-placeholder="category_search_placeholder" placeholder="Kategori ara...">
+    </div>
+    <div class="condition-toggle">
+      <button type="button" data-condition="new" class="active"><span data-i18n="condition_new">Sıfır</span></button>
+      <button type="button" data-condition="used"><span data-i18n="condition_used">2. El</span></button>
+    </div>
+    <div id="group-filter" class="group-filter"></div>
+    <div id="category-grid" class="category-grid"></div>
+    <p id="category-no-results" class="section-sub hidden-init" data-i18n="category_no_results">Aramanızla eşleşen kategori bulunamadı.</p>
+  </div>
+</section>
+
+<section id="spareparts" class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2 data-i18n="spareparts_title">Yedek Parça</h2>
+    <p class="section-sub" data-i18n="spareparts_subtitle">Filtre, mekanik, hidrolik grupları ve ataşmanlar için bize ulaşın.</p>
+    <div id="spareparts-grid" class="category-grid"></div>
+  </div>
+</section>
+
 <section id="about" class="about-section">
   <div class="section-inner about-inner">
     <div class="about-text">
       <h2 data-i18n="about_title">Hakkımızda</h2>
       <p data-i18n="about_p1">GND İş Makineleri Sanayi ve Ticaret A.Ş., iş makineleri, endüstriyel ekipmanlar ve uluslararası ticaret alanında faaliyet gösteren, müşterilerine güvenilir tedarik çözümleri sunmayı hedefleyen bir ticaret ve çözüm ortağıdır.</p>
-      <p data-i18n="about_p2">Şirketimiz; inşaat, madencilik, altyapı, enerji ve ağır sanayi sektörlerinin ihtiyaç duyduğu makine ve ekipmanların temini, üretici araştırmaları, uluslararası iş geliştirme ve tedarik süreçlerinin yönetimi konularında faaliyet göstermektedir.</p>
-      <p data-i18n="about_p3">Geniş iş ağı, teknolojiyi etkin kullanan çalışma modeli ve çözüm odaklı yaklaşımıyla; üreticiler ile alıcılar arasında sürdürülebilir ve güvenilir iş birlikleri kurmayı amaçlamaktadır.</p>
+      <p><a href="kurumsal.html" data-i18n="about_more_link">Kurucumuz, vizyonumuz ve şirket yolculuğumuz hakkında daha fazla bilgi →</a></p>
     </div>
     <div class="about-stats">
       <div class="stat"><span class="stat-num" id="stat-category-count">–</span><span data-i18n="stat_categories">Makine Kategorisi</span></div>
       <div class="stat"><span class="stat-num">Global</span><span data-i18n="stat_reach">Tedarik Ağı</span></div>
       <div class="stat"><span class="stat-num" data-i18n="stat_support_num">Hızlı</span><span data-i18n="stat_support">WhatsApp Desteği</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="founder" class="founder-section">
-  <div class="section-inner founder-inner">
-    <div class="founder-photo">
-      <img src="assets/duran-founder.jpg" alt="Duran Gönendi - GND İş Makineleri Kurucusu" width="220" height="220">
-    </div>
-    <div class="founder-text">
-      <h2 data-i18n="founder_title">Kurucudan</h2>
-      <h3 data-i18n="founder_name">Duran Gönendi</h3>
-      <p class="founder-role" data-i18n="founder_role">Kurucu ve Yönetim Kurulu Başkanı</p>
-      <p data-i18n="founder_bio">Duran Gönendi, iş makineleri sektöründeki girişimcilik yolculuğuna 2019 yılında şahıs firmasıyla başlamıştır. Sektörde edindiği deneyim ve oluşturduğu ticari birikim doğrultusunda faaliyetlerini geliştirerek 2024 yılında GND İş Makineleri Sanayi ve Ticaret A.Ş.'yi kurmuştur.</p>
-      <p data-i18n="founder_bio2">Günümüzde şirketin yönetim ve gelişim süreçlerine liderlik eden Duran Gönendi; güvenilirlik, kalite ve müşteri memnuniyetini temel alan hizmet anlayışıyla GND'yi iş makineleri ve uluslararası tedarik alanında güçlü bir marka hâline getirmeyi hedeflemektedir.</p>
-      <div class="founder-links">
-        <a href="https://www.facebook.com/IYAZARI/" target="_blank" rel="noopener" data-i18n="founder_facebook">Facebook'ta takip et →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="vision-mission" class="vm-section">
-  <div class="section-inner vm-grid">
-    <div class="vm-card">
-      <h3 data-i18n="vision_title">Vizyonumuz</h3>
-      <p data-i18n="vision_text">Ağır iş makineleri sektöründe, güvenilirlik ve global erişimi bir araya getiren öncü bir tedarik markası olmak.</p>
-    </div>
-    <div class="vm-card">
-      <h3 data-i18n="mission_title">Misyonumuz</h3>
-      <p data-i18n="mission_text">Müşterilerimizin ihtiyacını doğru anlayıp, geniş üretici ağımızla en uygun makine ve yedek parça çözümünü hızlı ve şeffaf şekilde sunmak.</p>
-    </div>
-  </div>
-</section>
-
-<section id="values" class="values-section">
-  <div class="section-inner">
-    <h2 data-i18n="values_title">Değerlerimiz</h2>
-    <div class="values-grid">
-      <span class="value-pill" data-i18n="value_1">Güvenilirlik</span>
-      <span class="value-pill" data-i18n="value_2">Şeffaflık</span>
-      <span class="value-pill" data-i18n="value_3">Etik Ticaret</span>
-      <span class="value-pill" data-i18n="value_4">Müşteri Memnuniyeti</span>
-      <span class="value-pill" data-i18n="value_5">Sürekli Gelişim</span>
-      <span class="value-pill" data-i18n="value_6">Yenilikçilik</span>
-      <span class="value-pill" data-i18n="value_7">Kalite</span>
-      <span class="value-pill" data-i18n="value_8">Sürdürülebilirlik</span>
-    </div>
-  </div>
-</section>
-
-<section id="history" class="history-section">
-  <div class="section-inner">
-    <h2 data-i18n="history_title">Yolculuğumuz</h2>
-    <p class="section-sub" data-i18n="history_subtitle">Kuruluşumuzdan bugüne büyüme hikayemiz.</p>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h4 data-i18n="history_step1_title">Kuruluş</h4>
-        <p data-i18n="history_step1_text">GND İş Makineleri'nin temelleri atıldı.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h4 data-i18n="history_step2_title">Büyüme</h4>
-        <p data-i18n="history_step2_text">Üretici ağımızı ve makine kategorilerimizi genişlettik.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <h4 data-i18n="history_step3_title">Bugün</h4>
-        <p data-i18n="history_step3_text">Global ölçekte hafriyat ve madencilik sektörüne hizmet veriyoruz.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -307,32 +261,6 @@
   </div>
 </section>
 
-<section id="categories" class="categories-section">
-  <div class="section-inner">
-    <h2 data-i18n="categories_title">Makine Kategorilerimiz</h2>
-    <p class="section-sub" data-i18n="categories_subtitle">Her kategori için detaylı teklif almak üzere doğrudan WhatsApp üzerinden bize ulaşın.</p>
-    <div class="category-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="text" id="category-search-input" data-i18n-placeholder="category_search_placeholder" placeholder="Kategori ara...">
-    </div>
-    <div class="condition-toggle">
-      <button type="button" data-condition="new" class="active"><span data-i18n="condition_new">Sıfır</span></button>
-      <button type="button" data-condition="used"><span data-i18n="condition_used">2. El</span></button>
-    </div>
-    <div id="group-filter" class="group-filter"></div>
-    <div id="category-grid" class="category-grid"></div>
-    <p id="category-no-results" class="section-sub hidden-init" data-i18n="category_no_results">Aramanızla eşleşen kategori bulunamadı.</p>
-  </div>
-</section>
-
-<section id="spareparts" class="categories-section spareparts-section">
-  <div class="section-inner">
-    <h2 data-i18n="spareparts_title">Yedek Parça</h2>
-    <p class="section-sub" data-i18n="spareparts_subtitle">Filtre, mekanik, hidrolik grupları ve ataşmanlar için bize ulaşın.</p>
-    <div id="spareparts-grid" class="category-grid"></div>
-  </div>
-</section>
-
 <section id="why" class="why-section">
   <div class="section-inner">
     <h2 data-i18n="why_title">Neden GND?</h2>
@@ -386,7 +314,7 @@
 <footer class="site-footer">
   <div class="section-inner footer-inner">
     <div>© <span id="footer-year"></span> GND İş Makineleri</div>
-    <div class="footer-note" data-i18n="footer_note">Bu site içeriği yer tutucu görsellerle hazırlanmıştır.</div>
+    <div class="footer-note" data-i18n="footer_note">Ağır iş makinesi ve yedek parça küresel tedarikçisi.</div>
   </div>
 </footer>
 
