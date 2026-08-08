@@ -6,7 +6,7 @@
   var isSending = false;
 
   var WELCOME_TEXT =
-    "Merhaba! Ben GND'nin AI Makine Danışmanıyım. Hangi iş için makine arıyorsun, bütçen ve tercih ettiğin sınıf nedir? Sana genel bir yönlendirme yapabilirim.";
+    "Merhaba! Ben GND'nin AI Makine Danışmanıyım. Sana uygun makineyi önerebilir, ayrıca makinende yaşadığın arıza/bakım belirtileri için genel yönlendirme yapabilirim. Nasıl yardımcı olabilirim?";
 
   function el(tag, attrs, children) {
     var e = document.createElement(tag);
