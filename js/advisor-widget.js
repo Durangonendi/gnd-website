@@ -66,9 +66,10 @@
   }
 
   function buildWidget() {
+    var toggleLabel = localStorage.getItem("gnd-site-lang") === "tr" ? "AI Danışman" : "AI Advisor";
     var toggleBtn = el("button", { class: "advisor-toggle-btn", type: "button", "aria-label": "AI Makine Danışmanı" }, [
       el("span", { text: "🤖" }),
-      el("span", { text: "AI Danışman" }),
+      el("span", { text: toggleLabel }),
     ]);
 
     var panel = el("div", { class: "advisor-panel" });
