@@ -389,10 +389,15 @@ HEADER = """<header class="site-header">
       <a href="{root}index.html#home" data-tr="Ana Sayfa">Home</a>
       <a href="{root}index.html#categories" data-tr="Makineler">Machines</a>
       <a href="{root}index.html#spareparts" data-tr="Yedek Parça">Spare Parts</a>
-      <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
-      <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
-      <a href="{root}blog/index.html" data-tr="Blog">Blog</a>
-      <a href="{root}pazar.html" data-tr="Makine Pazarı">Machine Market</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" data-tr="Daha Fazla ▾">More ▾</button>
+        <div class="nav-dropdown-menu">
+          <a href="{root}index.html#areas" data-tr="Hizmetler">Services</a>
+          <a href="{root}index.html#calculators" data-tr="Hesaplama Araçları">Calculators</a>
+          <a href="{root}blog/index.html" data-tr="Blog">Blog</a>
+          <a href="{root}pazar.html" data-tr="Makine Pazarı">Machine Market</a>
+        </div>
+      </div>
       <a href="{root}kurumsal.html" data-tr="Hakkımızda">About</a>
       <a href="{root}index.html#contact" data-tr="İletişim">Contact</a>
     </nav>
