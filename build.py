@@ -1784,12 +1784,12 @@ BLOG_POST_TEMPLATE = """<!DOCTYPE html>
     </div>
 
     <p class="back-link"><a href="index.html">{back_label}</a></p>
-<script src="../js/detail-lang.js"></script>
   </div>
 </section>
 
 {footer}
 
+<script src="../js/detail-lang.js"></script>
 <script src="../js/lib/supabase.min.js"></script>
 <script src="../js/auth.js"></script>
 <script src="../js/advisor-widget.js"></script>
@@ -1833,12 +1833,12 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
     <div class="category-grid">
       {cards}
     </div>
-<script src="../js/detail-lang.js"></script>
   </div>
 </section>
 
 {footer}
 
+<script src="../js/detail-lang.js"></script>
 <script src="../js/lib/supabase.min.js"></script>
 <script src="../js/auth.js"></script>
 <script src="../js/advisor-widget.js"></script>
