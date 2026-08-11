@@ -434,6 +434,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <title data-tr="{title_tr}">{name} | {title_suffix} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="{root}css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="{root}js/analytics.js"></script>
@@ -672,6 +673,7 @@ CALC_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>{name} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="../css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="../js/analytics.js"></script>
@@ -1026,6 +1028,7 @@ MACHINE_SPEC_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>{name} Teknik Özellikler — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1119,6 +1122,7 @@ COMPARISON_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>{title} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1237,6 +1241,7 @@ TEKLIF_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>Teklif Talebi Oluştur — {site_name}</title>
 <meta name="description" content="İhtiyacınız olan makineyi seçin, saniyeler içinde kendi teklif talep özetinizi PDF olarak indirin veya WhatsApp'tan gönderin.">
 <link rel="canonical" href="{base_url}/teklif-al.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1315,6 +1320,7 @@ GIRIS_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>Giriş Yap / Kayıt Ol — {site_name}</title>
 <meta name="description" content="GND Machinery müşteri hesabınıza giriş yapın veya yeni hesap oluşturun.">
 <link rel="canonical" href="{base_url}/giris.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1366,6 +1372,7 @@ HESABIM_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title>Hesabım — {site_name}</title>
 <meta name="description" content="GND Machinery hesabınız ve önceki teklif talepleriniz.">
 <link rel="canonical" href="{base_url}/hesabim.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1409,6 +1416,7 @@ PAZAR_TERMS_TEMPLATE = """<!DOCTYPE html>
 <title data-tr="Alım-Satım Kullanım Şartları — {site_name}">Buy/Sell Terms of Use — {site_name}</title>
 <meta name="description" content="GND Machine Market buy/sell request terms of use and liability disclaimer.">
 <link rel="canonical" href="{base_url}/pazar-sartlari.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1464,6 +1472,7 @@ PAZAR_PAGE_TEMPLATE = """<!DOCTYPE html>
 <title data-tr="Makine Pazarı — Alım / Satım Talebi — {site_name}">Machine Market — Buy/Sell Request — {site_name}</title>
 <meta name="description" content="Tell us about the machine or spare part you want to sell, or the one you're looking for, and we'll publish it on your behalf.">
 <link rel="canonical" href="{base_url}/pazar.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="js/analytics.js"></script>
@@ -1728,6 +1737,7 @@ BLOG_POST_TEMPLATE = """<!DOCTYPE html>
 <title>{title} — {site_name}</title>
 <meta name="description" content="{meta_desc}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="../css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="../js/analytics.js"></script>
@@ -1796,6 +1806,7 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
 <title>Blog — {site_name}</title>
 <meta name="description" content="İş makinesi sahipliği, tedariki, ithalatı ve bakımı hakkında güncel ve kaynaklı yazılar.">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="../css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
 <script src="../js/analytics.js"></script>
