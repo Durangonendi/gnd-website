@@ -145,7 +145,11 @@ const TRANSLATIONS = {
     footer_note: "Ağır iş makinesi ve yedek parça küresel tedarikçisi.",
     quote_intro: "Merhaba, ",
     quote_middle: " için teklif almak istiyorum.",
-    quote_generic: "Merhaba, GND İş Makineleri hakkında bilgi almak istiyorum."
+    quote_generic: "Merhaba, GND İş Makineleri hakkında bilgi almak istiyorum.",
+    fraud_notice_title: "Kamuoyunun Dikkatine",
+    fraud_notice_p1: "Son zamanlarda dijital platformlarda ve sosyal medyada, GND İş Makineleri markası ve kurumsal kimliği taklit edilerek yanıltıcı içerikler paylaşılabilmektedir.",
+    fraud_notice_p2: "Tek resmi web sitemiz gndmachinery.com'dur. Tek resmi iletişim/WhatsApp numaramız +90 555 070 80 34'tür. Bu adres ve numara dışındaki hiçbir teklif, kampanya veya ödeme talebine itibar etmeyiniz; kişisel veya finansal bilgilerinizi paylaşmayınız.",
+    fraud_notice_btn: "Anladım"
   },
   en: {
     nav_home: "Home",
@@ -291,7 +295,11 @@ const TRANSLATIONS = {
     footer_note: "Global supplier of heavy equipment and spare parts.",
     quote_intro: "Hi, I'd like a quote for ",
     quote_middle: ".",
-    quote_generic: "Hi, I'd like more information about GND İş Makineleri."
+    quote_generic: "Hi, I'd like more information about GND İş Makineleri.",
+    fraud_notice_title: "Public Notice",
+    fraud_notice_p1: "Recently, misleading content impersonating the GND İş Makineleri brand and corporate identity has been shared on digital platforms and social media.",
+    fraud_notice_p2: "Our only official website is gndmachinery.com. Our only official contact/WhatsApp number is +90 555 070 80 34. Do not trust any offer, campaign, or payment request outside this website and number, and do not share personal or financial information.",
+    fraud_notice_btn: "Understood"
   }
 };
 

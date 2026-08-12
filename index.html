@@ -58,6 +58,28 @@
 </head>
 <body>
 
+<div id="fraud-notice-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,12,18,0.92);color:#fff;align-items:center;justify-content:center;padding:24px;">
+  <div style="max-width:640px;text-align:center;">
+    <div style="font-size:20px;font-weight:800;margin-bottom:20px;" data-i18n="fraud_notice_title">Public Notice</div>
+    <div style="font-size:15px;line-height:1.8;color:#e8e8e8;margin-bottom:16px;" data-i18n="fraud_notice_p1">Recently, misleading content impersonating the GND İş Makineleri brand and corporate identity has been shared on digital platforms and social media.</div>
+    <div style="font-size:15px;line-height:1.8;color:#e8e8e8;margin-bottom:16px;" data-i18n="fraud_notice_p2">Our only official website is gndmachinery.com. Our only official contact/WhatsApp number is +90 555 070 80 34. Do not trust any offer, campaign, or payment request outside this website and number, and do not share personal or financial information.</div>
+    <button id="fraud-notice-close" style="background:#2ECC71;color:#0a0c12;border:none;border-radius:6px;padding:12px 32px;font-weight:700;font-size:14px;cursor:pointer;" data-i18n="fraud_notice_btn">Understood</button>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = "gnd-fraud-notice-seen-v1";
+  var overlay = document.getElementById("fraud-notice-overlay");
+  if (!localStorage.getItem(KEY)) {
+    overlay.style.display = "flex";
+  }
+  document.getElementById("fraud-notice-close").addEventListener("click", function () {
+    localStorage.setItem(KEY, "1");
+    overlay.style.display = "none";
+  });
+})();
+</script>
+
 <header class="site-header">
   <div class="header-inner">
     <a href="#home" class="logo"><img src="assets/logo-header.png" width="160" height="160" alt="GND İş Makineleri" /></a>
