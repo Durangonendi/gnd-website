@@ -95,6 +95,10 @@
     doc.text("WhatsApp: +90 555 070 80 34   ·   gndmachinery.com", 15, y);
 
     doc.save("GND_Teklif_Talebi_" + data.adSoyad.replace(/\s+/g, "_") + ".pdf");
+
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", { lead_source: "teklif_formu", page_path: window.location.pathname });
+    }
   }
 
   async function saveToAccountIfLoggedIn(data) {

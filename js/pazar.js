@@ -148,6 +148,9 @@
       msgEl.textContent = getLang() === "tr"
         ? "Talebiniz alındı. İncelendikten sonra onaylanırsa yayına alınacaktır."
         : "Your request has been received. It will be published once reviewed and approved.";
+      if (typeof gtag === "function") {
+        gtag("event", "generate_lead", { lead_source: "makine_pazari", page_path: window.location.pathname });
+      }
       form.reset();
       setTuru("satis");
     });
