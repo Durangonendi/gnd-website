@@ -27,6 +27,9 @@ function applyTranslations(lang) {
   document.getElementById("header-whatsapp-btn").href = buildWhatsAppLink(dict.quote_generic);
   document.getElementById("contact-whatsapp-btn").href = buildWhatsAppLink(dict.quote_generic);
   document.getElementById("floating-whatsapp-btn").href = buildWhatsAppLink(dict.quote_generic);
+
+  const intromakBtn = document.getElementById("intromak-quote-btn");
+  if (intromakBtn) intromakBtn.href = buildWhatsAppLink(dict.quote_intromak);
 }
 
 function conditionLabel(lang) {
