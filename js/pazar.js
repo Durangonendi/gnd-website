@@ -60,12 +60,20 @@
     }
     listEl.innerHTML = filtered.map(function (r) {
       var badge = r.islem_turu === "satis" ? t("badgeSatis") : t("badgeAlim");
+      var aciklama = r.aciklama || "";
+      var imgMatch = aciklama.match(/^\[img:([^\]]+)\]\s*/);
+      var imgHtml = "";
+      if (imgMatch) {
+        imgHtml = '<div class="category-photo-wrap"><img class="category-photo" src="' + escapeHtml(imgMatch[1]) + '" loading="lazy"></div>';
+        aciklama = aciklama.slice(imgMatch[0].length);
+      }
       return (
         '<div class="category-card">' +
+        imgHtml +
         "<h3>" + escapeHtml(r.baslik) + "</h3>" +
         '<p><strong>' + badge + '</strong>' + (r.durum_bilgisi ? " · " + escapeHtml(r.durum_bilgisi) : "") + "</p>" +
         (r.fiyat ? "<p>" + escapeHtml(r.fiyat) + "</p>" : "") +
-        (r.aciklama ? "<p>" + escapeHtml(r.aciklama) + "</p>" : "") +
+        (aciklama ? "<p>" + escapeHtml(aciklama) + "</p>" : "") +
         '<a class="btn btn-primary" style="width:100%;margin-top:8px" target="_blank" rel="noopener" href="https://wa.me/905550708034?text=' +
         encodeURIComponent("Merhaba, \"" + r.baslik + "\" ilanı/talebi hakkında bilgi almak istiyorum.") +
         '">' + t("waBtn") + "</a>" +
