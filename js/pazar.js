@@ -6,8 +6,8 @@
   var currentFilter = "all";
 
   var TXT = {
-    baslikSatis: { tr: "Makine / Parça Adı", en: "Machine / Part Name" },
-    baslikAlim: { tr: "Aradığınız Makine / Parça", en: "Machine / Part You're Looking For" },
+    baslikSatis: { tr: "Makine / Ataşman / Parça Adı", en: "Machine / Attachment / Part Name" },
+    baslikAlim: { tr: "Aradığınız Makine / Ataşman / Parça", en: "Machine / Attachment / Part You're Looking For" },
     fiyatSatis: { tr: "Fiyat Beklentisi", en: "Expected Price" },
     fiyatAlim: { tr: "Bütçeniz", en: "Your Budget" },
     badgeSatis: { tr: "Satış", en: "Sell" },

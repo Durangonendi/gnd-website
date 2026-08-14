@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-tr="Makine Pazarı — Alım / Satım Talebi — GND Machinery">Machine Market — Buy/Sell Request — GND Machinery</title>
-<meta name="description" content="Tell us about the machine or spare part you want to sell, or the one you're looking for, and we'll publish it on your behalf.">
+<meta name="description" content="Tell us about the machine, attachment or spare part you want to sell, or the one you're looking for, and we'll publish it on your behalf.">
 <link rel="canonical" href="https://gndmachinery.com/pazar.html">
 <link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
@@ -48,7 +48,12 @@
 <section class="hero category-hero">
   <div class="hero-inner">
     <h1 data-tr="Makine Pazarı">Machine Market</h1>
-    <p data-tr="Elinizdeki iş makinesi veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.">Do you want to sell a machine or spare part you own, or are you looking for one? Send us the details and we'll publish it on your behalf.</p>
+    <p data-tr="Elinizdeki iş makinesi, ataşman veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir şey mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.">Do you want to sell a machine, attachment or spare part you own, or are you looking for one? Send us the details and we'll publish it on your behalf.</p>
+    <div class="pazar-type-chips">
+      <span data-tr="Makine">Machine</span>
+      <span data-tr="Ataşman">Attachment</span>
+      <span data-tr="Yedek Parça">Spare Part</span>
+    </div>
   </div>
 </section>
 
@@ -90,8 +95,8 @@
       </div>
 
       <div class="calc-field">
-        <label for="pazarBaslik" id="pazarBaslikLabel" data-tr="Makine / Parça Adı">Machine / Part Name</label>
-        <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör" placeholder="e.g. 2019 model mini excavator">
+        <label for="pazarBaslik" id="pazarBaslikLabel" data-tr="Makine / Ataşman / Parça Adı">Machine / Attachment / Part Name</label>
+        <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör, hidrolik kırıcı, kova tırnağı..." placeholder="e.g. 2019 model mini excavator, hydraulic breaker, bucket tooth...">
       </div>
 
       <div class="calc-field" id="pazarDurumWrap">
@@ -157,6 +162,6 @@
 <script src="js/lib/supabase.min.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/advisor-widget.js"></script>
-<script src="js/pazar.js"></script>
+<script src="js/pazar.js?v=2"></script>
 </body>
 </html>
