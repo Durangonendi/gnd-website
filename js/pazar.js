@@ -62,15 +62,16 @@
       var badge = r.islem_turu === "satis" ? t("badgeSatis") : t("badgeAlim");
       var aciklama = r.aciklama || "";
       var imgMatch = aciklama.match(/^\[img:([^\]]+)\]\s*/);
-      var imgHtml = "";
+      var titleHtml;
       if (imgMatch) {
-        imgHtml = '<div class="category-photo-wrap"><img class="category-photo" src="' + escapeHtml(imgMatch[1]) + '" loading="lazy"></div>';
+        titleHtml = '<div class="pazar-card-head"><img class="pazar-card-icon" src="' + escapeHtml(imgMatch[1]) + '" loading="lazy"><h3>' + escapeHtml(r.baslik) + "</h3></div>";
         aciklama = aciklama.slice(imgMatch[0].length);
+      } else {
+        titleHtml = "<h3>" + escapeHtml(r.baslik) + "</h3>";
       }
       return (
         '<div class="category-card">' +
-        imgHtml +
-        "<h3>" + escapeHtml(r.baslik) + "</h3>" +
+        titleHtml +
         '<p><strong>' + badge + '</strong>' + (r.durum_bilgisi ? " · " + escapeHtml(r.durum_bilgisi) : "") + "</p>" +
         (r.fiyat ? "<p>" + escapeHtml(r.fiyat) + "</p>" : "") +
         (aciklama ? "<p>" + escapeHtml(aciklama) + "</p>" : "") +
