@@ -25,3 +25,12 @@ create policy "Anyone can view approved requests"
 create policy "Users can insert own requests"
   on market_requests for insert
   with check (auth.uid() = user_id);
+
+create policy "Users can update own requests"
+  on market_requests for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+create policy "Users can delete own requests"
+  on market_requests for delete
+  using (auth.uid() = user_id);
