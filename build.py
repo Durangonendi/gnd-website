@@ -411,6 +411,7 @@ HEADER = """<header class="site-header">
         <span data-tr="Teklif Al">Get a Quote</span>
       </a>
     </div>
+    <button type="button" class="nav-toggle" aria-label="Menu">☰</button>
   </div>
 </header>"""
 

@@ -76,5 +76,19 @@
         setTimeout(renderAuthNav, 0);
       });
     }
+
+    var navToggle = document.querySelector(".nav-toggle");
+    var header = document.querySelector(".site-header");
+    if (navToggle && header) {
+      navToggle.addEventListener("click", function () {
+        header.classList.toggle("nav-open");
+      });
+    }
+    document.querySelectorAll(".nav-dropdown-toggle").forEach(function (toggle) {
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        toggle.closest(".nav-dropdown").classList.toggle("dd-open");
+      });
+    });
   });
 })();

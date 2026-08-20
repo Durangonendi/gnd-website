@@ -66,11 +66,54 @@
   }
 
   function buildWidget() {
-    var toggleLabel = localStorage.getItem("gnd-site-lang") === "tr" ? "AI Danışman" : "AI Advisor";
-    var toggleBtn = el("button", { class: "advisor-toggle-btn", type: "button", "aria-label": "AI Makine Danışmanı" }, [
-      el("span", { text: "🤖" }),
-      el("span", { text: toggleLabel }),
+    var lang = localStorage.getItem("gnd-site-lang") === "en" ? "en" : "tr";
+    var isTR = lang === "tr";
+
+    var fabLabel = isTR ? "Canlı Destek" : "Live Support";
+    var fab = el("button", { class: "support-fab", type: "button", "aria-label": fabLabel }, [
+      el("span", { text: "💬" }),
+      el("span", { text: fabLabel }),
     ]);
+
+    var waText = isTR
+      ? "Merhaba, GND İş Makineleri hakkında bilgi almak istiyorum."
+      : "Hi, I'd like more information about GND İş Makineleri.";
+    var waLink = "https://wa.me/905550708034?text=" + encodeURIComponent(waText);
+
+    var menu = el("div", { class: "support-menu" });
+    var aiOption = el("button", { class: "support-menu-item", type: "button" }, [
+      el("span", { class: "support-menu-icon", text: "🤖" }),
+      el("span", { text: isTR ? "AI Danışman" : "AI Advisor" }),
+    ]);
+    var waOption = el("a", { class: "support-menu-item", href: waLink, target: "_blank", rel: "noopener" }, [
+      el("span", { class: "support-menu-icon", text: "💬" }),
+      el("span", { text: "WhatsApp" }),
+    ]);
+    menu.appendChild(aiOption);
+    menu.appendChild(waOption);
+
+    var menuOpen = false;
+    function setMenuOpen(open) {
+      menuOpen = open;
+      menu.classList.toggle("open", open);
+    }
+    fab.addEventListener("click", function () {
+      setMenuOpen(!menuOpen);
+    });
+    aiOption.addEventListener("click", function () {
+      setMenuOpen(false);
+      isOpen = true;
+      panel.classList.add("open");
+      input.focus();
+    });
+    waOption.addEventListener("click", function () {
+      setMenuOpen(false);
+    });
+    document.addEventListener("click", function (e) {
+      if (menuOpen && !menu.contains(e.target) && !fab.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    });
 
     var panel = el("div", { class: "advisor-panel" });
     var header = el("div", { class: "advisor-panel-header" }, [
@@ -100,12 +143,6 @@
       panel.classList.remove("open");
     });
 
-    toggleBtn.addEventListener("click", function () {
-      isOpen = !isOpen;
-      panel.classList.toggle("open", isOpen);
-      if (isOpen) input.focus();
-    });
-
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var text = input.value.trim();
@@ -114,7 +151,8 @@
       sendMessage(box, form, input, text);
     });
 
-    document.body.appendChild(toggleBtn);
+    document.body.appendChild(fab);
+    document.body.appendChild(menu);
     document.body.appendChild(panel);
   }
 
