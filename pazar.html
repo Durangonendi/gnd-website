@@ -95,6 +95,15 @@
         <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör" placeholder="e.g. 2019 model mini excavator">
       </div>
 
+      <div class="calc-field">
+        <label for="pazarKategori" data-tr="Kategori">Category</label>
+        <select id="pazarKategori">
+          <option value="makine" data-tr="Makine">Machine</option>
+          <option value="atasman" data-tr="Ataşman">Attachment</option>
+          <option value="parca" data-tr="Yedek Parça">Spare Part</option>
+        </select>
+      </div>
+
       <div class="calc-field" id="pazarDurumWrap">
         <label for="pazarDurum" data-tr="Durumu">Condition</label>
         <select id="pazarDurum">
@@ -113,7 +122,12 @@
         <textarea id="pazarAciklama" rows="4" data-tr-placeholder="Marka, model, çalışma saati, konum ve diğer detaylar" placeholder="Brand, model, working hours, location and other details"></textarea>
       </div>
 
-      <p class="calc-note" data-tr="Fotoğraf eklemek isterseniz, talebiniz onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.">If you'd like to add photos, you can share them with us on WhatsApp once your request is approved.</p>
+      <div class="calc-field">
+        <label for="pazarFoto" data-tr="Fotoğraflar (opsiyonel, en fazla 10)">Photos (optional, up to 10)</label>
+        <input type="file" id="pazarFoto" accept="image/*" multiple>
+      </div>
+      <div id="pazarFotoPreview" class="pazar-foto-preview"></div>
+      <p class="calc-note" data-tr="Fotoğrafları doğrudan buradan ekleyebilir, ya da onaylandıktan sonra WhatsApp üzerinden bizimle paylaşabilirsiniz.">You can add photos directly here, or share them with us on WhatsApp once your request is approved.</p>
 
       <label class="pazar-checkbox">
         <input type="checkbox" id="pazarOnay1" required>
@@ -133,14 +147,32 @@
 <section class="categories-section spareparts-section">
   <div class="section-inner">
     <h2 data-tr="Yayındaki Talepler">Published Requests</h2>
-    <div class="condition-toggle" style="margin-bottom:16px">
+    <div class="condition-toggle" style="margin-bottom:10px">
       <button type="button" data-filter="all" class="active" data-tr="Tümü">All</button>
       <button type="button" data-filter="satis" data-tr="Satış">Sell</button>
       <button type="button" data-filter="alim" data-tr="Alım Talebi">Buy Request</button>
     </div>
+    <div class="condition-toggle" style="margin-bottom:10px">
+      <button type="button" data-kategori="all" class="active" data-tr="Tüm Kategoriler">All Categories</button>
+      <button type="button" data-kategori="makine" data-tr="Makineler">Machines</button>
+      <button type="button" data-kategori="atasman" data-tr="Ataşmanlar">Attachments</button>
+      <button type="button" data-kategori="parca" data-tr="Yedek Parçalar">Spare Parts</button>
+    </div>
+    <div class="condition-toggle" style="margin-bottom:16px">
+      <button type="button" data-durum="all" class="active" data-tr="Sıfır / 2. El Fark Etmez">New / Used - Any</button>
+      <button type="button" data-durum="Sıfır" data-tr="Sıfır">New</button>
+      <button type="button" data-durum="2. El" data-tr="2. El">Used</button>
+    </div>
     <div id="pazarList" class="category-grid"><p data-tr="Yükleniyor...">Loading...</p></div>
   </div>
 </section>
+
+<div id="pazarDetayOverlay" class="pazar-detay-overlay">
+  <div class="pazar-detay-panel">
+    <button type="button" id="pazarDetayClose" class="pazar-detay-close" aria-label="Close">&times;</button>
+    <div id="pazarDetayBody"></div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="section-inner footer-inner">

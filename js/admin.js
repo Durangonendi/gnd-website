@@ -14,6 +14,8 @@
     return d.toLocaleDateString("tr-TR") + " " + d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
   }
 
+  var KATEGORI_LABEL = { makine: "Makine", atasman: "Ataşman", parca: "Yedek Parça" };
+
   function badgeFor(status) {
     if (status === "yayinda") return '<span class="admin-badge live">Yayında</span>';
     if (status === "reddedildi") return '<span class="admin-badge rejected">Reddedildi</span>';
@@ -50,12 +52,20 @@
           '<button class="admin-btn-undo" data-action="pending" data-id="' + r.id + '">Bekleyene Al</button>' +
           "</div>";
       }
+      var photos = r.foto_urls && r.foto_urls.length ? r.foto_urls : [];
+      var photoHtml = photos.length
+        ? '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">' +
+          photos.map(function (p) { return '<img src="' + esc(p) + '" style="width:64px;height:64px;object-fit:cover;border-radius:8px">'; }).join("") +
+          "</div>"
+        : "";
+      var kategoriLabel = KATEGORI_LABEL[r.kategori] ? " · " + KATEGORI_LABEL[r.kategori] : "";
       return (
         '<div class="admin-card">' +
         '<div class="admin-card-top"><strong>' + esc(r.baslik) + "</strong>" + badgeFor(r.onay_durumu) + "</div>" +
-        '<div class="admin-row">' + typeLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + "</div>" +
+        '<div class="admin-row">' + typeLabel + kategoriLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + "</div>" +
         '<div class="admin-row"><b>Kişi:</b> ' + esc(r.ad_soyad) + " · <b>Tel:</b> " + esc(r.telefon) + "</div>" +
         (r.aciklama ? '<div class="admin-row">' + esc(r.aciklama) + "</div>" : "") +
+        photoHtml +
         '<div class="admin-row" style="color:var(--text-muted,#888)">' + fmtDate(r.created_at) + "</div>" +
         actions +
         "</div>"
