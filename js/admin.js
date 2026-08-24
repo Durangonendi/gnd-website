@@ -58,11 +58,17 @@
           photos.map(function (p) { return '<img src="' + esc(p) + '" style="width:64px;height:64px;object-fit:cover;border-radius:8px">'; }).join("") +
           "</div>"
         : "";
-      var kategoriLabel = KATEGORI_LABEL[r.kategori] ? " · " + KATEGORI_LABEL[r.kategori] : "";
+      var kategoriSelect =
+        '<select class="admin-kategori-select" data-id="' + r.id + '" style="margin-left:8px">' +
+        '<option value="">Kategori seç</option>' +
+        '<option value="makine"' + (r.kategori === "makine" ? " selected" : "") + '>Makine</option>' +
+        '<option value="atasman"' + (r.kategori === "atasman" ? " selected" : "") + '>Ataşman</option>' +
+        '<option value="parca"' + (r.kategori === "parca" ? " selected" : "") + '>Yedek Parça</option>' +
+        "</select>";
       return (
         '<div class="admin-card">' +
         '<div class="admin-card-top"><strong>' + esc(r.baslik) + "</strong>" + badgeFor(r.onay_durumu) + "</div>" +
-        '<div class="admin-row">' + typeLabel + kategoriLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + "</div>" +
+        '<div class="admin-row">' + typeLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + kategoriSelect + "</div>" +
         '<div class="admin-row"><b>Kişi:</b> ' + esc(r.ad_soyad) + " · <b>Tel:</b> " + esc(r.telefon) + "</div>" +
         (r.aciklama ? '<div class="admin-row">' + esc(r.aciklama) + "</div>" : "") +
         photoHtml +
@@ -94,6 +100,13 @@
       return;
     }
     loadPazar();
+  }
+
+  async function setKategori(id, kategori) {
+    var row = pazarData.find(function (r) { return String(r.id) === String(id); });
+    if (row) row.kategori = kategori || null;
+    var { error } = await window.gndSupabase.from("market_requests").update({ kategori: kategori || null }).eq("id", id);
+    if (error) alert("Hata: " + error.message);
   }
 
   async function loadTeklif() {
@@ -168,6 +181,12 @@
       if (action === "approve") setStatus(id, "yayinda");
       else if (action === "reject") setStatus(id, "reddedildi");
       else if (action === "pending") setStatus(id, "beklemede");
+    });
+
+    document.getElementById("pazarList").addEventListener("change", function (e) {
+      var sel = e.target.closest(".admin-kategori-select");
+      if (!sel) return;
+      setKategori(sel.dataset.id, sel.value);
     });
   });
 })();
