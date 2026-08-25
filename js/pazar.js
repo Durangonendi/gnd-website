@@ -23,6 +23,11 @@
     loadError: { tr: "Talepler yüklenemedi: ", en: "Could not load requests: " },
     maxFotoWarn: { tr: "En fazla 10 fotoğraf seçebilirsiniz, ilk 10 tanesi alındı.", en: "You can select up to 10 photos, only the first 10 were kept." },
     uploading: { tr: "Fotoğraflar yükleniyor...", en: "Uploading photos..." },
+    factKod: { tr: "İlan Kodu", en: "Listing Code" },
+    factTuru: { tr: "İlan Türü", en: "Listing Type" },
+    factDurum: { tr: "Durumu", en: "Condition" },
+    factTarih: { tr: "İlan Tarihi", en: "Listed On" },
+    factIletisim: { tr: "GND Machinery Üzerinden İletişime Geçin", en: "Contact via GND Machinery" },
   };
 
   var KATEGORI_LABEL_KEY = { makine: "kategoriMakine", atasman: "kategoriAtasman", parca: "kategoriParca" };
@@ -113,6 +118,17 @@
     }).join("");
   }
 
+  function fmtTarih(iso) {
+    if (!iso) return "-";
+    var d = new Date(iso);
+    return d.toLocaleDateString(getLang() === "tr" ? "tr-TR" : "en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  }
+
+  function ilanKodu(r) {
+    var prefix = r.kategori === "makine" ? "MK" : r.kategori === "atasman" ? "AT" : r.kategori === "parca" ? "YP" : "GN";
+    return prefix + "-" + String(r.id).slice(0, 6).toUpperCase();
+  }
+
   function openDetay(id) {
     var r = allListings.find(function (x) { return String(x.id) === String(id); });
     if (!r) return;
@@ -122,22 +138,45 @@
     var kategoriHtml = r.kategori && KATEGORI_LABEL_KEY[r.kategori]
       ? '<span class="pazar-kategori-badge">' + t(KATEGORI_LABEL_KEY[r.kategori]) + "</span>"
       : "";
-    var mainImg = photos.length ? '<img class="pazar-detay-gallery-main" id="pazarDetayMain" src="' + escapeHtml(photos[0]) + '">' : "";
+    var waHref = "https://wa.me/905550708034?text=" +
+      encodeURIComponent("Merhaba, \"" + r.baslik + "\" ilanı/talebi hakkında bilgi almak istiyorum.");
+
+    var mainImg = photos.length
+      ? '<img class="pazar-detay-gallery-main" id="pazarDetayMain" src="' + escapeHtml(photos[0]) + '">'
+      : '<div class="pazar-detay-gallery-main pazar-detay-noimg"><span>' + escapeHtml(r.baslik) + "</span></div>";
     var thumbs = photos.length > 1
       ? '<div class="pazar-detay-gallery">' + photos.map(function (p) {
           return '<img src="' + escapeHtml(p) + '" data-full="' + escapeHtml(p) + '">';
         }).join("") + "</div>"
       : "";
+
+    var facts = [
+      [t("factKod"), ilanKodu(r)],
+      [t("factTuru"), badge],
+    ];
+    if (r.durum_bilgisi) facts.push([t("factDurum"), escapeHtml(r.durum_bilgisi)]);
+    facts.push([t("factTarih"), fmtTarih(r.created_at)]);
+
+    var factRows = facts.map(function (f) {
+      return '<div class="pazar-fact-row"><span class="pazar-fact-label">' + f[0] + "</span><span class=\"pazar-fact-value\">" + f[1] + "</span></div>";
+    }).join("");
+
+    var infoPanel =
+      "<h2 style=\"margin:0 0 4px\">" + escapeHtml(r.baslik) + kategoriHtml + "</h2>" +
+      (r.fiyat ? '<div class="pazar-detay-fiyat">' + escapeHtml(r.fiyat) + "</div>" : "") +
+      '<div class="pazar-fact-table">' + factRows + "</div>" +
+      (aciklama ? '<p class="pazar-detay-aciklama">' + escapeHtml(aciklama) + "</p>" : "") +
+      '<div class="pazar-detay-contact-box">' +
+      '<div class="pazar-detay-contact-title">' + t("factIletisim") + "</div>" +
+      '<a class="btn btn-primary pazar-detay-wa-btn" target="_blank" rel="noopener" href="' + waHref + '">' + t("waBtn") + "</a>" +
+      "</div>";
+
     var body =
-      mainImg +
-      "<h2 style=\"margin:6px 0\">" + escapeHtml(r.baslik) + kategoriHtml + "</h2>" +
-      '<p><strong>' + badge + '</strong>' + (r.durum_bilgisi ? " · " + escapeHtml(r.durum_bilgisi) : "") + "</p>" +
-      (r.fiyat ? "<p><strong>" + escapeHtml(r.fiyat) + "</strong></p>" : "") +
-      (aciklama ? "<p>" + escapeHtml(aciklama) + "</p>" : "") +
-      thumbs +
-      '<a class="btn btn-primary" style="width:100%;margin-top:14px" target="_blank" rel="noopener" href="https://wa.me/905550708034?text=' +
-      encodeURIComponent("Merhaba, \"" + r.baslik + "\" ilanı/talebi hakkında bilgi almak istiyorum.") +
-      '">' + t("waBtn") + "</a>";
+      '<div class="pazar-detay-grid">' +
+      '<div class="pazar-detay-media">' + mainImg + thumbs + "</div>" +
+      '<div class="pazar-detay-info">' + infoPanel + "</div>" +
+      "</div>";
+
     document.getElementById("pazarDetayBody").innerHTML = body;
     document.getElementById("pazarDetayOverlay").classList.add("is-open");
 
