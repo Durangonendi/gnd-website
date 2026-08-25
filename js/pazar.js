@@ -32,6 +32,7 @@
     factMotorSaati: { tr: "Motor Saati", en: "Working Hours" },
     factTonaj: { tr: "Tonaj", en: "Tonnage" },
     factYakit: { tr: "Yakıt Tipi", en: "Fuel Type" },
+    aciklamaGoster: { tr: "Açıklamayı Göster", en: "Show Description" },
   };
 
   var KATEGORI_LABEL_KEY = { makine: "kategoriMakine", atasman: "kategoriAtasman", parca: "kategoriParca" };
@@ -131,6 +132,22 @@
     return d.toLocaleDateString(getLang() === "tr" ? "tr-TR" : "en-GB", { day: "2-digit", month: "short", year: "numeric" });
   }
 
+  function splitAciklamaFacts(aciklama) {
+    var lines = (aciklama || "").split(/\r?\n/);
+    var pairs = [];
+    var freeLines = [];
+    var lineRe = /^\s*([\wÇĞİÖŞÜçğıöşü][\wÇĞİÖŞÜçğıöşü .()/-]{1,28}?)\s*[:：]\s*(.+?)\s*$/;
+    lines.forEach(function (line) {
+      var m = line.match(lineRe);
+      if (m && m[2]) {
+        pairs.push([m[1], m[2]]);
+      } else if (line.trim()) {
+        freeLines.push(line);
+      }
+    });
+    return { pairs: pairs, freeText: freeLines.join("\n") };
+  }
+
   function ilanKodu(r) {
     var prefix = r.kategori === "makine" ? "MK" : r.kategori === "atasman" ? "AT" : r.kategori === "parca" ? "YP" : "GN";
     return prefix + "-" + String(r.id).slice(0, 6).toUpperCase();
@@ -168,6 +185,12 @@
     if (r.yakit_tipi) facts.push([t("factYakit"), escapeHtml(r.yakit_tipi)]);
     facts.push([t("factTarih"), fmtTarih(r.created_at)]);
 
+    var split = splitAciklamaFacts(aciklama);
+    split.pairs.forEach(function (p) {
+      facts.push([escapeHtml(p[0]), escapeHtml(p[1])]);
+    });
+    aciklama = split.freeText;
+
     var factRows = facts.map(function (f) {
       return '<div class="pazar-fact-row"><span class="pazar-fact-label">' + f[0] + "</span><span class=\"pazar-fact-value\">" + f[1] + "</span></div>";
     }).join("");
@@ -176,7 +199,9 @@
       "<h2 style=\"margin:0 0 4px\">" + escapeHtml(r.baslik) + kategoriHtml + "</h2>" +
       (r.fiyat ? '<div class="pazar-detay-fiyat">' + escapeHtml(r.fiyat) + "</div>" : "") +
       '<div class="pazar-fact-table">' + factRows + "</div>" +
-      (aciklama ? '<p class="pazar-detay-aciklama">' + escapeHtml(aciklama) + "</p>" : "") +
+      (aciklama
+        ? '<details class="pazar-detay-aciklama-details"><summary>' + t("aciklamaGoster") + '</summary><p class="pazar-detay-aciklama">' + escapeHtml(aciklama) + "</p></details>"
+        : "") +
       '<div class="pazar-detay-contact-box">' +
       '<div class="pazar-detay-contact-title">' + t("factIletisim") + "</div>" +
       '<a class="btn btn-primary pazar-detay-wa-btn" target="_blank" rel="noopener" href="' + waHref + '">' + t("waBtn") + "</a>" +
