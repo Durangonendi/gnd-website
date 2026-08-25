@@ -55,12 +55,77 @@
 
 <section class="categories-section">
   <div class="section-inner">
+    <div class="calc-panel" style="max-width:760px; margin-bottom:24px">
+      <h3 style="margin-top:0">İlanlarım</h3>
+      <p class="calc-note">Pazar'a verdiğiniz ilan/talepleri buradan düzenleyebilirsiniz. Bir ilanı düzenlerseniz, tekrar GND onayından geçtikten sonra yayına alınır.</p>
+      <div id="ilanlarimList">Yükleniyor...</div>
+    </div>
     <div class="calc-panel" style="max-width:760px">
       <h3 style="margin-top:0">Teklif Taleplerim</h3>
       <div id="hesabimList">Yükleniyor...</div>
     </div>
   </div>
 </section>
+
+<div id="ilanDuzenleOverlay" class="pazar-detay-overlay">
+  <div class="pazar-detay-panel">
+    <button type="button" id="ilanDuzenleClose" class="pazar-detay-close" aria-label="Close">&times;</button>
+    <h3 style="margin-top:0">İlanı Düzenle</h3>
+    <form id="ilanDuzenleForm">
+      <input type="hidden" id="dzId">
+      <div class="condition-toggle" style="margin-bottom:16px">
+        <button type="button" data-dzturu="satis" class="active">Satış</button>
+        <button type="button" data-dzturu="alim">Alım Talebi</button>
+      </div>
+      <input type="hidden" id="dzTuru" value="satis">
+
+      <div class="calc-field">
+        <label for="dzBaslik">Makine / Parça Adı</label>
+        <input type="text" id="dzBaslik" required>
+      </div>
+
+      <div class="calc-field">
+        <label for="dzKategori">Kategori</label>
+        <select id="dzKategori">
+          <option value="makine">Makine</option>
+          <option value="atasman">Ataşman</option>
+          <option value="parca">Yedek Parça</option>
+        </select>
+      </div>
+
+      <div class="calc-field" id="dzDurumWrap">
+        <label for="dzDurum">Durumu</label>
+        <select id="dzDurum">
+          <option value="Sıfır">Sıfır</option>
+          <option value="2. El">2. El</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label for="dzFiyat">Fiyat Beklentisi</label>
+        <input type="text" id="dzFiyat">
+      </div>
+
+      <div class="calc-field">
+        <label for="dzAciklama">Açıklama</label>
+        <textarea id="dzAciklama" rows="4"></textarea>
+      </div>
+
+      <div class="calc-field">
+        <label>Mevcut Fotoğraflar</label>
+        <div id="dzFotoMevcut" class="pazar-foto-preview"></div>
+      </div>
+      <div class="calc-field">
+        <label for="dzFotoYeni">Yeni Fotoğraf Ekle (opsiyonel)</label>
+        <input type="file" id="dzFotoYeni" accept="image/*" multiple>
+      </div>
+      <div id="dzFotoYeniPreview" class="pazar-foto-preview"></div>
+
+      <div id="dzMsg" class="calc-note"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px">Değişiklikleri Kaydet</button>
+    </form>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="section-inner footer-inner">

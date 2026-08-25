@@ -66,3 +66,11 @@ update market_requests set kategori = 'parca' where id in (
   'c15b1b82-7e52-45a6-a79a-394b2944cf80', -- İş Makinesi Filtre Grubu (İntromak)
   '66c67a00-d41f-4b70-8c2e-8c6a5a9c860d'  -- İş Makinesi Yedek Parçaları (İntromak)
 );
+
+-- 5) Müşteriler kendi ilanlarını düzenleyebilsin ("İlanlarım" - Hesabım sayfası)
+drop policy if exists "owner_update_own_market_requests" on market_requests;
+create policy "owner_update_own_market_requests"
+on market_requests for update
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
