@@ -49,7 +49,7 @@
 <section class="hero category-hero">
   <div class="hero-inner">
     <h1 data-tr="Makine Pazarı">Machine Market</h1>
-    <p data-tr="Elinizdeki iş makinesi, ataşman veya yedek parçayı satmak mı istiyorsunuz, yoksa aradığınız bir makine, parça ya da güvenilir bir tedarikçi mi var? Bilgilerinizi bize iletin, sizin adınıza paylaşalım.">Do you want to sell a machine, attachment, or spare part you own, or are you looking for one — or a reliable supplier? Send us the details and we'll publish it on your behalf.</p>
+    <p data-tr="Türkiye'de ya da dünyanın herhangi bir yerinde olun — iş makinesi, ataşman veya yedek parça alım, satım ya da tedarik ihtiyacınız için ücretsiz ilan oluşturun. GND'nin global tedarik ağı üzerinden sizin adınıza ilgili taraflara ulaştıralım.">Wherever you are in the world — create a free listing for your machine, attachment, or spare part buying, selling, or sourcing needs. We'll connect you with the right parties through GND's global supply network, on your behalf.</p>
   </div>
 </section>
 
@@ -112,14 +112,42 @@
         </select>
       </div>
 
+      <div class="calc-field-pair">
+        <div class="calc-field">
+          <label for="pazarModelYili" data-tr="Model Yılı">Model Year</label>
+          <input type="text" id="pazarModelYili" data-tr-placeholder="Örn: 2019" placeholder="e.g. 2019">
+        </div>
+        <div class="calc-field" id="pazarMotorSaatiWrap">
+          <label for="pazarMotorSaati" data-tr="Motor Saati">Working Hours</label>
+          <input type="text" id="pazarMotorSaati" data-tr-placeholder="Örn: 1500 saat" placeholder="e.g. 1500 hrs">
+        </div>
+      </div>
+
+      <div class="calc-field-pair">
+        <div class="calc-field">
+          <label for="pazarTonaj" data-tr="Tonaj">Tonnage</label>
+          <input type="text" id="pazarTonaj" data-tr-placeholder="Örn: 20 ton" placeholder="e.g. 20 tons">
+        </div>
+        <div class="calc-field" id="pazarYakitWrap">
+          <label for="pazarYakit" data-tr="Yakıt Tipi">Fuel Type</label>
+          <select id="pazarYakit">
+            <option value="" data-tr="Seçiniz">Select</option>
+            <option value="Dizel" data-tr="Dizel">Diesel</option>
+            <option value="Hibrit" data-tr="Hibrit">Hybrid</option>
+            <option value="Elektrikli" data-tr="Elektrikli">Electric</option>
+            <option value="Benzinli" data-tr="Benzinli">Petrol</option>
+          </select>
+        </div>
+      </div>
+
       <div class="calc-field">
         <label for="pazarFiyat" id="pazarFiyatLabel" data-tr="Fiyat Beklentisi">Expected Price</label>
         <input type="text" id="pazarFiyat" data-tr-placeholder="Örn: 850.000 TL veya pazarlıklı" placeholder="e.g. 850,000 TL or negotiable">
       </div>
 
       <div class="calc-field">
-        <label for="pazarAciklama" data-tr="Açıklama">Description</label>
-        <textarea id="pazarAciklama" rows="4" data-tr-placeholder="Marka, model, çalışma saati, konum ve diğer detaylar" placeholder="Brand, model, working hours, location and other details"></textarea>
+        <label for="pazarAciklama" data-tr="Diğer Bilgiler / Açıklama">Other Details / Description</label>
+        <textarea id="pazarAciklama" rows="4" data-tr-placeholder="Marka, konum ve yukarıda yer almayan diğer detaylar" placeholder="Brand, location and any other details not covered above"></textarea>
       </div>
 
       <div class="calc-field">

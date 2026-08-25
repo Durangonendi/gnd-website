@@ -28,6 +28,10 @@
     factDurum: { tr: "Durumu", en: "Condition" },
     factTarih: { tr: "İlan Tarihi", en: "Listed On" },
     factIletisim: { tr: "GND Machinery Üzerinden İletişime Geçin", en: "Contact via GND Machinery" },
+    factModelYili: { tr: "Model Yılı", en: "Model Year" },
+    factMotorSaati: { tr: "Motor Saati", en: "Working Hours" },
+    factTonaj: { tr: "Tonaj", en: "Tonnage" },
+    factYakit: { tr: "Yakıt Tipi", en: "Fuel Type" },
   };
 
   var KATEGORI_LABEL_KEY = { makine: "kategoriMakine", atasman: "kategoriAtasman", parca: "kategoriParca" };
@@ -103,11 +107,14 @@
       var kategoriHtml = r.kategori && KATEGORI_LABEL_KEY[r.kategori]
         ? '<span class="pazar-kategori-badge">' + t(KATEGORI_LABEL_KEY[r.kategori]) + "</span>"
         : "";
+      var specBits = [r.model_yili, r.motor_saati, r.tonaj, r.yakit_tipi].filter(Boolean).map(escapeHtml);
+      var specLine = specBits.length ? "<p>" + specBits.join(" · ") + "</p>" : "";
       return (
         '<div class="category-card pazar-clickable" data-id="' + r.id + '">' +
         imgHtml +
         "<h3>" + escapeHtml(r.baslik) + kategoriHtml + "</h3>" +
         '<p><strong>' + badge + '</strong>' + (r.durum_bilgisi ? " · " + escapeHtml(r.durum_bilgisi) : "") + "</p>" +
+        specLine +
         (r.fiyat ? "<p>" + escapeHtml(r.fiyat) + "</p>" : "") +
         (aciklama ? "<p>" + escapeHtml(aciklama.slice(0, 120)) + (aciklama.length > 120 ? "…" : "") + "</p>" : "") +
         '<a class="btn btn-primary" style="width:100%;margin-top:8px" target="_blank" rel="noopener" href="https://wa.me/905550708034?text=' +
@@ -155,6 +162,10 @@
       [t("factTuru"), badge],
     ];
     if (r.durum_bilgisi) facts.push([t("factDurum"), escapeHtml(r.durum_bilgisi)]);
+    if (r.model_yili) facts.push([t("factModelYili"), escapeHtml(r.model_yili)]);
+    if (r.motor_saati) facts.push([t("factMotorSaati"), escapeHtml(r.motor_saati)]);
+    if (r.tonaj) facts.push([t("factTonaj"), escapeHtml(r.tonaj)]);
+    if (r.yakit_tipi) facts.push([t("factYakit"), escapeHtml(r.yakit_tipi)]);
     facts.push([t("factTarih"), fmtTarih(r.created_at)]);
 
     var factRows = facts.map(function (f) {
@@ -342,6 +353,10 @@
         telefon: document.getElementById("pazarTelefon").value.trim(),
         baslik: document.getElementById("pazarBaslik").value.trim(),
         durum_bilgisi: currentTuru === "satis" ? document.getElementById("pazarDurum").value : null,
+        model_yili: document.getElementById("pazarModelYili").value.trim() || null,
+        motor_saati: document.getElementById("pazarMotorSaati").value.trim() || null,
+        tonaj: document.getElementById("pazarTonaj").value.trim() || null,
+        yakit_tipi: document.getElementById("pazarYakit").value || null,
         fiyat: document.getElementById("pazarFiyat").value.trim() || null,
         aciklama: document.getElementById("pazarAciklama").value.trim() || null,
         foto_urls: fotoUrls.length ? fotoUrls : null,

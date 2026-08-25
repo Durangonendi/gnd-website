@@ -106,6 +106,10 @@
     document.getElementById("dzBaslik").value = r.baslik || "";
     document.getElementById("dzKategori").value = r.kategori || "makine";
     document.getElementById("dzDurum").value = r.durum_bilgisi || "Sıfır";
+    document.getElementById("dzModelYili").value = r.model_yili || "";
+    document.getElementById("dzMotorSaati").value = r.motor_saati || "";
+    document.getElementById("dzTonaj").value = r.tonaj || "";
+    document.getElementById("dzYakit").value = r.yakit_tipi || "";
     document.getElementById("dzFiyat").value = r.fiyat || "";
     document.getElementById("dzAciklama").value = r.aciklama || "";
     dzExistingPhotos = (r.foto_urls || []).slice();
@@ -233,6 +237,10 @@
         kategori: document.getElementById("dzKategori").value,
         baslik: document.getElementById("dzBaslik").value.trim(),
         durum_bilgisi: document.getElementById("dzTuru").value === "satis" ? document.getElementById("dzDurum").value : null,
+        model_yili: document.getElementById("dzModelYili").value.trim() || null,
+        motor_saati: document.getElementById("dzMotorSaati").value.trim() || null,
+        tonaj: document.getElementById("dzTonaj").value.trim() || null,
+        yakit_tipi: document.getElementById("dzYakit").value || null,
         fiyat: document.getElementById("dzFiyat").value.trim() || null,
         aciklama: document.getElementById("dzAciklama").value.trim() || null,
         foto_urls: finalPhotos.length ? finalPhotos : null,
