@@ -41,7 +41,7 @@ async function fetchListing(id) {
 
 export default async function handler(req, res) {
   const id = typeof req.query.id === "string" ? req.query.id : null;
-  const filePath = path.join(process.cwd(), "pazar.html");
+  const filePath = path.join(process.cwd(), "pazar-template.html");
   let html = fs.readFileSync(filePath, "utf8");
 
   let ogTitle = "Makine Pazarı — GND Machinery";
