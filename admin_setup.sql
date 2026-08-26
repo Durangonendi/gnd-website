@@ -71,3 +71,7 @@ alter table market_requests add column if not exists motor_saati text;
 alter table market_requests add column if not exists model_yili text;
 alter table market_requests add column if not exists tonaj text;
 alter table market_requests add column if not exists yakit_tipi text;
+
+-- 7) Alt kategori (mini ekskavatör, dozer, hidrolik gruplar vb.) — kategori sayfalarında
+-- ilgili ilanların otomatik listelenmesi için
+alter table market_requests add column if not exists alt_kategori text;

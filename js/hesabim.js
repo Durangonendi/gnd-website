@@ -19,6 +19,30 @@
     return '<span class="admin-badge pending">İnceleniyor</span>';
   }
 
+  function altKategoriOptions(kategori) {
+    if (kategori === "makine" && typeof CATEGORIES !== "undefined") return CATEGORIES;
+    if (kategori === "parca" && typeof SPARE_PARTS_CATEGORIES !== "undefined") {
+      return SPARE_PARTS_CATEGORIES.filter(function (c) { return c.id !== "attachments"; });
+    }
+    return [];
+  }
+
+  function updateDzAltKategori(kategori, selectedId) {
+    var selectEl = document.getElementById("dzAltKategori");
+    var wrapEl = document.getElementById("dzAltKategoriWrap");
+    var options = altKategoriOptions(kategori);
+    if (!options.length) {
+      wrapEl.style.display = "none";
+      selectEl.innerHTML = "";
+      return;
+    }
+    selectEl.innerHTML = options.map(function (c) {
+      return '<option value="' + c.id + '">' + esc(c.name.tr) + "</option>";
+    }).join("");
+    if (selectedId) selectEl.value = selectedId;
+    wrapEl.style.display = "";
+  }
+
   var ilanlarim = [];
   var dzExistingPhotos = [];
   var dzNewFiles = [];
@@ -105,6 +129,7 @@
     setDzTuru(r.islem_turu || "satis");
     document.getElementById("dzBaslik").value = r.baslik || "";
     document.getElementById("dzKategori").value = r.kategori || "makine";
+    updateDzAltKategori(r.kategori || "makine", r.alt_kategori || "");
     document.getElementById("dzDurum").value = r.durum_bilgisi || "Sıfır";
     document.getElementById("dzModelYili").value = r.model_yili || "";
     document.getElementById("dzMotorSaati").value = r.motor_saati || "";
@@ -181,6 +206,10 @@
       btn.addEventListener("click", function () { setDzTuru(btn.dataset.dzturu); });
     });
 
+    document.getElementById("dzKategori").addEventListener("change", function () {
+      updateDzAltKategori(this.value, "");
+    });
+
     document.getElementById("ilanlarimList").addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-edit-id]");
       if (!btn) return;
@@ -235,6 +264,7 @@
       var payload = {
         islem_turu: document.getElementById("dzTuru").value,
         kategori: document.getElementById("dzKategori").value,
+        alt_kategori: document.getElementById("dzAltKategori").value || null,
         baslik: document.getElementById("dzBaslik").value.trim(),
         durum_bilgisi: document.getElementById("dzTuru").value === "satis" ? document.getElementById("dzDurum").value : null,
         model_yili: document.getElementById("dzModelYili").value.trim() || null,
@@ -250,6 +280,10 @@
       msgEl.textContent = "Kaydediliyor...";
       var id = document.getElementById("dzId").value;
       var { error } = await window.gndSupabase.from("market_requests").update(payload).eq("id", id);
+      if (error && /alt_kategori/i.test(error.message || "")) {
+        delete payload.alt_kategori;
+        ({ error } = await window.gndSupabase.from("market_requests").update(payload).eq("id", id));
+      }
       submitBtn.disabled = false;
       if (error) {
         msgEl.textContent = "Hata: " + error.message;
