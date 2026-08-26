@@ -28,6 +28,8 @@
     factDurum: { tr: "Durumu", en: "Condition" },
     factTarih: { tr: "İlan Tarihi", en: "Listed On" },
     factIletisim: { tr: "GND Machinery Üzerinden İletişime Geçin", en: "Contact via GND Machinery" },
+    shareBtn: { tr: "Bağlantıyı Kopyala", en: "Copy Link" },
+    shareCopied: { tr: "Bağlantı kopyalandı!", en: "Link copied!" },
     factModelYili: { tr: "Model Yılı", en: "Model Year" },
     factMotorSaati: { tr: "Motor Saati", en: "Working Hours" },
     factTonaj: { tr: "Tonaj", en: "Tonnage" },
@@ -205,6 +207,8 @@
       '<div class="pazar-detay-contact-box">' +
       '<div class="pazar-detay-contact-title">' + t("factIletisim") + "</div>" +
       '<a class="btn btn-primary pazar-detay-wa-btn" target="_blank" rel="noopener" href="' + waHref + '">' + t("waBtn") + "</a>" +
+      '<button type="button" class="btn pazar-detay-share-btn" id="pazarDetayShareBtn">' + t("shareBtn") + "</button>" +
+      '<span class="pazar-detay-share-msg" id="pazarDetayShareMsg"></span>' +
       "</div>";
 
     var body =
@@ -215,6 +219,21 @@
 
     document.getElementById("pazarDetayBody").innerHTML = body;
     document.getElementById("pazarDetayOverlay").classList.add("is-open");
+
+    var shareUrl = location.origin + location.pathname + "?id=" + encodeURIComponent(r.id);
+    history.replaceState(null, "", shareUrl);
+    var shareBtn = document.getElementById("pazarDetayShareBtn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", function () {
+        var msgEl = document.getElementById("pazarDetayShareMsg");
+        var done = function () { if (msgEl) msgEl.textContent = t("shareCopied"); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareUrl).then(done).catch(function () { window.prompt(t("shareBtn"), shareUrl); });
+        } else {
+          window.prompt(t("shareBtn"), shareUrl);
+        }
+      });
+    }
 
     var gallery = document.querySelector(".pazar-detay-gallery");
     if (gallery) {
@@ -229,6 +248,9 @@
 
   function closeDetay() {
     document.getElementById("pazarDetayOverlay").classList.remove("is-open");
+    if (new URLSearchParams(location.search).get("id")) {
+      history.replaceState(null, "", location.pathname);
+    }
   }
 
   async function loadListings() {
@@ -243,6 +265,8 @@
     }
     allListings = data || [];
     renderListings();
+    var sharedId = new URLSearchParams(location.search).get("id");
+    if (sharedId) openDetay(sharedId);
   }
 
   function renderFotoPreview() {

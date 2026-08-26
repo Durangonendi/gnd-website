@@ -1170,3 +1170,16 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 10px;
 }
 .pazar-detay-wa-btn { width: 100%; }
+.pazar-detay-share-btn {
+  width: 100%;
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.pazar-detay-share-msg {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--accent);
+  text-align: center;
+}
