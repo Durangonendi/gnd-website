@@ -16,6 +16,15 @@
 
   var KATEGORI_LABEL = { makine: "Makine", atasman: "Ataşman", parca: "Yedek Parça" };
 
+  function displayAciklama(raw) {
+    var aciklama = raw || "";
+    var imgMatch = aciklama.match(/^\[img:([^\]]+)\]\s*/);
+    if (imgMatch) aciklama = aciklama.slice(imgMatch[0].length);
+    var langMatch = aciklama.match(/^\[TR\]([\s\S]*?)\[EN\]([\s\S]*)$/);
+    if (langMatch) return langMatch[1].trim();
+    return aciklama;
+  }
+
   function badgeFor(status) {
     if (status === "yayinda") return '<span class="admin-badge live">Yayında</span>';
     if (status === "reddedildi") return '<span class="admin-badge rejected">Reddedildi</span>';
@@ -70,7 +79,7 @@
         '<div class="admin-card-top"><strong>' + esc(r.baslik) + "</strong>" + badgeFor(r.onay_durumu) + "</div>" +
         '<div class="admin-row">' + typeLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + (r.alt_kategori ? " · " + esc(r.alt_kategori) : "") + kategoriSelect + "</div>" +
         '<div class="admin-row"><b>Kişi:</b> ' + esc(r.ad_soyad) + " · <b>Tel:</b> " + esc(r.telefon) + "</div>" +
-        (r.aciklama ? '<div class="admin-row">' + esc(r.aciklama) + "</div>" : "") +
+        (r.aciklama ? '<div class="admin-row">' + esc(displayAciklama(r.aciklama)) + "</div>" : "") +
         photoHtml +
         '<div class="admin-row" style="color:var(--text-muted,#888)">' + fmtDate(r.created_at) + "</div>" +
         actions +

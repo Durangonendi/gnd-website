@@ -114,7 +114,9 @@
   function getListingDescription(r) {
     var aciklama = r.aciklama || "";
     var imgMatch = aciklama.match(/^\[img:([^\]]+)\]\s*/);
-    if (imgMatch) return aciklama.slice(imgMatch[0].length);
+    if (imgMatch) aciklama = aciklama.slice(imgMatch[0].length);
+    var langMatch = aciklama.match(/^\[TR\]([\s\S]*?)\[EN\]([\s\S]*)$/);
+    if (langMatch) return (getLang() === "tr" ? langMatch[1] : langMatch[2]).trim();
     return aciklama;
   }
 
