@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/pazar.html", "destination": "/api/pazar-meta" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
