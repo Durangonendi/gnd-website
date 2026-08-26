@@ -477,6 +477,15 @@
       updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
     });
 
+    var VIDEO_TAB_IDS = { satis: "Zbkf3q_7Vp0", alim: "nRf3YRmgQT4", foto: "g2JkOwoNPsw" };
+    document.querySelectorAll('[data-video-tab]').forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll('[data-video-tab]').forEach(function (b) { b.classList.toggle("active", b === btn); });
+        var frame = document.getElementById("pazarHelpVideo");
+        if (frame) frame.src = "https://www.youtube-nocookie.com/embed/" + VIDEO_TAB_IDS[btn.dataset.videoTab];
+      });
+    });
+
     setTuru("satis");
     loadListings();
   });
