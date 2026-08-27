@@ -68,7 +68,7 @@
       return (
         '<div class="admin-card">' +
         '<div class="admin-card-top"><strong>' + esc(r.baslik) + "</strong>" + badgeFor(r.onay_durumu) + "</div>" +
-        '<div class="admin-row">' + typeLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + kategoriSelect + "</div>" +
+        '<div class="admin-row">' + typeLabel + (r.durum_bilgisi ? " · " + esc(r.durum_bilgisi) : "") + (r.fiyat ? " · " + esc(r.fiyat) : "") + (r.alt_kategori ? " · " + esc(r.alt_kategori) : "") + kategoriSelect + "</div>" +
         '<div class="admin-row"><b>Kişi:</b> ' + esc(r.ad_soyad) + " · <b>Tel:</b> " + esc(r.telefon) + "</div>" +
         (r.aciklama ? '<div class="admin-row">' + esc(r.aciklama) + "</div>" : "") +
         photoHtml +

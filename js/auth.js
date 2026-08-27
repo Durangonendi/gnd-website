@@ -7,6 +7,62 @@
   var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   window.gndSupabase = client;
 
+  // --- Faz 7: Marketplace event tracking (GND OS funnel'ı için) ---
+  // Ziyaretçiyi anonim bir id ile takip eder, UTM parametrelerini yakalar,
+  // ve website_visit / registration / listing_created / request_created
+  // olaylarını marketplace_events tablosuna yazar. Kişisel veri içermez.
+  function getVisitorRef() {
+    try {
+      var ref = localStorage.getItem("gnd_visitor_ref");
+      if (!ref) {
+        ref = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : "v_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+        localStorage.setItem("gnd_visitor_ref", ref);
+      }
+      return ref;
+    } catch (e) { return null; }
+  }
+
+  function getUtm() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var fromUrl = {
+        utm_source: params.get("utm_source"),
+        utm_medium: params.get("utm_medium"),
+        utm_campaign: params.get("utm_campaign"),
+        utm_content: params.get("utm_content"),
+      };
+      if (fromUrl.utm_source || fromUrl.utm_medium || fromUrl.utm_campaign) {
+        sessionStorage.setItem("gnd_utm", JSON.stringify(fromUrl));
+        return fromUrl;
+      }
+      var stored = sessionStorage.getItem("gnd_utm");
+      return stored ? JSON.parse(stored) : { utm_source: null, utm_medium: null, utm_campaign: null, utm_content: null };
+    } catch (e) { return { utm_source: null, utm_medium: null, utm_campaign: null, utm_content: null }; }
+  }
+
+  window.gndTrack = function (eventType, extra) {
+    try {
+      var utm = getUtm();
+      client.from("marketplace_events").insert({
+        visitor_ref: getVisitorRef(),
+        utm_source: utm.utm_source,
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+        utm_content: utm.utm_content,
+        event_type: eventType,
+        metadata: extra || null,
+      }).then(function () {}, function () {});
+    } catch (e) { /* takip hatası sitenin çalışmasını engellemez */ }
+  };
+
+  (function trackVisitOnce() {
+    try {
+      if (sessionStorage.getItem("gnd_visit_tracked")) return;
+      sessionStorage.setItem("gnd_visit_tracked", "1");
+      window.gndTrack("website_visit", { page: window.location.pathname });
+    } catch (e) {}
+  })();
+
   window.gndAuth = {
     signUp: function (email, password, metadata) {
       var redirectTo = window.location.origin + window.location.pathname.replace(/[^/]*$/, "") + "giris.html";

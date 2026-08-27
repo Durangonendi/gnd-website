@@ -26,6 +26,7 @@
     factKod: { tr: "İlan Kodu", en: "Listing Code" },
     factTuru: { tr: "İlan Türü", en: "Listing Type" },
     factDurum: { tr: "Durumu", en: "Condition" },
+    factAltKategori: { tr: "Alt Kategori", en: "Subcategory" },
     factTarih: { tr: "İlan Tarihi", en: "Listed On" },
     factIletisim: { tr: "GND Machinery Üzerinden İletişime Geçin", en: "Contact via GND Machinery" },
     shareBtn: { tr: "Bağlantıyı Kopyala", en: "Copy Link" },
@@ -38,6 +39,35 @@
   };
 
   var KATEGORI_LABEL_KEY = { makine: "kategoriMakine", atasman: "kategoriAtasman", parca: "kategoriParca" };
+
+  function altKategoriOptions(kategori) {
+    if (kategori === "makine" && typeof CATEGORIES !== "undefined") return CATEGORIES;
+    if (kategori === "parca" && typeof SPARE_PARTS_CATEGORIES !== "undefined") {
+      return SPARE_PARTS_CATEGORIES.filter(function (c) { return c.id !== "attachments"; });
+    }
+    return [];
+  }
+
+  function altKategoriLabel(kategori, altId) {
+    var list = altKategoriOptions(kategori);
+    var found = list.find(function (c) { return c.id === altId; });
+    return found ? found.name[getLang()] : "";
+  }
+
+  function updateAltKategoriSelect(selectEl, wrapEl, kategori, selectedId) {
+    var options = altKategoriOptions(kategori);
+    if (!options.length) {
+      wrapEl.style.display = "none";
+      selectEl.innerHTML = "";
+      return;
+    }
+    var lang = getLang();
+    selectEl.innerHTML = options.map(function (c) {
+      return '<option value="' + c.id + '">' + escapeHtml(c.name[lang]) + "</option>";
+    }).join("");
+    if (selectedId) selectEl.value = selectedId;
+    wrapEl.style.display = "";
+  }
 
   function getLang() {
     return localStorage.getItem("gnd-site-lang") === "tr" ? "tr" : "en";
@@ -181,6 +211,10 @@
       [t("factTuru"), badge],
     ];
     if (r.durum_bilgisi) facts.push([t("factDurum"), escapeHtml(r.durum_bilgisi)]);
+    if (r.alt_kategori) {
+      var altLabel = altKategoriLabel(r.kategori, r.alt_kategori);
+      if (altLabel) facts.push([t("factAltKategori"), escapeHtml(altLabel)]);
+    }
     if (r.model_yili) facts.push([t("factModelYili"), escapeHtml(r.model_yili)]);
     if (r.motor_saati) facts.push([t("factMotorSaati"), escapeHtml(r.motor_saati)]);
     if (r.tonaj) facts.push([t("factTonaj"), escapeHtml(r.tonaj)]);
@@ -300,6 +334,14 @@
     document.querySelectorAll('[data-turu]').forEach(function (btn) {
       btn.addEventListener("click", function () { setTuru(btn.dataset.turu); });
     });
+
+    var pazarKategoriSelect = document.getElementById("pazarKategori");
+    var pazarAltKategoriSelect = document.getElementById("pazarAltKategori");
+    var pazarAltKategoriWrap = document.getElementById("pazarAltKategoriWrap");
+    pazarKategoriSelect.addEventListener("change", function () {
+      updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+    });
+    updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
     document.querySelectorAll('[data-filter]').forEach(function (btn) {
       btn.addEventListener("click", function () {
         currentFilter = btn.dataset.filter;
@@ -398,6 +440,7 @@
         user_id: currentUser.id,
         islem_turu: currentTuru,
         kategori: document.getElementById("pazarKategori").value,
+        alt_kategori: document.getElementById("pazarAltKategori").value || null,
         ad_soyad: document.getElementById("pazarAdSoyad").value.trim(),
         telefon: document.getElementById("pazarTelefon").value.trim(),
         baslik: document.getElementById("pazarBaslik").value.trim(),
@@ -412,6 +455,10 @@
       };
       msgEl.textContent = getLang() === "tr" ? "Gönderiliyor..." : "Submitting...";
       var { error } = await window.gndSupabase.from("market_requests").insert(payload);
+      if (error && /alt_kategori/i.test(error.message || "")) {
+        delete payload.alt_kategori;
+        ({ error } = await window.gndSupabase.from("market_requests").insert(payload));
+      }
       submitBtn.disabled = false;
       if (error) {
         msgEl.textContent = (getLang() === "tr" ? "Bir hata oluştu: " : "An error occurred: ") + error.message;
@@ -423,10 +470,14 @@
       if (typeof gtag === "function") {
         gtag("event", "generate_lead", { lead_source: "makine_pazari", page_path: window.location.pathname });
       }
+      if (typeof window.gndTrack === "function") {
+        window.gndTrack(currentTuru === "satis" ? "listing_created" : "request_created", { kategori: payload.kategori });
+      }
       form.reset();
       selectedFiles = [];
       document.getElementById("pazarFotoPreview").innerHTML = "";
       setTuru("satis");
+      updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
     });
 
     setTuru("satis");
