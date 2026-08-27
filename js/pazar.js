@@ -31,6 +31,7 @@
     factIletisim: { tr: "GND Machinery Üzerinden İletişime Geçin", en: "Contact via GND Machinery" },
     shareBtn: { tr: "Bağlantıyı Kopyala", en: "Copy Link" },
     shareCopied: { tr: "Bağlantı kopyalandı!", en: "Link copied!" },
+    shareLabel: { tr: "İlanı Paylaş", en: "Share This Listing" },
     factModelYili: { tr: "Model Yılı", en: "Model Year" },
     factMotorSaati: { tr: "Motor Saati", en: "Working Hours" },
     factTonaj: { tr: "Tonaj", en: "Tonnage" },
@@ -39,6 +40,11 @@
   };
 
   var KATEGORI_LABEL_KEY = { makine: "kategoriMakine", atasman: "kategoriAtasman", parca: "kategoriParca" };
+
+  var ICON_WHATSAPP = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5C11.5 9.4 11 8.2 10.8 7.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.3C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.5.9.9-3.4-.2-.3C3.4 14.5 3 13.3 3 12c0-4.9 4.1-9 9-9s9 4.1 9 9-4.1 9-9 9z"/></svg>';
+  var ICON_FACEBOOK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.5-1.5h1.6V3.7C15.9 3.5 15 3.5 13.9 3.5c-2.4 0-4 1.5-4 4.1v2.3H7.2V13h2.7v8h3.6z"/></svg>';
+  var ICON_LINK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.1 0l2-2a5 5 0 00-7-7l-1.2 1.1"/><path d="M14 11a5 5 0 00-7.1 0l-2 2a5 5 0 007 7l1.1-1.1"/></svg>';
+  var ICON_MORE = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>';
 
   function altKategoriOptions(kategori) {
     if (kategori === "makine" && typeof CATEGORIES !== "undefined") return CATEGORIES;
@@ -114,7 +120,9 @@
   function getListingDescription(r) {
     var aciklama = r.aciklama || "";
     var imgMatch = aciklama.match(/^\[img:([^\]]+)\]\s*/);
-    if (imgMatch) return aciklama.slice(imgMatch[0].length);
+    if (imgMatch) aciklama = aciklama.slice(imgMatch[0].length);
+    var langMatch = aciklama.match(/^\[TR\]([\s\S]*?)\[EN\]([\s\S]*)$/);
+    if (langMatch) return (getLang() === "tr" ? langMatch[1] : langMatch[2]).trim();
     return aciklama;
   }
 
@@ -241,7 +249,13 @@
       '<div class="pazar-detay-contact-box">' +
       '<div class="pazar-detay-contact-title">' + t("factIletisim") + "</div>" +
       '<a class="btn btn-primary pazar-detay-wa-btn" target="_blank" rel="noopener" href="' + waHref + '">' + t("waBtn") + "</a>" +
-      '<button type="button" class="btn pazar-detay-share-btn" id="pazarDetayShareBtn">' + t("shareBtn") + "</button>" +
+      '<div class="pazar-share-label">' + t("shareLabel") + "</div>" +
+      '<div class="pazar-share-row">' +
+      '<a class="pazar-share-icon" id="pazarShareWa" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">' + ICON_WHATSAPP + "</a>" +
+      '<a class="pazar-share-icon" id="pazarShareFb" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">' + ICON_FACEBOOK + "</a>" +
+      '<button type="button" class="pazar-share-icon" id="pazarDetayShareBtn" aria-label="' + t("shareBtn") + '" title="' + t("shareBtn") + '">' + ICON_LINK + "</button>" +
+      '<button type="button" class="pazar-share-icon" id="pazarNativeShareBtn" style="display:none" aria-label="' + t("shareBtn") + '" title="' + t("shareBtn") + '">' + ICON_MORE + "</button>" +
+      "</div>" +
       '<span class="pazar-detay-share-msg" id="pazarDetayShareMsg"></span>' +
       "</div>";
 
@@ -266,6 +280,19 @@
         } else {
           window.prompt(t("shareBtn"), shareUrl);
         }
+      });
+    }
+
+    var shareText = getLang() === "tr" ? "\"" + r.baslik + "\" ilanına göz atın:" : "Check out this listing: \"" + r.baslik + "\"";
+    var waShare = document.getElementById("pazarShareWa");
+    if (waShare) waShare.href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText + " " + shareUrl);
+    var fbShare = document.getElementById("pazarShareFb");
+    if (fbShare) fbShare.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
+    var nativeShareBtn = document.getElementById("pazarNativeShareBtn");
+    if (nativeShareBtn && navigator.share) {
+      nativeShareBtn.style.display = "";
+      nativeShareBtn.addEventListener("click", function () {
+        navigator.share({ title: r.baslik, text: shareText, url: shareUrl }).catch(function () {});
       });
     }
 
@@ -478,6 +505,15 @@
       document.getElementById("pazarFotoPreview").innerHTML = "";
       setTuru("satis");
       updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+    });
+
+    var VIDEO_TAB_IDS = { satis: "Zbkf3q_7Vp0", alim: "nRf3YRmgQT4", foto: "g2JkOwoNPsw" };
+    document.querySelectorAll('[data-video-tab]').forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll('[data-video-tab]').forEach(function (b) { b.classList.toggle("active", b === btn); });
+        var frame = document.getElementById("pazarHelpVideo");
+        if (frame) frame.src = "https://www.youtube-nocookie.com/embed/" + VIDEO_TAB_IDS[btn.dataset.videoTab];
+      });
     });
 
     setTuru("satis");

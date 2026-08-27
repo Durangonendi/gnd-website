@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/pazar.html", "destination": "/api/pazar-meta" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -7,7 +10,7 @@
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; img-src 'self' data: https://ffqjotevmozjidhhjsqy.supabase.co; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://ffqjotevmozjidhhjsqy.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; img-src 'self' data: https://ffqjotevmozjidhhjsqy.supabase.co; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://ffqjotevmozjidhhjsqy.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src https://www.youtube-nocookie.com" }
       ]
     }
   ]

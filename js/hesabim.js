@@ -280,6 +280,10 @@
       msgEl.textContent = "Kaydediliyor...";
       var id = document.getElementById("dzId").value;
       var { error } = await window.gndSupabase.from("market_requests").update(payload).eq("id", id);
+      if (error && /alt_kategori/i.test(error.message || "")) {
+        delete payload.alt_kategori;
+        ({ error } = await window.gndSupabase.from("market_requests").update(payload).eq("id", id));
+      }
       submitBtn.disabled = false;
       if (error) {
         msgEl.textContent = "Hata: " + error.message;
