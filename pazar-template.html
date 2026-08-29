@@ -65,23 +65,6 @@
   </div>
 </section>
 
-<section class="categories-section spareparts-section">
-  <div class="section-inner">
-    <div class="calc-panel">
-      <h3 style="margin-top:0" data-tr="Nasıl Kullanılır? (Video)">How to Use It (Video)</h3>
-      <div class="condition-toggle" style="margin-bottom:16px">
-        <button type="button" class="active" data-video-tab="satis" data-tr="Satış İlanı Ver">Post a Sale</button>
-        <button type="button" data-video-tab="alim" data-tr="Alım Talebi Ver">Post a Buy Request</button>
-        <button type="button" data-video-tab="foto" data-tr="Fotoğraf Ekle">Add Photos</button>
-      </div>
-      <div class="video-embed-wrap">
-        <iframe id="pazarHelpVideo" src="https://www.youtube-nocookie.com/embed/Zbkf3q_7Vp0" title="Pazar Yardım Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <p class="calc-note"><a href="destek.html" data-tr="Diğer yardım videolarını gör →">See other help videos →</a></p>
-    </div>
-  </div>
-</section>
-
 <section class="categories-section">
   <div class="section-inner">
     <div id="pazarLoginPrompt" class="calc-panel" style="display:none">
@@ -90,13 +73,42 @@
       <a href="giris.html" class="btn btn-primary" style="width:100%" data-tr="Giriş Yap / Üye Ol →">Log In / Sign Up →</a>
     </div>
 
-    <form id="pazarForm" class="calc-panel" style="display:none">
-      <h3 style="margin-top:0" data-tr="Talep Oluştur">Create a Request</h3>
-      <div class="condition-toggle" style="margin-bottom:16px">
-        <button type="button" data-turu="satis" class="active" data-tr="Satış">Sell</button>
-        <button type="button" data-turu="alim" data-tr="Alım Talebi">Buy Request</button>
+    <div id="pazarWizardTrigger" class="calc-panel" style="text-align:center;display:none">
+      <h3 style="margin-top:0" data-tr="Talep Oluştur / İlan Ver">Create Request / Post Listing</h3>
+      <p class="calc-note" data-tr="Alım ya da satım ilanınızı birkaç adımda oluşturun.">Create your buy or sell listing in a few quick steps.</p>
+      <button type="button" class="btn btn-primary pazar-wizard-open-btn" style="width:100%" data-tr="Talep Oluştur / İlan Ver">Create Request / Post Listing</button>
+    </div>
+
+    <div id="pazarWizard" class="calc-panel" style="display:none">
+      <div id="wizardStep1" class="wizard-step">
+        <h3 style="margin-top:0" data-tr="1/3 — İlan Türü">Step 1/3 — Listing Type</h3>
+        <div class="wizard-choice-grid">
+          <button type="button" class="wizard-choice-btn" data-wizard-turu="satis" data-tr="📤 Satım İlanı">📤 Sell Listing</button>
+          <button type="button" class="wizard-choice-btn" data-wizard-turu="alim" data-tr="📥 Alım İlanı">📥 Buy Listing</button>
+        </div>
       </div>
+
+      <div id="wizardStep2" class="wizard-step" style="display:none">
+        <h3 data-tr="2/3 — Durumu">Step 2/3 — Condition</h3>
+        <div class="wizard-choice-grid">
+          <button type="button" class="wizard-choice-btn" data-wizard-durum="Sıfır" data-tr="Sıfır">New</button>
+          <button type="button" class="wizard-choice-btn" data-wizard-durum="2. El" data-tr="2. El">Used</button>
+        </div>
+      </div>
+
+      <div id="wizardStep3" class="wizard-step" style="display:none">
+        <h3 data-tr="3/3 — Kategori">Step 3/3 — Category</h3>
+        <div class="wizard-choice-grid">
+          <button type="button" class="wizard-choice-btn" data-wizard-kategori="parca" data-tr="Yedek Parça">Spare Part</button>
+          <button type="button" class="wizard-choice-btn" data-wizard-kategori="atasman" data-tr="Ataşman">Attachment</button>
+          <button type="button" class="wizard-choice-btn" data-wizard-kategori="makine" data-tr="İş Makinesi">Machine</button>
+        </div>
+      </div>
+
+    <form id="pazarForm" style="display:none">
       <input type="hidden" id="pazarTuru" value="satis">
+      <input type="hidden" id="pazarKategori" value="makine">
+      <input type="hidden" id="pazarDurum" value="Sıfır">
 
       <div class="calc-field">
         <label for="pazarAdSoyad" data-tr="Ad Soyad">Full Name</label>
@@ -113,26 +125,9 @@
         <input type="text" id="pazarBaslik" required data-tr-placeholder="Örn: 2019 model mini ekskavatör" placeholder="e.g. 2019 model mini excavator">
       </div>
 
-      <div class="calc-field">
-        <label for="pazarKategori" data-tr="Kategori">Category</label>
-        <select id="pazarKategori">
-          <option value="makine" data-tr="Makine">Machine</option>
-          <option value="atasman" data-tr="Ataşman">Attachment</option>
-          <option value="parca" data-tr="Yedek Parça">Spare Part</option>
-        </select>
-      </div>
-
       <div class="calc-field" id="pazarAltKategoriWrap" style="display:none">
         <label for="pazarAltKategori" data-tr="Alt Kategori">Subcategory</label>
         <select id="pazarAltKategori"></select>
-      </div>
-
-      <div class="calc-field" id="pazarDurumWrap">
-        <label for="pazarDurum" data-tr="Durumu">Condition</label>
-        <select id="pazarDurum">
-          <option value="Sıfır" data-tr="Sıfır">New</option>
-          <option value="2. El" data-tr="2. El">Used</option>
-        </select>
       </div>
 
       <div class="calc-field-pair">
@@ -192,6 +187,7 @@
       <div id="pazarMsg" class="calc-note"></div>
       <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px" data-tr="Talebi Gönder">Submit Request</button>
     </form>
+    </div>
   </div>
 </section>
 
@@ -215,6 +211,24 @@
       <button type="button" data-durum="2. El" data-tr="2. El">Used</button>
     </div>
     <div id="pazarList" class="category-grid"><p data-tr="Yükleniyor...">Loading...</p></div>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      <h3 style="margin-top:0" data-tr="Nasıl Kullanılır? (Video)">How to Use It (Video)</h3>
+      <div class="condition-toggle" style="margin-bottom:16px">
+        <button type="button" class="active" data-video-tab="satis" data-tr="Satış İlanı Ver">Post a Sale</button>
+        <button type="button" data-video-tab="alim" data-tr="Alım Talebi Ver">Post a Buy Request</button>
+        <button type="button" data-video-tab="foto" data-tr="Fotoğraf Ekle">Add Photos</button>
+      </div>
+      <div class="video-embed-wrap">
+        <iframe id="pazarHelpVideo" src="https://www.youtube-nocookie.com/embed/Zbkf3q_7Vp0" title="Pazar Yardım Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="calc-note"><a href="destek.html" data-tr="Diğer yardım videolarını gör →">See other help videos →</a></p>
+      <button type="button" class="btn btn-primary pazar-wizard-open-btn" style="width:100%;margin-top:16px" data-tr="Talep Oluştur / İlan Ver">Create Request / Post Listing</button>
+    </div>
   </div>
 </section>
 

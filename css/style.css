@@ -520,6 +520,29 @@ a { color: inherit; text-decoration: none; }
   color: #fff;
 }
 
+.wizard-step { margin-bottom: 8px; }
+.wizard-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.wizard-choice-btn {
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 18px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.wizard-choice-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-alt);
+}
+
 .group-filter {
   display: flex;
   flex-wrap: wrap;

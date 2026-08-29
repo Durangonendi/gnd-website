@@ -91,22 +91,37 @@
 
   function setTuru(turu) {
     currentTuru = turu;
-    document.querySelectorAll('[data-turu]').forEach(function (btn) {
-      btn.classList.toggle("active", btn.dataset.turu === turu);
-    });
     document.getElementById("pazarTuru").value = turu;
-    var durumWrap = document.getElementById("pazarDurumWrap");
     var baslikLabel = document.getElementById("pazarBaslikLabel");
     var fiyatLabel = document.getElementById("pazarFiyatLabel");
     if (turu === "satis") {
-      durumWrap.style.display = "";
       baslikLabel.textContent = t("baslikSatis");
       fiyatLabel.textContent = t("fiyatSatis");
     } else {
-      durumWrap.style.display = "none";
       baslikLabel.textContent = t("baslikAlim");
       fiyatLabel.textContent = t("fiyatAlim");
     }
+  }
+
+  // ── Ilan sihirbazi (wizard): tur -> durum (sadece satis icin) -> kategori -> form ──
+  function wizardReset() {
+    document.getElementById("pazarWizardTrigger").style.display = "";
+    document.getElementById("pazarWizard").style.display = "none";
+    document.getElementById("wizardStep1").style.display = "";
+    document.getElementById("wizardStep2").style.display = "none";
+    document.getElementById("wizardStep3").style.display = "none";
+    document.getElementById("pazarForm").style.display = "none";
+  }
+
+  async function wizardOpen() {
+    var user = await window.gndAuth.getUser();
+    if (!user) {
+      document.getElementById("pazarLoginPrompt").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    document.getElementById("pazarWizardTrigger").style.display = "none";
+    document.getElementById("pazarWizard").style.display = "";
+    document.getElementById("pazarWizard").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function getListingPhotos(r) {
@@ -358,17 +373,42 @@
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
-    document.querySelectorAll('[data-turu]').forEach(function (btn) {
-      btn.addEventListener("click", function () { setTuru(btn.dataset.turu); });
-    });
-
     var pazarKategoriSelect = document.getElementById("pazarKategori");
     var pazarAltKategoriSelect = document.getElementById("pazarAltKategori");
     var pazarAltKategoriWrap = document.getElementById("pazarAltKategoriWrap");
-    pazarKategoriSelect.addEventListener("change", function () {
-      updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+
+    document.querySelectorAll(".pazar-wizard-open-btn").forEach(function (btn) {
+      btn.addEventListener("click", wizardOpen);
     });
-    updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+    document.querySelectorAll("[data-wizard-turu]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTuru(btn.dataset.wizardTuru);
+        document.getElementById("wizardStep1").style.display = "none";
+        if (btn.dataset.wizardTuru === "satis") {
+          document.getElementById("wizardStep2").style.display = "";
+        } else {
+          document.getElementById("pazarDurum").value = "Sıfır";
+          document.getElementById("wizardStep3").style.display = "";
+        }
+      });
+    });
+    document.querySelectorAll("[data-wizard-durum]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.getElementById("pazarDurum").value = btn.dataset.wizardDurum;
+        document.getElementById("wizardStep2").style.display = "none";
+        document.getElementById("wizardStep3").style.display = "";
+      });
+    });
+    document.querySelectorAll("[data-wizard-kategori]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        pazarKategoriSelect.value = btn.dataset.wizardKategori;
+        updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+        document.getElementById("wizardStep3").style.display = "none";
+        document.getElementById("pazarForm").style.display = "";
+        document.getElementById("pazarForm").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
     document.querySelectorAll('[data-filter]').forEach(function (btn) {
       btn.addEventListener("click", function () {
         currentFilter = btn.dataset.filter;
@@ -423,18 +463,20 @@
       langSelect.addEventListener("change", function () {
         setTuru(currentTuru);
         renderListings();
+        updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value, pazarAltKategoriSelect.value);
       });
     }
 
     var user = await window.gndAuth.getUser();
     if (user) {
-      document.getElementById("pazarForm").style.display = "";
       document.getElementById("pazarLoginPrompt").style.display = "none";
+      wizardReset();
       var meta = user.user_metadata || {};
       if (meta.ad_soyad) document.getElementById("pazarAdSoyad").value = meta.ad_soyad;
       if (meta.telefon) document.getElementById("pazarTelefon").value = meta.telefon;
     } else {
-      document.getElementById("pazarForm").style.display = "none";
+      document.getElementById("pazarWizardTrigger").style.display = "none";
+      document.getElementById("pazarWizard").style.display = "none";
       document.getElementById("pazarLoginPrompt").style.display = "";
     }
 
@@ -504,7 +546,7 @@
       selectedFiles = [];
       document.getElementById("pazarFotoPreview").innerHTML = "";
       setTuru("satis");
-      updateAltKategoriSelect(pazarAltKategoriSelect, pazarAltKategoriWrap, pazarKategoriSelect.value);
+      wizardReset();
     });
 
     var VIDEO_TAB_IDS = { satis: "Zbkf3q_7Vp0", alim: "nRf3YRmgQT4", foto: "g2JkOwoNPsw" };
