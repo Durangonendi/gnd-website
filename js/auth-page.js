@@ -96,7 +96,7 @@
           }
           var res2 = await window.gndAuth.signUp(email, password, { ad_soyad: adSoyad, telefon: telefon });
           if (res2.error) throw res2.error;
-          if (typeof window.gndTrack === "function") window.gndTrack("registration", {});
+          if (typeof window.gndTrack === "function") window.gndTrack("registration", { email: email, ad_soyad: adSoyad, telefon: telefon });
           if (res2.data && res2.data.session) {
             window.location.href = "hesabim.html";
           } else {
