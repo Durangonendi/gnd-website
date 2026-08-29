@@ -193,6 +193,33 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 32px;
 }
 
+/* Marketplace promo strip — anasayfanin en ustunde, ziyaretciyi ilk karsilayan bolum */
+.pazar-top-banner {
+  background: linear-gradient(135deg, #1a1a1a, #2b2418);
+  padding: 28px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.pazar-top-banner-inner { max-width: 720px; margin: 0 auto; }
+.pazar-top-banner-badge {
+  display: inline-block;
+  background: rgba(216, 181, 111, 0.18);
+  color: #d8b56f;
+  border: 1px solid rgba(216, 181, 111, 0.4);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.pazar-top-banner h2 { color: #fff; font-size: 24px; margin: 0 0 8px; }
+.pazar-top-banner p { color: rgba(255, 255, 255, 0.75); margin: 0 0 18px; font-size: 14.5px; line-height: 1.5; }
+@media (max-width: 640px) {
+  .pazar-top-banner { padding: 22px 20px; }
+  .pazar-top-banner h2 { font-size: 19px; }
+}
+
 /* Full-bleed cover-photo style hero */
 .hero-with-cover {
   position: relative;
