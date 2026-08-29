@@ -1,6 +1,6 @@
 (function () {
   var stored = localStorage.getItem('gnd-site-lang');
-  var lang = stored === 'tr' ? 'tr' : 'en';
+  var lang = stored === 'en' ? 'en' : 'tr';
 
   function apply(l) {
     document.documentElement.lang = l;
