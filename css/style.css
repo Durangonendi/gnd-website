@@ -1281,3 +1281,20 @@ a { color: inherit; text-decoration: none; }
   gap: 24px;
 }
 .video-card h3 { margin: 0 0 8px; }
+
+/* Site-wide footer link block + related-link lists (internal linking for SEO) */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 24px 32px;
+  padding-bottom: 22px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-col h4 { margin: 0 0 10px; font-size: 14px; color: var(--text); }
+.footer-col a { display: block; padding: 3px 0; color: var(--text-dim); text-decoration: none; }
+.footer-col a:hover { color: var(--text); text-decoration: underline; }
+.hub-list { margin: 10px 0 0; padding-left: 18px; }
+.hub-list li { margin: 6px 0; }
+.related-links { margin-top: 24px; }
+.related-links h3 { margin-top: 0; }
