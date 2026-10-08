@@ -10,7 +10,7 @@
 
   function getLang() {
     var stored = localStorage.getItem("gnd-site-lang");
-    return stored === "tr" ? "tr" : "en";
+    return stored === "tr" || stored === "en" ? stored : (document.documentElement.lang === "en" ? "en" : "tr");
   }
 
   function t(key) {

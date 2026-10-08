@@ -66,7 +66,8 @@
   }
 
   function buildWidget() {
-    var lang = localStorage.getItem("gnd-site-lang") === "en" ? "en" : "tr";
+    var storedLang = localStorage.getItem("gnd-site-lang");
+    var lang = storedLang === "tr" || storedLang === "en" ? storedLang : (document.documentElement.lang === "en" ? "en" : "tr");
     var isTR = lang === "tr";
 
     var fabLabel = isTR ? "Canlı Destek" : "Live Support";

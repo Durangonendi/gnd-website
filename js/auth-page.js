@@ -14,7 +14,8 @@
   };
 
   function getLang() {
-    return localStorage.getItem("gnd-site-lang") === "tr" ? "tr" : "en";
+    var stored = localStorage.getItem("gnd-site-lang");
+    return stored === "tr" || stored === "en" ? stored : (document.documentElement.lang === "en" ? "en" : "tr");
   }
 
   function showMessage(textOrKey, isError) {
