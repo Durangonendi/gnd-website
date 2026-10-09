@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://gndmachinery.com/sitemap.xml
+Sitemap: https://gndmachinery.com/sitemap-pazar.xml

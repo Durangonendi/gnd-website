@@ -50,10 +50,15 @@ export default async function handler(req, res) {
   let ogImage = FALLBACK_IMAGE;
   const pageUrl = "https://gndmachinery.com/pazar.html" + (id ? "?id=" + encodeURIComponent(id) : "");
 
+  let listingFound = null;
+  let lookupOk = false;
+
   if (id) {
     try {
       const listing = await fetchListing(id);
+      lookupOk = true;
       if (listing) {
+        listingFound = listing;
         ogTitle = listing.baslik + " — GND Machinery";
         const desc = cleanDescription(listing.aciklama);
         ogDescription = [listing.durum_bilgisi, listing.fiyat, desc].filter(Boolean).join(" · ") || ogDescription;
@@ -64,7 +69,27 @@ export default async function handler(req, res) {
     }
   }
 
+  // Unknown/unpublished ids must not be indexed; a failed lookup (outage) is left alone.
+  let robotsTag = "";
+  if (id && lookupOk && !listingFound) robotsTag = '<meta name="robots" content="noindex, follow">\n';
+
+  let jsonLd = "";
+  if (listingFound) {
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: listingFound.baslik,
+      description: ogDescription,
+      image: ogImage,
+      url: pageUrl,
+      brand: { "@type": "Organization", name: "GND İş Makineleri" },
+    };
+    jsonLd = '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, "\\u003c") + "</script>\n";
+  }
+
   const metaTags =
+    robotsTag +
+    jsonLd +
     '<meta property="og:type" content="website">\n' +
     '<meta property="og:url" content="' + escapeAttr(pageUrl) + '">\n' +
     '<meta property="og:title" content="' + escapeAttr(ogTitle) + '">\n' +
@@ -80,6 +105,7 @@ export default async function handler(req, res) {
     '<meta name="description" content="' + escapeAttr(ogDescription) + '">\n' + metaTags
   );
   html = html.replace(/<title[^>]*>[^<]*<\/title>/, "<title>" + escapeAttr(ogTitle) + "</title>");
+  html = html.replace(/<link rel="canonical"[^>]*>/, '<link rel="canonical" href="' + escapeAttr(pageUrl) + '">');
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");

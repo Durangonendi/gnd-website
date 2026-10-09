@@ -169,7 +169,7 @@
       return (
         '<div class="category-card pazar-clickable" data-id="' + r.id + '">' +
         imgHtml +
-        "<h3>" + escapeHtml(r.baslik) + kategoriHtml + "</h3>" +
+        "<h3><a class=\"pazar-card-link\" href=\"pazar.html?id=" + encodeURIComponent(r.id) + "\">" + escapeHtml(r.baslik) + "</a>" + kategoriHtml + "</h3>" +
         '<p><strong>' + badge + '</strong>' + (r.durum_bilgisi ? " · " + escapeHtml(r.durum_bilgisi) : "") + "</p>" +
         specLine +
         (r.fiyat ? "<p>" + escapeHtml(r.fiyat) + "</p>" : "") +
@@ -433,6 +433,8 @@
     });
 
     document.getElementById("pazarList").addEventListener("click", function (e) {
+      var cardLink = e.target.closest("a.pazar-card-link");
+      if (cardLink) e.preventDefault();
       var card = e.target.closest(".pazar-clickable");
       if (!card) return;
       openDetay(card.dataset.id);

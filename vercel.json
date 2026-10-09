@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/pazar.html", "destination": "/api/pazar-meta" }
+    { "source": "/pazar.html", "destination": "/api/pazar-meta" },
+    { "source": "/sitemap-pazar.xml", "destination": "/api/sitemap-pazar" }
   ],
   "headers": [
     {
