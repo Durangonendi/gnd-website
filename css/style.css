@@ -1298,3 +1298,7 @@ a { color: inherit; text-decoration: none; }
 .hub-list li { margin: 6px 0; }
 .related-links { margin-top: 24px; }
 .related-links h3 { margin-top: 0; }
+
+/* Homepage link clouds (crawl paths to spec pages + guides) */
+.link-cloud { columns: 3 230px; column-gap: 28px; padding-left: 18px; margin: 12px 0 26px; }
+.link-cloud li { margin: 6px 0; break-inside: avoid; }
