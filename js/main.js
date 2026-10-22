@@ -24,8 +24,10 @@ function applyTranslations(lang) {
   });
   document.documentElement.lang = lang;
 
-  document.getElementById("header-whatsapp-btn").href = buildWhatsAppLink(dict.quote_generic);
-  document.getElementById("contact-whatsapp-btn").href = buildWhatsAppLink(dict.quote_generic);
+  const hw = document.getElementById("header-whatsapp-btn");
+  if (hw) hw.href = buildWhatsAppLink(dict.quote_generic);
+  const cw = document.getElementById("contact-whatsapp-btn");
+  if (cw) cw.href = buildWhatsAppLink(dict.quote_generic);
 }
 
 function conditionLabel(lang) {
@@ -34,6 +36,7 @@ function conditionLabel(lang) {
 
 function renderCategoryGrid(gridId, list, lang, includeCondition) {
   const grid = document.getElementById(gridId);
+  if (!grid) return;
   grid.innerHTML = "";
   list.forEach((cat) => {
     const card = document.createElement("div");
@@ -86,8 +89,10 @@ function renderGroupFilter(lang) {
 function renderMachines(lang) {
   const list = filteredCategories(lang);
   renderCategoryGrid("category-grid", list, lang, true);
-  document.getElementById("category-grid").style.display = list.length ? "grid" : "none";
-  document.getElementById("category-no-results").style.display = list.length ? "none" : "block";
+  const cg = document.getElementById("category-grid");
+  if (cg) cg.style.display = list.length ? "grid" : "none";
+  const nr = document.getElementById("category-no-results");
+  if (nr) nr.style.display = list.length ? "none" : "block";
 }
 
 function renderAll(lang) {
@@ -100,7 +105,8 @@ function setLang(lang) {
   localStorage.setItem(STORAGE_KEY, lang);
   applyTranslations(lang);
   renderAll(lang);
-  document.getElementById("lang-select").value = lang;
+  const ls = document.getElementById("lang-select");
+  if (ls) ls.value = lang;
 }
 
 function setCondition(condition) {
@@ -112,12 +118,15 @@ function setCondition(condition) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("footer-year").textContent = new Date().getFullYear();
-  document.getElementById("stat-category-count").textContent = CATEGORIES.length + "+";
+  const fy = document.getElementById("footer-year");
+  if (fy) fy.textContent = new Date().getFullYear();
+  const sc = document.getElementById("stat-category-count");
+  if (sc) sc.textContent = CATEGORIES.length + "+";
   const initialLang = getLang();
   setLang(initialLang);
 
-  document.getElementById("lang-select").addEventListener("change", (e) => {
+  const langSel = document.getElementById("lang-select");
+  if (langSel) langSel.addEventListener("change", (e) => {
     setLang(e.target.value);
   });
 
@@ -125,7 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => setCondition(btn.dataset.condition));
   });
 
-  document.getElementById("category-search-input").addEventListener("input", (e) => {
+  const csi = document.getElementById("category-search-input");
+  if (csi) csi.addEventListener("input", (e) => {
     searchTerm = e.target.value;
     renderMachines(getLang());
   });
