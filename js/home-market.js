@@ -29,6 +29,33 @@
     return m ? m[1] : "";
   }
 
+  var pages = [];
+  document.querySelectorAll("#side-drawer li a").forEach(function (a) {
+    var h = a.getAttribute("href") || "";
+    if (/^(tel:|mailto:|https?:)/.test(h)) return;
+    pages.push({ t: a.textContent.trim(), h: h, x: /teknik-ozellikler|-vs-/.test(h) ? " teknik özellikleri özellik kaç ton kaç beygir kaç kilo karşılaştırma" : "" });
+  });
+  var pageBox = document.createElement("div");
+  pageBox.className = "mkt-pages";
+  grid.parentNode.insertBefore(pageBox, grid);
+
+  function trLower(x) { return String(x || "").toLocaleLowerCase("tr"); }
+
+  function renderPages(q) {
+    if (!q) { pageBox.innerHTML = ""; return 0; }
+    var words = trLower(q).split(/\s+/).filter(Boolean);
+    var hits = pages.filter(function (p) {
+      var t = trLower(p.t) + p.x + " " + trLower(p.h.replace(/[-_.\/]/g, " "));
+      return words.every(function (w) { return t.indexOf(w) !== -1; });
+    }).slice(0, 12);
+    pageBox.innerHTML = hits.length
+      ? '<h3>' + esc(tr("mkt_pages_title")) + '</h3><ul>' + hits.map(function (p) {
+          return '<li><a href="' + esc(p.h) + '">' + esc(p.t) + "</a></li>";
+        }).join("") + "</ul>"
+      : "";
+    return hits.length;
+  }
+
   function render() {
     var q = search ? search.value.trim().toLocaleLowerCase("tr") : "";
     var list = all.filter(function (r) {
@@ -37,6 +64,7 @@
       var hay = [r.baslik, r.marka, r.model, r.alt_kategori, r.durum_bilgisi, r.model_yili, r.tonaj].join(" ").toLocaleLowerCase("tr");
       return hay.indexOf(q) !== -1;
     });
+    var pageHits = renderPages(q);
     grid.innerHTML = list.map(function (r) {
       var img = photoOf(r);
       var wanted = r.islem_turu !== "satis";
@@ -51,7 +79,10 @@
     if (status) {
       status.hidden = false;
       if (failed) status.textContent = tr("mkt_error");
-      else if (!list.length) status.textContent = tr("mkt_empty");
+      else if (!list.length && q && !pageHits) {
+        status.innerHTML = esc(tr("mkt_nosearch")) + ' <a href="https://wa.me/905550708034?text=' + encodeURIComponent(q) + '" target="_blank" rel="noopener">' + esc(tr("mkt_ask_wa")) + "</a>";
+      }
+      else if (!list.length) status.textContent = q ? "" : tr("mkt_empty");
       else status.hidden = true;
     }
   }
