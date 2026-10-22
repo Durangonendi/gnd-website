@@ -1372,3 +1372,6 @@ a { color: inherit; text-decoration: none; }
   .mkt-intro h1 { font-size: 21px; }
   .mkt-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
+
+.hero-market.hero-with-cover { min-height: 340px; padding: 40px 20px; }
+@media (max-width: 720px) { .hero-market.hero-with-cover { min-height: 280px; padding: 28px 16px; } }
