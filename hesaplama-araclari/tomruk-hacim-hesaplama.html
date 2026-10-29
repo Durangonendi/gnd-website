@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-tr="Tomruk Hacim Hesaplama (Kütür / Kütük m³) — GND Machinery" data-en="Log Volume Calculator — GND Machinery">Tomruk Hacim Hesaplama (Kütür / Kütük m³) — GND Machinery</title>
+<meta name="description" content="Tomruk ve kütür hacmi hesaplama aracı. Çap ve boyu girin, tomruğun m³ hacmini Huber ya da Smalian yöntemiyle görün.">
+<link rel="canonical" href="https://gndmachinery.com/hesaplama-araclari/tomruk-hacim-hesaplama.html">
+<link rel="icon" href="https://gndmachinery.com/assets/logo-header.png" type="image/png">
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-37LSLM4SE6"></script>
+<script src="../js/analytics.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://gndmachinery.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Hesaplama Araçları", "item": "https://gndmachinery.com/#calculators"},
+    {"@type": "ListItem", "position": 3, "name": "Tomruk Hacim Hesaplama", "item": "https://gndmachinery.com/hesaplama-araclari/tomruk-hacim-hesaplama.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Tomruk hacmi nasıl hesaplanır?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Huber yönteminde tomruğun orta çapı ölçülür ve hacim π/4 × çap² × boy formülüyle bulunur. Smalian yönteminde alt ve üst uç çapların kesit alanlarının ortalaması boyla çarpılır."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Kütür ve tomruk aynı şey mi?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Bu sayfadaki hesaplama kesilmiş ağaç gövdesi (tomruk, kütük, kütür) hacmi içindir; hepsi için aynı geometrik formül kullanılır."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Orta çapı 30 cm, boyu 4 m olan tomruk kaç m³'tür?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Huber yöntemiyle π/4 × 0,30² × 4 hesabı yaklaşık 0,28 m³ verir."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body data-calc="tomruk">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo"><img src="../assets/logo-header.png" width="160" height="160" alt="GND Machinery" /></a>
+    <nav class="main-nav">
+      <a href="../index.html#home" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a>
+      <a href="../makineler.html" data-tr="Makineler" data-en="Machines">Makineler</a>
+      <a href="../makineler.html#spareparts" data-tr="Yedek Parça" data-en="Spare Parts">Yedek Parça</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle" data-tr="Daha Fazla ▾" data-en="More ▾">Daha Fazla ▾</button>
+        <div class="nav-dropdown-menu">
+          <a href="../hakkimizda.html#areas" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+          <a href="../hakkimizda.html#calculators" data-tr="Hesaplama Araçları" data-en="Calculators">Hesaplama Araçları</a>
+          <a href="../blog/index.html" data-tr="Blog" data-en="Blog">Blog</a>
+          <a href="../pazar.html" data-tr="Makine Pazarı" data-en="Machine Market">Makine Pazarı</a>
+          <a href="../destek.html" data-tr="Destek / Yardım" data-en="Support / Help">Destek / Yardım</a>
+        </div>
+      </div>
+      <a href="../kurumsal.html" data-tr="Hakkımızda" data-en="About">Hakkımızda</a>
+      <a href="../hakkimizda.html#contact" data-tr="İletişim" data-en="Contact">İletişim</a>
+    </nav>
+    <div class="header-actions">
+      <span id="auth-nav-slot" class="auth-nav-slot"></span>
+      <select id="lang-select" class="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="tr">TR</option>
+      </select>
+      <a class="btn btn-primary header-cta" href="https://wa.me/905550708034?text=Hi%2C%20I%27d%20like%20more%20information%20about%20GND%20Machinery." target="_blank" rel="noopener">
+        <span data-tr="Teklif Al" data-en="Get a Quote">Teklif Al</span>
+      </a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="hero category-hero">
+  <div class="hero-inner">
+    <h1 data-tr="Tomruk Hacim Hesaplama" data-en="Log Volume Calculator">Tomruk Hacim Hesaplama</h1>
+    <p data-tr="Tomruk, kütür ve kütük hacmini çap ve boydan m³ olarak hesaplayın. Ortalama çapla (Huber) ya da iki uç çapıyla (Smalian) hesaplayabilirsiniz." data-en="Calculate log volume in cubic meters from diameter and length, using either mid-diameter (Huber) or end diameters (Smalian).">Tomruk, kütür ve kütük hacmini çap ve boydan m³ olarak hesaplayın. Ortalama çapla (Huber) ya da iki uç çapıyla (Smalian) hesaplayabilirsiniz.</p>
+  </div>
+</section>
+
+<section class="categories-section">
+  <div class="section-inner">
+    <div class="calc-panel">
+      <div class="calc-field"><label data-tr="Orta Çap (cm) — Huber yöntemi" data-en="Mid Diameter (cm) — Huber method">Orta Çap (cm) — Huber yöntemi</label><input type="number" id="tomrukOrtaCap" value="30" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="Alt Uç Çapı (cm) — Smalian, isteğe bağlı" data-en="Bottom Diameter (cm) — Smalian, optional">Alt Uç Çapı (cm) — Smalian, isteğe bağlı</label><input type="number" id="tomrukAltCap" value="0" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="Üst Uç Çapı (cm) — Smalian, isteğe bağlı" data-en="Top Diameter (cm) — Smalian, optional">Üst Uç Çapı (cm) — Smalian, isteğe bağlı</label><input type="number" id="tomrukUstCap" value="0" min="0" step="0.5"></div>
+      <div class="calc-field"><label data-tr="Boy (m)" data-en="Length (m)">Boy (m)</label><input type="number" id="tomrukBoy" value="4" min="0" step="0.1"></div>
+      <div class="calc-field"><label data-tr="Adet" data-en="Number of Logs">Adet</label><input type="number" id="tomrukAdet" value="1" min="1" step="1"></div>
+      <button id="calcBtn" class="btn btn-primary" style="width:100%" data-tr="Hesapla" data-en="Calculate">Hesapla</button>
+      <div id="calcResult" class="calc-result"></div>
+      <p class="calc-note" data-tr="Alt ve üst çapı girerseniz Smalian, girmezseniz orta çapla Huber yöntemi kullanılır. Sonuç geometrik bir hesaptır; resmî ölçüm, kabuk payı ve kesim standartları farklı olabilir." data-en="If you enter both end diameters Smalian is used, otherwise Huber with the mid diameter. The result is a geometric estimate; official scaling, bark allowance and cutting standards may differ.">Alt ve üst çapı girerseniz Smalian, girmezseniz orta çapla Huber yöntemi kullanılır. Sonuç geometrik bir hesaptır; resmî ölçüm, kabuk payı ve kesim standartları farklı olabilir.</p>
+      <div class="calc-cta">
+        <a href="https://wa.me/905550708034?text=Hi%2C%20I%20have%20a%20question%20about%20the%20Log%20Volume%20Calculator." class="btn btn-primary" style="width:100%" target="_blank" rel="noopener" data-tr="Kesin Bilgi İçin WhatsApp'tan Sorun →" data-en="Ask on WhatsApp for Exact Info →">Kesin Bilgi İçin WhatsApp'tan Sorun →</a>
+      </div>
+    </div>
+
+    <div class="calc-panel" style="margin-top:24px">
+      <h3 style="margin-top:0">Tomruk hacmi nasıl hesaplanır?</h3>
+      <p>Tomruk, uzun bir silindire benzetilir. <strong>Huber yöntemi:</strong> tomruğun tam ortasındaki çap ölçülür, hacim = π/4 × çap² × boy formülüyle bulunur (çap metre cinsinden alınır). <strong>Smalian yöntemi:</strong> alt ve üst uç çaplarından iki kesit alanı bulunur, ortalaması boyla çarpılır. Çap ucundan uca çok değişiyorsa Smalian, tomruk neredeyse silindirse Huber yeterlidir.</p>
+      <h4>Örnek</h4>
+      <p>Orta çapı 30 cm, boyu 4 m olan bir tomruğun hacmi yaklaşık 0,28 m³'tür (π/4 × 0,30² × 4).</p>
+      <h4>Neden önemli?</h4>
+      <p>Tomruk yüklemesinde kamyon ve ekskavatör ya da loader seçimi, taşınacak toplam hacme göre yapılır. Hacmi bilmek, kaç sefer gerektiğini planlamaya yardım eder. Taşınacak malzeme miktarı için <a href="malzeme-tasima-hesaplama.html">malzeme taşıma hesaplama</a> aracına da bakabilirsiniz.</p>
+    </div>
+  </div>
+</section>
+
+<section class="categories-section spareparts-section">
+  <div class="section-inner">
+    <h2 data-tr="Diğer Hesaplama Araçları" data-en="Other Calculators">Diğer Hesaplama Araçları</h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <h3><a href="hafriyat-dolgu-hesaplama.html" data-tr="Hafriyat / Dolgu Hesaplama" data-en="Excavation &amp;amp; Fill Volume Calculator">Hafriyat / Dolgu Hesaplama</a></h3>
+        <p data-tr="Hafriyat ve dolgu hacmi hesaplama aracı. Uzunluk, genişlik ve derinlik girin; yerinde ve gevşeme sonrası (kazılmış) hacmi m³ olarak görün." data-en="Free excavation and fill volume calculator for construction projects. Enter length, width and depth to get bank and loose (swelled) volume in cubic meters.">Hafriyat ve dolgu hacmi hesaplama aracı. Uzunluk, genişlik ve derinlik girin; yerinde ve gevşeme sonrası (kazılmış) hacmi m³ olarak görün.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="beton-hesaplama.html" data-tr="Beton Hesaplama" data-en="Concrete Volume Calculator">Beton Hesaplama</a></h3>
+        <p data-tr="Beton hacmi hesaplama aracı. Uzunluk, genişlik ve kalınlık girin; gerekli beton hacmini m³ olarak, fire payıyla birlikte görün." data-en="Free concrete volume calculator. Enter length, width and thickness to get the required concrete volume in cubic meters, with a waste margin included.">Beton hacmi hesaplama aracı. Uzunluk, genişlik ve kalınlık girin; gerekli beton hacmini m³ olarak, fire payıyla birlikte görün.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="malzeme-tasima-hesaplama.html" data-tr="Malzeme Taşıma Hesaplama" data-en="Material Hauling Calculator">Malzeme Taşıma Hesaplama</a></h3>
+        <p data-tr="Malzeme taşıma hesaplama aracı. Toplam malzeme hacmini ve araç kapasitesini girin, kaç sefer gerektiğini görün." data-en="Free material hauling calculator. Enter total material volume and vehicle capacity to find out how many trips you&#x27;ll need.">Malzeme taşıma hesaplama aracı. Toplam malzeme hacmini ve araç kapasitesini girin, kaç sefer gerektiğini görün.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="ekipman-secim-rehberi.html" data-tr="Ekipman Seçim Rehberi" data-en="Equipment Selection Guide">Ekipman Seçim Rehberi</a></h3>
+        <p data-tr="Ekipman seçim rehberi. İşinizin türünü seçin, projeniz için önerilen ekskavatör sınıfını görün." data-en="Free equipment selection guide. Answer one question about your job type to get a recommended excavator class for your project.">Ekipman seçim rehberi. İşinizin türünü seçin, projeniz için önerilen ekskavatör sınıfını görün.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="yakit-maliyeti-hesaplama.html" data-tr="Yakıt Maliyeti Hesaplama" data-en="Fuel Cost Calculator">Yakıt Maliyeti Hesaplama</a></h3>
+        <p data-tr="Ağır iş makinesi yakıt maliyeti hesaplama aracı. Makine tipi, çalışma saati ve yakıt fiyatına göre tahmini yakıt tüketimi ve maliyeti." data-en="Free fuel cost calculator for heavy equipment. Estimate fuel consumption and cost based on machine type, working hours and fuel price.">Ağır iş makinesi yakıt maliyeti hesaplama aracı. Makine tipi, çalışma saati ve yakıt fiyatına göre tahmini yakıt tüketimi ve maliyeti.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="ithalat-maliyet-hesaplama.html" data-tr="İthalat Maliyet Hesaplayıcı" data-en="Import Cost Estimator">İthalat Maliyet Hesaplayıcı</a></h3>
+        <p data-tr="Ağır iş makinesi ithalat maliyeti hesaplama aracı. FOB fiyat, navlun, gümrük vergisi ve KDV oranını girin; tahmini toplam maliyeti görün." data-en="Free heavy equipment import cost estimator for Turkey. Enter FOB price, freight, customs duty and VAT rate to estimate total landed cost.">Ağır iş makinesi ithalat maliyeti hesaplama aracı. FOB fiyat, navlun, gümrük vergisi ve KDV oranını girin; tahmini toplam maliyeti görün.</p>
+      </div>
+      <div class="category-card">
+        <h3><a href="atasman-secim-rehberi.html" data-tr="Ataşman Seçim Rehberi" data-en="Attachment Selection Guide">Ataşman Seçim Rehberi</a></h3>
+        <p data-tr="Ekskavatör ataşman seçim rehberi. Makinenizin ağırlık sınıfını ve yapacağınız işi seçin, önerilen ataşmanı görün." data-en="Free excavator attachment selection guide. Select your machine&#x27;s weight class and job type to get a recommended attachment.">Ekskavatör ataşman seçim rehberi. Makinenizin ağırlık sınıfını ve yapacağınız işi seçin, önerilen ataşmanı görün.</p>
+      </div>
+    </div>
+    <p class="back-link"><a href="../index.html" data-tr="← Anasayfaya dön" data-en="← Back to home">← Anasayfaya dön</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner footer-links"><div class="footer-col"><h4 data-tr="Makineler" data-en="Machines">Makineler</h4><a href="../makineler/excavator.html" data-tr="Ekskavatörler" data-en="Excavators">Ekskavatörler</a><a href="../makineler/mini-excavator.html" data-tr="Mini Ekskavatörler" data-en="Mini Excavators">Mini Ekskavatörler</a><a href="../makineler/wheel-loader.html" data-tr="Lastikli Yükleyiciler" data-en="Wheel Loaders">Lastikli Yükleyiciler</a><a href="../makineler/backhoe-loader.html" data-tr="Bekoloaderler" data-en="Backhoe Loaders">Bekoloaderler</a><a href="../makineler/bulldozer.html" data-tr="Dozerler" data-en="Bulldozers">Dozerler</a><a href="../makineler/motor-grader.html" data-tr="Greyderler" data-en="Motor Graders">Greyderler</a><a href="../makineler/road-roller.html" data-tr="Silindirler" data-en="Road Rollers">Silindirler</a><a href="../makineler/skid-steer-loader.html" data-tr="Skid Steer Loaderlar" data-en="Skid Steer Loaders">Skid Steer Loaderlar</a><a href="../makineler/telehandler.html" data-tr="Telehandlerlar" data-en="Telehandlers">Telehandlerlar</a><a href="../makineler/boom-lift.html" data-tr="Platform ve Manliftler" data-en="Boom Lifts">Platform ve Manliftler</a><a href="../makineler/asphalt-paver.html" data-tr="Asfalt Finişerleri" data-en="Asphalt Pavers">Asfalt Finişerleri</a><a href="../makineler/mining-excavator.html" data-tr="Madencilik Ekskavatörleri" data-en="Mining Excavators">Madencilik Ekskavatörleri</a></div><div class="footer-col"><h4 data-tr="Yedek Parça" data-en="Spare Parts">Yedek Parça</h4><a href="../yedek-parca/filters.html" data-tr="Filtreler" data-en="Filters">Filtreler</a><a href="../yedek-parca/hydraulic-parts.html" data-tr="Hidrolik Parçalar" data-en="Hydraulic Parts">Hidrolik Parçalar</a><a href="../yedek-parca/mechanical-parts.html" data-tr="Mekanik Parçalar" data-en="Mechanical Parts">Mekanik Parçalar</a><a href="../yedek-parca/attachments.html" data-tr="Ataşmanlar" data-en="Attachments">Ataşmanlar</a></div><div class="footer-col"><h4 data-tr="Keşfet" data-en="Explore">Keşfet</h4><a href="../blog/index.html" data-tr="Blog ve Rehberler" data-en="Blog &amp; Guides">Blog ve Rehberler</a><a href="../teknik-ozellikler.html" data-tr="Teknik Özellikler ve Karşılaştırmalar" data-en="Specs &amp; Comparisons">Teknik Özellikler ve Karşılaştırmalar</a><a href="../hakkimizda.html#calculators" data-tr="Hesaplama Araçları" data-en="Calculators">Hesaplama Araçları</a><a href="../pazar.html" data-tr="Makine Pazarı" data-en="Machine Market">Makine Pazarı</a><a href="../teklif-al.html" data-tr="Teklif Al" data-en="Request a Quote">Teklif Al</a><a href="../destek.html" data-tr="Destek" data-en="Support">Destek</a><a href="../kurumsal.html" data-tr="Kurumsal" data-en="About Us">Kurumsal</a><a href="../hizmetler/import-export-consultancy.html" data-tr="İthalat &amp; İhracat Danışmanlığı" data-en="Import &amp; Export Consultancy">İthalat &amp; İhracat Danışmanlığı</a></div></div>
+  <div class="section-inner footer-inner">
+    <div>© 2026 GND Machinery — GND İş Makineleri Sanayi ve Ticaret A.Ş.</div>
+    <div class="footer-note" data-tr="Ağır iş makinesi ve yedek parça küresel tedarikçisi." data-en="Global supplier of heavy equipment and spare parts.">Ağır iş makinesi ve yedek parça küresel tedarikçisi.</div>
+  </div>
+</footer>
+
+<script src="../js/detail-lang.js"></script>
+<script src="../js/calculators.js"></script>
+<script src="../js/lib/supabase.min.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/advisor-widget.js"></script>
+</body>
+</html>

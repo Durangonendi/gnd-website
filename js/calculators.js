@@ -85,6 +85,17 @@
         "<div>Yaklaşık <strong>" + fmt(days) + " iş günü</strong> (günde 8 saat çalışmayla).</div>"
       );
     },
+    tomruk: function () {
+      var mid = num("tomrukOrtaCap"), a = num("tomrukAltCap"), u = num("tomrukUstCap"), L = num("tomrukBoy"), n = Math.max(1, num("tomrukAdet"));
+      var area = function (cm) { return Math.PI / 4 * Math.pow(cm / 100, 2); };
+      var one, method;
+      if (a > 0 && u > 0) { one = (area(a) + area(u)) / 2 * L; method = "Smalian"; }
+      else { one = area(mid) * L; method = "Huber"; }
+      showResult(
+        '<div class="calc-result-value">' + fmt(one * n) + " m³</div>" +
+        "<div>" + n + " adet için toplam hacim (" + method + " yöntemi). Tek tomruk: <strong>" + fmt(one) + " m³</strong></div>"
+      );
+    },
     ithalat: function () {
       var fob = num("fobFiyat"), navlun = num("navlun"), gumrukOrani = num("gumrukOrani"),
           kdvOrani = num("kdvOrani"), kur = num("usdKur");
