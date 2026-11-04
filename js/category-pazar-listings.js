@@ -25,6 +25,10 @@
 
   var cachedListings = null;
 
+  function base(el) {
+    return el.hasAttribute("data-base") ? el.getAttribute("data-base") : "../";
+  }
+
   function render(container, kategori) {
     var lang = getLang();
     if (!cachedListings || !cachedListings.length) {
@@ -48,7 +52,7 @@
           "<p>" + (r.durum_bilgisi ? escapeHtml(r.durum_bilgisi) : "") + "</p>" +
           specLine +
           (r.fiyat ? "<p><strong>" + escapeHtml(r.fiyat) + "</strong></p>" : "") +
-          '<a class="category-quote-btn" href="../pazar.html?id=' + encodeURIComponent(r.id) + '">' + t("cta") + "</a>" +
+          '<a class="category-quote-btn" href="' + base(container) + 'pazar.html?id=' + encodeURIComponent(r.id) + '">' + t("cta") + "</a>" +
           "</div>"
         );
       }).join("") +

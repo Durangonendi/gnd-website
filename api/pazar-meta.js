@@ -30,7 +30,7 @@ async function fetchListing(id) {
     SUPABASE_URL +
     "/rest/v1/market_requests?id=eq." +
     encodeURIComponent(id) +
-    "&onay_durumu=eq.yayinda&select=id,baslik,aciklama,foto_urls,fiyat,durum_bilgisi";
+    "&onay_durumu=eq.yayinda&select=id,baslik,aciklama,foto_urls,fiyat,durum_bilgisi,kategori,islem_turu,model_yili";
   const res = await fetch(url, {
     headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY },
   });
@@ -44,9 +44,9 @@ export default async function handler(req, res) {
   const filePath = path.join(process.cwd(), "pazar-template.html");
   let html = fs.readFileSync(filePath, "utf8");
 
-  let ogTitle = "Makine Pazarı — GND Machinery";
+  let ogTitle = "İş Makinesi ve Yedek Parça Alım Satım İlanları — GND Makine Pazarı";
   let ogDescription =
-    "İş makinesi, ataşman veya yedek parça alım/satım ilanlarını görüntüleyin veya ücretsiz ilan verin.";
+    "Satılık sıfır ve ikinci el iş makineleri, ataşman ve yedek parça ilanları. Ücretsiz ilan verin, alım talebi oluşturun — GND Makine Pazarı.";
   let ogImage = FALLBACK_IMAGE;
   const pageUrl = "https://gndmachinery.com/pazar.html" + (id ? "?id=" + encodeURIComponent(id) : "");
 
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       lookupOk = true;
       if (listing) {
         listingFound = listing;
-        ogTitle = listing.baslik + " — GND Machinery";
+        ogTitle = listing.baslik + (listing.islem_turu === "satis" ? " — Satılık" : " — Alım Talebi") + " | GND Makine Pazarı";
         const desc = cleanDescription(listing.aciklama);
         ogDescription = [listing.durum_bilgisi, listing.fiyat, desc].filter(Boolean).join(" · ") || ogDescription;
         if (listing.foto_urls && listing.foto_urls.length) ogImage = listing.foto_urls[0];
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
   if (id && lookupOk && !listingFound) robotsTag = '<meta name="robots" content="noindex, follow">\n';
 
   let jsonLd = "";
-  if (listingFound) {
+  if (listingFound && listingFound.islem_turu === "satis") {
     const ld = {
       "@context": "https://schema.org",
       "@type": "Product",
@@ -82,8 +82,21 @@ export default async function handler(req, res) {
       description: ogDescription,
       image: ogImage,
       url: pageUrl,
-      brand: { "@type": "Organization", name: "GND İş Makineleri" },
+      category: listingFound.kategori === "parca" ? "Yedek Parça" : listingFound.kategori === "atasman" ? "Ataşman" : "İş Makinesi",
     };
+    const durum = (listingFound.durum_bilgisi || "").toLocaleLowerCase("tr");
+    let condition = null;
+    if (durum.indexOf("sıfır") !== -1) condition = "https://schema.org/NewCondition";
+    else if (durum.indexOf("ikinci") !== -1 || durum.indexOf("2.") !== -1 || durum.indexOf("çıkma") !== -1) condition = "https://schema.org/UsedCondition";
+    const pm = String(listingFound.fiyat || "").match(/(\d[\d.,\s]*)\s*(TL|₺|USD|\$|EUR|€)/i);
+    if (pm) {
+      const num = pm[1].replace(/[\s.]/g, "").replace(",", ".");
+      const cur = /TL|₺/i.test(pm[2]) ? "TRY" : /USD|\$/i.test(pm[2]) ? "USD" : "EUR";
+      if (num && !isNaN(Number(num))) {
+        ld.offers = { "@type": "Offer", price: num, priceCurrency: cur, availability: "https://schema.org/InStock", url: pageUrl };
+        if (condition) ld.offers.itemCondition = condition;
+      }
+    }
     jsonLd = '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, "\\u003c") + "</script>\n";
   }
 
