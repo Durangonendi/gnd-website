@@ -9,6 +9,7 @@
     loginToggle: { tr: "Hesabın yok mu? Kayıt ol", en: "Don't have an account? Sign up" },
     signupToggle: { tr: "Zaten hesabın var mı? Giriş yap", en: "Already have an account? Log in" },
     missingFields: { tr: "Lütfen ad soyad ve telefon numaranı da girin.", en: "Please also enter your full name and phone number." },
+    consentRequired: { tr: "Devam etmek için Kullanım Koşulları ve KVKK metnini onaylamanız gerekir.", en: "You must accept the Terms of Use and the privacy notice to continue." },
     signupSuccess: { tr: "Kayıt oluşturuldu. E-postana gelen onay linkine tıkladıktan sonra giriş yapabilirsin.", en: "Account created. You can log in after clicking the confirmation link sent to your email." },
     genericError: { tr: "Bir hata oluştu, tekrar deneyin.", en: "Something went wrong, please try again." },
   };
@@ -46,6 +47,7 @@
       toggle.textContent = TXT.loginToggle[lang];
       adSoyadField.style.display = "none";
       telefonField.style.display = "none";
+      document.getElementById("authConsentField").style.display = "none";
       adSoyadInput.required = false;
       telefonInput.required = false;
     } else {
@@ -54,6 +56,9 @@
       toggle.textContent = TXT.signupToggle[lang];
       adSoyadField.style.display = "";
       telefonField.style.display = "";
+      document.getElementById("authConsentField").style.display = "";
+      document.getElementById("authConsentTr").style.display = lang === "en" ? "none" : "";
+      document.getElementById("authConsentEn").style.display = lang === "en" ? "" : "none";
       adSoyadInput.required = true;
       telefonInput.required = true;
     }
@@ -95,7 +100,12 @@
             submitBtn.disabled = false;
             return;
           }
-          var res2 = await window.gndAuth.signUp(email, password, { ad_soyad: adSoyad, telefon: telefon });
+          if (!document.getElementById("authConsent").checked) {
+            showMessage("consentRequired", true);
+            submitBtn.disabled = false;
+            return;
+          }
+          var res2 = await window.gndAuth.signUp(email, password, { ad_soyad: adSoyad, telefon: telefon, sozlesme_onay: new Date().toISOString() });
           if (res2.error) throw res2.error;
           if (typeof window.gndTrack === "function") window.gndTrack("registration", { email: email, ad_soyad: adSoyad, telefon: telefon });
           if (res2.data && res2.data.session) {
